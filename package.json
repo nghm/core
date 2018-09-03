@@ -1,6 +1,6 @@
 {
   "name": "@nghm/core",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "A platform for handling SIREN spec hypermedia with angular 6+",
   "main": "index.js",
   "scripts": {
