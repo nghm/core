@@ -122,46 +122,6 @@
         }
       }
     },
-    "NghmCore": {
-      "root": "projects/nghm-core",
-      "sourceRoot": "projects/nghm-core/src",
-      "projectType": "library",
-      "prefix": "lib",
-      "architect": {
-        "build": {
-          "builder": "@angular-devkit/build-ng-packagr:build",
-          "options": {
-            "tsConfig": "projects/nghm-core/tsconfig.lib.json",
-            "project": "projects/nghm-core/ng-package.json"
-          },
-          "configurations": {
-            "production": {
-              "project": "projects/nghm-core/ng-package.prod.json"
-            }
-          }
-        },
-        "test": {
-          "builder": "@angular-devkit/build-angular:karma",
-          "options": {
-            "main": "projects/nghm-core/src/test.ts",
-            "tsConfig": "projects/nghm-core/tsconfig.spec.json",
-            "karmaConfig": "projects/nghm-core/karma.conf.js"
-          }
-        },
-        "lint": {
-          "builder": "@angular-devkit/build-angular:tslint",
-          "options": {
-            "tsConfig": [
-              "projects/nghm-core/tsconfig.lib.json",
-              "projects/nghm-core/tsconfig.spec.json"
-            ],
-            "exclude": [
-              "**/node_modules/**"
-            ]
-          }
-        }
-      }
-    },
     "Core": {
       "root": "projects/core",
       "sourceRoot": "projects/core/src",
