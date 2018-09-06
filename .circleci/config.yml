@@ -1,16 +1,19 @@
 version: 2
 jobs:
-  build:
+  build-and-test:
     docker:
-      - image: debian:stretch
+      - image: angular/ngcontainer:0.3.3
     steps:
       - checkout
       - run:
-          name: Greeting
-          command: echo Hello, world.
+          name: Npm Dependencies
+          command: npm install
       - run:
-          name: Print the Current Time
-          command: date
+          name: Build
+          command: npm run build-prod
+      - run:
+          name: Test Core
+          command: npm run test-core
 dependencies:
   pre:
     - echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" >> ~/.npmrc

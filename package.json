@@ -4,11 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build --prod",
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "build-core": "ng build Core --prod"
+    "test-core": "ng test Core --browsers=ChromeHeadless"
   },
   "private": true,
   "dependencies": {
