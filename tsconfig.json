@@ -17,12 +17,7 @@
       "dom"
     ],
     "paths": {
-      "@nghm/core": [
-        "dist/core"
-      ],
-      "@nghm/core/*": [
-        "dist/core/*"
-      ]
+      "@nghm/core": ["projects/core/src/public_api"]
     }
   }
 }

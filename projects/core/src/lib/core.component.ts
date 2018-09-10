@@ -1,19 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Property } from './decorators/property.decorator';
 
 @Component({
   selector: 'lib-core',
   template: `
     <p>
-      core works!
+      {{ title }}
     </p>
   `,
   styles: []
 })
-export class CoreComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
+export class CoreComponent {
+  @Property() title;
 }
