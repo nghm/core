@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Property } from './decorators/property.decorator';
+import { Property } from './decorators';
 
 @Component({
   selector: 'lib-core',

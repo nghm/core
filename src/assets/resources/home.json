@@ -1,0 +1,10 @@
+{
+    "properties": {
+        "title": "Test",
+        "description": "Test description"
+    },
+    "links": {
+        "aboutUs": { "href": "http://localhost:4200/about-us" },
+        "page": { "href": "http://localhost:4200/home/{no}" }
+    }
+}
