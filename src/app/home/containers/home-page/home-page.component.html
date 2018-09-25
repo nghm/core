@@ -1,3 +1,12 @@
 <p>
-  home-page works!
+  {{ title }} works!
 </p>
+<p>
+  {{ description }} is present
+</p>
+
+<a *ngIf="aboutUs" [href]="aboutUs">Link {{ aboutUs }}</a>
+<br>
+<a *ngIf="page && page({ no: 1 }) as href" [href]="href">Page {{ href }}</a>
+<br>
+<a *ngIf="next as href" [href]="href">Next {{ href }}</a>
