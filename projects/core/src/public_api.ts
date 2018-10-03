@@ -9,4 +9,6 @@ export * from './lib/core.module';
 export * from './lib/decorators';
 
 export type LinkFunction<T> = (params: T) => string;
-export type ActionFunction<T = void> = () => void | ((fields: Partial<T>) => void);
+
+export type ActionFunction = () => void;
+export type ParameterizedActionFunction<T> = (fields: Partial<T>) => void;
