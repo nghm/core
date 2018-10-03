@@ -13,7 +13,7 @@ export class ActionBinder implements Binder {
     const { actions: { [actionName]: action } } = source;
 
     Object.defineProperty(target, actionName, {
-      get: () => parameters => this.actionExecutor.execute(action, parameters)
+      get: () => parameters => this.actionExecutor.execute({ name: actionName, ...action }, parameters)
     });
   }
 }

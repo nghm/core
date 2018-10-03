@@ -12,6 +12,7 @@ import { LinkBinderFactory } from './services/link-binder-factory';
 import { ActionBinderFactory } from './services/action-binder-factory';
 import { PropertyBinderFactory } from './services/property-binder-factory';
 import { ActionExecutor } from './services/action-executor';
+import { ActionListenerFactory } from './services/action-listener-factory';
 
 @NgModule({
   imports: [],
@@ -25,7 +26,8 @@ import { ActionExecutor } from './services/action-executor';
     ActionExecutor,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
-    { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true }
+    { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true }
   ],
   exports: [CoreComponent]
 })
