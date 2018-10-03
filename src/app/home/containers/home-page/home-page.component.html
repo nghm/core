@@ -2,9 +2,6 @@
   {{ title }} works!
 </p>
 <p>
-  {{ firstChapterTitle }} works!
-</p>
-<p>
   {{ description }} is present
 </p>
 
@@ -13,3 +10,10 @@
 <a *ngIf="page && page({ no: 1 }) as href" [href]="href">Page {{ href }}</a>
 <br>
 <a *ngIf="next as href" [href]="href">Next {{ href }}</a>
+
+<p>
+  {{ firstChapter?.title }}
+</p>
+<p>
+  {{ lastChapter?.title }}
+</p>

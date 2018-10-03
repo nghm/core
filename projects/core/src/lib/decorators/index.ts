@@ -1,3 +1,5 @@
+import { Type } from '@angular/core';
+
 const RESOURCE_METADATA_KEY = '__RESOURCE_BINDING_METADATA__';
 
 export class PropertyBoundMetadata {
@@ -16,10 +18,15 @@ export class ActionListenerBoundMetadata {
   constructor(public event: string, public handle: string) { }
 }
 
-export type BindingMetadata = PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata | ActionListenerBoundMetadata;
+export class EntityBoundMetadata {
+  constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
+}
 
-export function Property<T>(propertyName?: string): PropertyDecorator {
-  return function(target: T, bindingName: string) {
+export type BindingMetadata =
+  PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata | ActionListenerBoundMetadata | EntityBoundMetadata;
+
+export function Property(propertyName?: string): PropertyDecorator {
+  return function<T>(target: T, bindingName: string) {
     const metadata = new PropertyBoundMetadata(propertyName || bindingName, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
@@ -30,9 +37,9 @@ interface LinkMeta {
   params?: boolean;
 }
 
-export function Link<T>({ linkName }: LinkMeta = {})
+export function Link({ linkName }: LinkMeta = {})
   : PropertyDecorator {
-  return function(target: T, fallbackLinkName: string) {
+  return function<T>(target: T, fallbackLinkName: string) {
     const metadata = new LinkBoundMetadata(linkName || fallbackLinkName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
@@ -50,6 +57,13 @@ export function ActionListener(event?: string)
   : PropertyDecorator {
   return function<T>(target: T, methodName: string) {
     const metadata = new ActionListenerBoundMetadata(event || methodName, methodName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
+export function Entity<T>(query: string, type: Type<any>): PropertyDecorator {
+  return function(target: T, bindingName: string) {
+    const metadata = new EntityBoundMetadata(query, type, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
