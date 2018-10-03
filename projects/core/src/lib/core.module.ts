@@ -13,6 +13,8 @@ import { ActionBinderFactory } from './services/action-binder-factory';
 import { PropertyBinderFactory } from './services/property-binder-factory';
 import { ActionExecutor } from './services/action-executor';
 import { ActionListenerFactory } from './services/action-listener-factory';
+import { LifetimeEvents } from './services/lifetime-events';
+import { HypermediaRef } from './services/hypermedia-ref';
 
 @NgModule({
   imports: [],
@@ -24,6 +26,8 @@ import { ActionListenerFactory } from './services/action-listener-factory';
     CurrentResolverService,
     UrlInterpolator,
     ActionExecutor,
+    LifetimeEvents,
+    HypermediaRef,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },

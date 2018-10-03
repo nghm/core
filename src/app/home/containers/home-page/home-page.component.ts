@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Property, Link, LinkFunction, Action, ActionFunction, ParameterizedActionFunction, ActionListener } from '@nghm/core';
+import { Property, Link, LinkFunction, Action, ActionFunction,
+  ParameterizedActionFunction, ActionListener, HypermediaRef } from '@nghm/core';
 
 @Component({
   selector: 'app-home-page',
@@ -10,6 +11,8 @@ export class HomePageComponent {
   @Property() title: string;
   @Property() description: string;
 
+  @Property('title') firstChapterTitle: string;
+
   @Link() aboutUs: string;
   @Link() next: string;
   @Link() page: LinkFunction<{ no: number }>;
@@ -17,10 +20,12 @@ export class HomePageComponent {
   @Action() updateTitle: ParameterizedActionFunction<{ title: string }>;
   @Action() clearDescription: ActionFunction;
 
+  constructor(private hypermediaRef: HypermediaRef) {}
+
   @ActionListener('updateTitle:success')
   @ActionListener('clearDescription:success')
   refresh(): void {
-    console.log('refresh!', this.description);
+    this.hypermediaRef.fetch();
   }
 
   hmAfterBinding() {
