@@ -6,6 +6,8 @@ export * from './lib/core.service';
 export * from './lib/core.component';
 export * from './lib/core.module';
 
+export * from './lib/services/hypermedia-ref';
+
 export * from './lib/decorators';
 
 export type LinkFunction<T> = (params: T) => string;

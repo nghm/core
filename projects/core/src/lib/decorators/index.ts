@@ -1,7 +1,7 @@
 const RESOURCE_METADATA_KEY = '__RESOURCE_BINDING_METADATA__';
 
 export class PropertyBoundMetadata {
-  constructor(public propertyName: string) { }
+  constructor(public propertyName: string, public bindingName) { }
 }
 
 export class LinkBoundMetadata {
@@ -19,8 +19,8 @@ export class ActionListenerBoundMetadata {
 export type BindingMetadata = PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata | ActionListenerBoundMetadata;
 
 export function Property<T>(propertyName?: string): PropertyDecorator {
-  return function(target: T, fallbackPropertyName: string) {
-    const metadata = new PropertyBoundMetadata(propertyName || fallbackPropertyName);
+  return function(target: T, bindingName: string) {
+    const metadata = new PropertyBoundMetadata(propertyName || bindingName, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
@@ -46,7 +46,7 @@ export function Action<T>(actionName?: string)
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
-export function ActionListener(event: string)
+export function ActionListener(event?: string)
   : PropertyDecorator {
   return function<T>(target: T, methodName: string) {
     const metadata = new ActionListenerBoundMetadata(event || methodName, methodName);
