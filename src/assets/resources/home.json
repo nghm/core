@@ -17,5 +17,25 @@
                 }
             }
         }
-    }
+    },
+    "entities": [
+      {
+        "class": ["chapter"],
+        "properties": {
+          "title": "First chapter"
+        }
+      },
+      {
+        "class": ["chapter"],
+        "properties": {
+          "title": "Middle chapter"
+        }
+      },
+      {
+        "class": ["chapter"],
+        "properties": {
+          "title": "Last chapter"
+        }
+      }
+    ]
 }

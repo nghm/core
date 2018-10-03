@@ -3,8 +3,8 @@ import { NgModule } from '@angular/core';
 import { CoreComponent } from './core.component';
 import { ComponentInstantiationInterceptor } from './services/component-instantiation.interceptor';
 import { ResourcePathNormalizer } from './services/resource-path-normalizer';
-import { MetaBindersProvider } from './services/meta-binders-provider';
-import { CurrentResolverService } from './services/current-resolver.service';
+import { MetaBinder } from './services/meta-binders-provider';
+import { ResolverService } from './services/current-resolver.service';
 import { UrlInterpolator } from './services/url-interpolator';
 import { BINDER_FACTORIES } from './services/meta-binder-factory';
 
@@ -15,6 +15,8 @@ import { ActionExecutor } from './services/action-executor';
 import { ActionListenerFactory } from './services/action-listener-factory';
 import { LifetimeEvents } from './services/lifetime-events';
 import { HypermediaRef } from './services/hypermedia-ref';
+import { EntityBinderFactory } from './services/entity-binder-factory';
+import { CssQueryFactory } from './services/css-query-factory';
 
 @NgModule({
   imports: [],
@@ -22,16 +24,18 @@ import { HypermediaRef } from './services/hypermedia-ref';
   providers: [
     ComponentInstantiationInterceptor,
     ResourcePathNormalizer,
-    MetaBindersProvider,
-    CurrentResolverService,
+    MetaBinder,
+    ResolverService,
     UrlInterpolator,
     ActionExecutor,
     LifetimeEvents,
     HypermediaRef,
+    CssQueryFactory,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
-    { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true }
+    { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true }
   ],
   exports: [CoreComponent]
 })
