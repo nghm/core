@@ -12,7 +12,7 @@ export class HomePageComponent {
 
   @Link() aboutUs: string;
   @Link() next: string;
-  @Link({ params: true }) page: LinkFunction<{ no: number }>;
+  @Link() page: LinkFunction<{ no: number }>;
 
   @Action() updateTitle: ParameterizedActionFunction<{ title: string }>;
   @Action() clearDescription: ActionFunction;

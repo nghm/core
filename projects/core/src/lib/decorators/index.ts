@@ -5,7 +5,7 @@ export class PropertyBoundMetadata {
 }
 
 export class LinkBoundMetadata {
-  constructor(public linkName: string, public params: boolean) { }
+  constructor(public linkName: string) { }
 }
 
 export class ActionBoundMetadata {
@@ -26,10 +26,10 @@ interface LinkMeta {
   params?: boolean;
 }
 
-export function Link<T>({ linkName, params = false }: LinkMeta = { params: false })
+export function Link<T>({ linkName }: LinkMeta = {})
   : PropertyDecorator {
   return function(target: T, fallbackLinkName: string) {
-    const metadata = new LinkBoundMetadata(linkName || fallbackLinkName, params);
+    const metadata = new LinkBoundMetadata(linkName || fallbackLinkName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
