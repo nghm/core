@@ -11,6 +11,7 @@ import { BINDER_FACTORIES } from './services/meta-binder-factory';
 import { LinkBinderFactory } from './services/link-binder-factory';
 import { ActionBinderFactory } from './services/action-binder-factory';
 import { PropertyBinderFactory } from './services/property-binder-factory';
+import { ActionExecutor } from './services/action-executor';
 
 @NgModule({
   imports: [],
@@ -21,6 +22,7 @@ import { PropertyBinderFactory } from './services/property-binder-factory';
     MetaBindersProvider,
     CurrentResolverService,
     UrlInterpolator,
+    ActionExecutor,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true }
