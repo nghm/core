@@ -12,7 +12,11 @@ export class ActionBoundMetadata {
   constructor(public actionName: string) { }
 }
 
-export type BindingMetadata = PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata;
+export class ActionListenerBoundMetadata {
+  constructor(public event: string, public handle: string) { }
+}
+
+export type BindingMetadata = PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata | ActionListenerBoundMetadata;
 
 export function Property<T>(propertyName?: string): PropertyDecorator {
   return function(target: T, fallbackPropertyName: string) {
@@ -42,6 +46,13 @@ export function Action<T>(actionName?: string)
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
+export function ActionListener(event: string)
+  : PropertyDecorator {
+  return function<T>(target: T, methodName: string) {
+    const metadata = new ActionListenerBoundMetadata(event || methodName, methodName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
 
 function setMetadataEntry<T>(
   sourceProto: T,

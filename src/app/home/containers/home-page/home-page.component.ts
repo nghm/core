@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Property, Link, LinkFunction, Action, ActionFunction, ParameterizedActionFunction } from '@nghm/core';
+import { Property, Link, LinkFunction, Action, ActionFunction, ParameterizedActionFunction, ActionListener } from '@nghm/core';
 
 @Component({
   selector: 'app-home-page',
@@ -16,6 +16,12 @@ export class HomePageComponent {
 
   @Action() updateTitle: ParameterizedActionFunction<{ title: string }>;
   @Action() clearDescription: ActionFunction;
+
+  @ActionListener('updateTitle:success')
+  @ActionListener('clearDescription:success')
+  refresh(): void {
+    console.log('refresh!', this.description);
+  }
 
   hmAfterBinding() {
     this.clearDescription();
