@@ -6,5 +6,16 @@
     "links": {
         "aboutUs": { "href": "http://localhost:4200/about-us" },
         "page": { "href": "http://localhost:4200/home/{no}" }
+    },
+    "actions": {
+        "clearDescription": {
+            "href": "http://localhost:4200/home/description",
+            "method": "PATCH",
+            "fields": {
+                "description": {
+                    "value": "Description text"
+                }
+            }
+        }
     }
 }

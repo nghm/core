@@ -1,9 +1,16 @@
 import { NgModule } from '@angular/core';
+
 import { CoreComponent } from './core.component';
 import { ComponentInstantiationInterceptor } from './services/component-instantiation.interceptor';
 import { ResourcePathNormalizer } from './services/resource-path-normalizer';
-import { ComponentBindingsAnalizer } from './services/component-bindings-analizer';
+import { MetaBindersProvider } from './services/meta-binders-provider';
 import { CurrentResolverService } from './services/current-resolver.service';
+import { UrlInterpolator } from './services/url-interpolator';
+import { BINDER_FACTORIES } from './services/meta-binder-factory';
+
+import { LinkBinderFactory } from './services/link-binder-factory';
+import { ActionBinderFactory } from './services/action-binder-factory';
+import { PropertyBinderFactory } from './services/property-binder-factory';
 
 @NgModule({
   imports: [],
@@ -11,8 +18,12 @@ import { CurrentResolverService } from './services/current-resolver.service';
   providers: [
     ComponentInstantiationInterceptor,
     ResourcePathNormalizer,
-    ComponentBindingsAnalizer,
-    CurrentResolverService
+    MetaBindersProvider,
+    CurrentResolverService,
+    UrlInterpolator,
+    { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true }
   ],
   exports: [CoreComponent]
 })
