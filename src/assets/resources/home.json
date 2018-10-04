@@ -23,7 +23,27 @@
         "class": ["chapter"],
         "properties": {
           "title": "First chapter"
-        }
+        },
+        "entities": [
+          {
+            "class": ["chapter"],
+            "properties": {
+              "title": "DEEP First chapter"
+            }
+          },
+          {
+            "class": ["chapter"],
+            "properties": {
+              "title": "DEEP Middle chapter"
+            }
+          },
+          {
+            "class": ["chapter"],
+            "properties": {
+              "title": "DEEP Last chapter"
+            }
+          }
+        ]
       },
       {
         "class": ["chapter"],
