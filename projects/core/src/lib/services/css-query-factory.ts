@@ -5,14 +5,11 @@ import * as CSSselect from 'css-select';
 export class CssQueryFactory {
   make(queryString: string): (source) => Array<any> {
     const select = CSSselect;
-    const query = CSSselect.compile(queryString);
 
     return source => {
-      bindParent(source, undefined);
+      bindParents(source, undefined);
 
-      return select
-        .selectAll(query, source, { adapter: new HypermediaAdapter() })
-        .map(node => node['source']);
+      return select.selectAll(queryString, source, { adapter: new HypermediaAdapter() });
     };
   }
 }
@@ -29,13 +26,30 @@ class HypermediaAdapter implements CSSselect.Adapter<HypermediaNode, HypermediaN
     return true;
   }
   existsOne(test: CSSselect.Predicate<HypermediaNode>, elems: HypermediaNode[]): boolean {
-    return elems.some(elem => test(elem));
+    for (let i = 0, l = elems.length; i < l; i++) {
+      if (
+        this.isTag(elems[i]) && (
+          test(elems[i]) || (
+            elems[i].entities.length > 0 &&
+            this.existsOne(test, elems[i].entities)
+          )
+        )
+      ) {
+        return true;
+      }
+    }
+
+    return false;
   }
   getAttributeValue(elem: HypermediaNode, name: string): string {
-    return elem && elem.properties && elem.properties[name];
+    if (name === 'class') {
+      return (elem.class || []).join(' ');
+    }
+
+    return elem.properties && elem.properties[name];
   }
   getChildren(node: HypermediaNode): HypermediaNode[] {
-    return node && node.entities;
+    return node.entities;
   }
   getName(elem: HypermediaNode): string {
     return 'div';
@@ -44,44 +58,74 @@ class HypermediaAdapter implements CSSselect.Adapter<HypermediaNode, HypermediaN
     return node.parent;
   }
   getSiblings(node: HypermediaNode): HypermediaNode[] {
-    return node && node.parent && node.parent.entities;
+    return node.parent ? this.getChildren(node.parent) : [node];
   }
   getText(node: HypermediaNode): string {
     return '';
   }
   hasAttrib(elem: HypermediaNode, name: string): boolean {
-    return elem && elem.properties && elem.properties[name];
+    return elem && elem.properties && !!elem.properties[name];
   }
   removeSubsets(nodes: HypermediaNode[]): HypermediaNode[] {
-    const iterator = tranverse({ entities: nodes }) as any;
-    const newArray = [];
-    const inserted = {};
+    let idx = nodes.length, node, ancestor, replace;
 
-    for (const node of iterator) {
-      const parents = getParents(node);
+    // Check if each node (or one of its ancestors) is already contained in the
+    // array.
+    while (--idx > -1) {
+      node = ancestor = nodes[idx];
 
-      if (!inserted[node] && !parents.some(parent => inserted[parent])) {
-        inserted[node] = true;
+      // Temporarily remove the node under consideration
+      nodes[idx] = null;
+      replace = true;
 
-        newArray.push(node);
+      while (ancestor) {
+        if (nodes.indexOf(ancestor) > -1) {
+          replace = false;
+          nodes.splice(idx, 1);
+          break;
+        }
+        ancestor = ancestor.parent;
+      }
+
+      // If the node has been found to be unique, re-insert it.
+      if (replace) {
+        nodes[idx] = node;
       }
     }
 
-    return newArray;
+    return nodes;
   }
-  findAll(test: CSSselect.Predicate<HypermediaNode>, nodes: HypermediaNode[]): HypermediaNode[] {
-    const iterator = tranverse({ entities: nodes });
+  findAll(test, rootElems) {
+    const result = [];
+    const stack = rootElems.slice();
 
-    return Array.from(iterator);
+    while (stack.length) {
+      const elem = stack.shift();
+      if (!this.isTag(elem)) { continue; }
+
+      if (elem.entities && elem.entities.length > 0) {
+        stack.unshift.apply(stack, elem.entities);
+      }
+
+      if (test(elem)) { result.push(elem); }
+    }
+
+    return result;
   }
   findOne(test: CSSselect.Predicate<HypermediaNode>, elems: HypermediaNode[]): HypermediaNode {
-    const iterator = tranverse({ entities: elems }) as any;
+    let elem = null;
 
-    for (const node of iterator) {
-      if (test(node)) {
-        return node;
+    for (let i = 0, l = elems.length; i < l && !elem; i++) {
+      if (!this.isTag(elems[i])) {
+        continue;
+      } else if (test(elems[i])) {
+        elem = elems[i];
+      } else if (elems[i].entities.length > 0) {
+        elem = this.findOne(test, elems[i].entities);
       }
     }
+
+    return elem;
   }
 }
 
@@ -118,10 +162,16 @@ function * tranverse(node: HypermediaNode): Iterable<HypermediaNode> {
   }
 }
 
-function bindParent(node, parent) {
+function bindParents(node, parent) {
   node.parent = parent;
 
+  Object.defineProperty(node, 'classes', {
+    get: () => {
+      console.log('HERE');
+    }
+  });
+
   if (node.entities) {
-    node.entities.forEach(entity => bindParent(entity, node));
+    node.entities.forEach(entity => bindParents(entity, node));
   }
 }
