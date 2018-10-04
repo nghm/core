@@ -15,6 +15,7 @@ export class CssQueryFactory {
 }
 
 interface HypermediaNode {
+  type: string;
   class?: Array<string>;
   entities?: Array<any>;
   properties?: any;
@@ -52,7 +53,7 @@ class HypermediaAdapter implements CSSselect.Adapter<HypermediaNode, HypermediaN
     return node.entities;
   }
   getName(elem: HypermediaNode): string {
-    return 'div';
+    return elem.type;
   }
   getParent(node: HypermediaNode): HypermediaNode {
     return node.parent;
@@ -162,8 +163,9 @@ function * tranverse(node: HypermediaNode): Iterable<HypermediaNode> {
   }
 }
 
-function bindParents(node, parent) {
+function bindParents(node, parent, level = 0) {
   node.parent = parent;
+  node.type = level === 0 ? 'root' : 'child';
 
   Object.defineProperty(node, 'classes', {
     get: () => {
@@ -172,6 +174,6 @@ function bindParents(node, parent) {
   });
 
   if (node.entities) {
-    node.entities.forEach(entity => bindParents(entity, node));
+    node.entities.forEach(entity => bindParents(entity, node, level + 1));
   }
 }

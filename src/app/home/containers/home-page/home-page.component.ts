@@ -15,8 +15,8 @@ export class HomePageComponent {
   @Property() title: string;
   @Property() description: string;
 
-  @Entity('.chapter:last-child', Chapter) firstChapter: Chapter;
-  @Entity('.chapter:last-child', Chapter) lastChapter: Chapter;
+  @Entity(' .chapter:first-child', Chapter) firstChapter: Chapter;
+  @Entity(':not(:root) .chapter:last-child', Chapter) lastChapter: Chapter;
 
   @Link() aboutUs: string;
   @Link() next: string;
