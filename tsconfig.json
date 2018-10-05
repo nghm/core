@@ -17,7 +17,18 @@
       "dom"
     ],
     "paths": {
-      "@nghm/core": ["projects/core/src/public_api"]
+      "@nghm/core": [
+        "projects/core/src/public_api"
+      ],
+      "@nghm/forms": [
+        "projects/forms/src/public_api"
+      ],
+      "material-forms": [
+        "dist/material-forms"
+      ],
+      "material-forms/*": [
+        "dist/material-forms/*"
+      ]
     }
   }
 }
