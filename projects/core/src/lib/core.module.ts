@@ -17,6 +17,7 @@ import { LifetimeEvents } from './services/lifetime-events';
 import { HypermediaRef } from './services/hypermedia-ref';
 import { EntityBinderFactory } from './services/entity-binder-factory';
 import { CssQueryFactory } from './services/css-query-factory';
+import { EntitiesBinderFactory } from './services/entities-binder-factory';
 
 @NgModule({
   imports: [],
@@ -35,7 +36,8 @@ import { CssQueryFactory } from './services/css-query-factory';
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true },
-    { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true }
+    { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: EntitiesBinderFactory, multi: true }
   ],
   exports: [CoreComponent]
 })

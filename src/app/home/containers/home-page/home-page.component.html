@@ -11,9 +11,12 @@
 <br>
 <a *ngIf="next as href" [href]="href">Next {{ href }}</a>
 
-<p>
+<p style="color: green">
   {{ firstChapter?.title }}
 </p>
-<p>
+<p style="color: red" *ngFor="let middleChapter of middleChapters">
+  {{ middleChapter.title }}
+</p>
+<p style="color: blue">
   {{ lastChapter?.title }}
 </p>

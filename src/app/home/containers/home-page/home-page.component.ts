@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Property, Link, LinkFunction, Action, ActionFunction, Entity,
-  ParameterizedActionFunction, ActionListener, HypermediaRef } from '@nghm/core';
+  ParameterizedActionFunction, ActionListener, HypermediaRef, Entities } from '@nghm/core';
 
 export class Chapter {
   @Property() title: string;
@@ -15,8 +15,14 @@ export class HomePageComponent {
   @Property() title: string;
   @Property() description: string;
 
-  @Entity(' .chapter:first-child', Chapter) firstChapter: Chapter;
-  @Entity(':not(:root) .chapter:last-child', Chapter) lastChapter: Chapter;
+  @Entity(':root > .chapter:first-child', Chapter)
+  firstChapter: Chapter;
+
+  @Entities('.chapter', Chapter)
+  middleChapters: Array<Chapter>;
+
+  @Entity(':root > .chapter:last-child', Chapter)
+  lastChapter: Chapter;
 
   @Link() aboutUs: string;
   @Link() next: string;

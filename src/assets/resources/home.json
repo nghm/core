@@ -26,19 +26,19 @@
         },
         "entities": [
           {
-            "class": ["chapter"],
+            "class": ["chapter", "sub-chapter"],
             "properties": {
               "title": "DEEP First chapter"
             }
           },
           {
-            "class": ["chapter"],
+            "class": ["chapter", "sub-chapter"],
             "properties": {
               "title": "DEEP Middle chapter"
             }
           },
           {
-            "class": ["chapter"],
+            "class": ["chapter", "sub-chapter"],
             "properties": {
               "title": "DEEP Last chapter"
             }
@@ -49,6 +49,12 @@
         "class": ["chapter"],
         "properties": {
           "title": "Middle chapter"
+        }
+      },
+      {
+        "class": ["chapter"],
+        "properties": {
+          "title": "Middle chapter 2"
         }
       },
       {
