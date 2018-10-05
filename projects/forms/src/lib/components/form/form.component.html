@@ -1,7 +1,16 @@
 <form (submit)="onSubmit($event)">
-  <ng-container *ngFor="let field of _fields">
+  <ng-container *ngFor="let field of fields">
     <hm-field
-      [localConfiguration]="field.localConfiguration"
-      [remoteConfiguration]="field.remoteConfiguration"></hm-field>
+      [name]="field.override?.name || field.remote.name"
+      [type]="field.override?.type || field.remote.type"
+      [value]="field.override?.value || field.remote.value"
+      [min]="field.override?.min || field.remote.min"
+      [max]="field.override?.max || field.remote.max"
+      [minLength]="field.override?.minLength || field.remote.minLength"
+      [maxLength]="field.override?.maxLength || field.remote.maxLength"
+      [pattern]="field.override?.pattern || field.remote.pattern"
+      [email]="field.override?.email || field.remote.email"
+    >
+    </hm-field>
   </ng-container>
 </form>
