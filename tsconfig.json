@@ -23,11 +23,8 @@
       "@nghm/forms": [
         "projects/forms/src/public_api"
       ],
-      "material-forms": [
-        "dist/material-forms"
-      ],
-      "material-forms/*": [
-        "dist/material-forms/*"
+      "@nghm/material-fields": [
+        "projects/material-fields/src/public_api"
       ]
     }
   }
