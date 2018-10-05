@@ -12,8 +12,16 @@ export class ActionBinder implements Binder {
     const { actionName, bindingName } = this.meta;
     const { actions: { [actionName]: action } } = source;
 
+    if (!action) {
+      return;
+    }
+
+    const execute: Function & { fields?: any } = parameters => this.actionExecutor.execute({ name: actionName, ...action }, parameters);
+
+    execute.fields = action.fields;
+
     Object.defineProperty(target, bindingName, {
-      get: () => parameters => this.actionExecutor.execute({ name: actionName, ...action }, parameters)
+      get: () => execute as any
     });
   }
 }

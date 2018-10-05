@@ -33,8 +33,8 @@ export class HomePageComponent {
 
   constructor(private hypermediaRef: HypermediaRef) {}
 
-  @ActionListener('updateTitle:success')
-  @ActionListener('clearDescription:success')
+  @ActionListener('updateTitle', 'success')
+  @ActionListener('clearDescription', 'success')
   refresh(): void {
     this.hypermediaRef.fetch();
   }

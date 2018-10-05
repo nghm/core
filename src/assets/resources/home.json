@@ -8,15 +8,24 @@
         "page": { "href": "http://localhost:4200/home/{no}" }
     },
     "actions": {
-        "clearDescription": {
-            "href": "http://localhost:4200/home/description",
-            "method": "PATCH",
-            "fields": {
-                "description": {
-                    "value": "Description text"
-                }
-            }
-        }
+      "clearDescription": {
+          "href": "http://localhost:4200/home/description",
+          "method": "PATCH",
+          "fields": {
+              "description": {
+                  "value": ""
+              }
+          }
+      },
+      "updateTitle": {
+          "href": "http://localhost:4200/home/title",
+          "method": "PATCH",
+          "fields": {
+              "title": {
+                  "value": "Test"
+              }
+          }
+      }
     },
     "entities": [
       {
