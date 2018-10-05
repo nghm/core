@@ -10,12 +10,11 @@ export class ActionListenerBinder implements Binder {
   constructor(private meta: ActionListenerBoundMetadata, private actionExecutor: ActionExecutor) {}
 
   bind(target) {
-    const { event, handle } = this.meta;
-    const [ action, name ] = event.split(':');
+    const { actionName, events, bindingName } = this.meta;
 
     this.eventSubscription = this.actionExecutor
-      .on(action, name)
-      .subscribe(_ => target[handle] && target[handle]());
+      .on(actionName, ...events)
+      .subscribe(_ => target[bindingName] && target[bindingName]());
   }
 
   dispose(): void {

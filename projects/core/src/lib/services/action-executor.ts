@@ -20,10 +20,10 @@ export class ActionExecutor {
     this.eventsSubject.next({ action, name: 'success', payload: { }});
   }
 
-  on(action: string, name: string): Observable<ActionEvent> {
+  on(action: string, ...events: Array<string>): Observable<ActionEvent> {
     return this.eventsObservable
       .pipe(
-        filter(({ action: matchingAction, name: matchingName }) => matchingAction === action && matchingName === name),
+        filter(({ action: matchingAction, name }) => matchingAction === action && events.includes(name)),
         takeUntil(this.lifetimeEvents.dispose)
       );
   }

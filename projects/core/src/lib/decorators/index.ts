@@ -2,28 +2,33 @@ import { Type } from '@angular/core';
 
 const RESOURCE_METADATA_KEY = '__RESOURCE_BINDING_METADATA__';
 
-export class PropertyBoundMetadata {
-  constructor(public propertyName: string, public bindingName) { }
+interface FieldBoundMetadata {
+  bindingName: string;
 }
 
-export class LinkBoundMetadata {
-  constructor(public linkName: string) { }
+export class PropertyBoundMetadata implements FieldBoundMetadata {
+  constructor(public propertyName: string, public bindingName: string) { }
 }
 
-export class ActionBoundMetadata {
-  constructor(public actionName: string) { }
+export class LinkBoundMetadata implements FieldBoundMetadata {
+  constructor(public linkName: string, public bindingName: string) { }
 }
 
-export class ActionListenerBoundMetadata {
-  constructor(public event: string, public handle: string) { }
+export class ActionBoundMetadata implements FieldBoundMetadata {
+  constructor(public actionName: string, public bindingName: string) { }
 }
 
-export class EntityBoundMetadata {
+export class ActionListenerBoundMetadata implements FieldBoundMetadata {
+  constructor(public actionName: string, public events: Array<string>, public bindingName: string) { }
+}
+
+export class EntityBoundMetadata implements FieldBoundMetadata {
   constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
 }
 
-export type BindingMetadata =
-  PropertyBoundMetadata | LinkBoundMetadata | ActionBoundMetadata | ActionListenerBoundMetadata | EntityBoundMetadata;
+export class EntitiesBoundMetadata implements FieldBoundMetadata {
+  constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
+}
 
 export function Property(propertyName?: string): PropertyDecorator {
   return function<T>(target: T, bindingName: string) {
@@ -39,24 +44,24 @@ interface LinkMeta {
 
 export function Link({ linkName }: LinkMeta = {})
   : PropertyDecorator {
-  return function<T>(target: T, fallbackLinkName: string) {
-    const metadata = new LinkBoundMetadata(linkName || fallbackLinkName);
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new LinkBoundMetadata(linkName || bindingName, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
 export function Action<T>(actionName?: string)
   : PropertyDecorator {
-  return function(target: T, fallbackActionName: string) {
-    const metadata = new ActionBoundMetadata(actionName || fallbackActionName);
+  return function(target: T, bindingName: string) {
+    const metadata = new ActionBoundMetadata(actionName || bindingName, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
-export function ActionListener(event?: string)
+export function ActionListener(actionName: string, ...events: Array<string>)
   : PropertyDecorator {
-  return function<T>(target: T, methodName: string) {
-    const metadata = new ActionListenerBoundMetadata(event || methodName, methodName);
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new ActionListenerBoundMetadata(actionName || bindingName, events, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
@@ -68,12 +73,19 @@ export function Entity<T>(query: string, type: Type<any>): PropertyDecorator {
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
+export function Entities<T>(query: string, type: Type<any>): PropertyDecorator {
+  return function(target: T, bindingName: string) {
+    const metadata = new EntitiesBoundMetadata(query, type, bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
 function setMetadataEntry<T>(
   sourceProto: T,
-  entries: Array<BindingMetadata>
+  entries: Array<FieldBoundMetadata>
 ) {
   const constructor = sourceProto.constructor;
-  const meta: Array<BindingMetadata> = constructor.hasOwnProperty(
+  const meta: Array<FieldBoundMetadata> = constructor.hasOwnProperty(
     RESOURCE_METADATA_KEY
   )
     ? (constructor as any)[RESOURCE_METADATA_KEY]
@@ -83,7 +95,7 @@ function setMetadataEntry<T>(
   Array.prototype.push.apply(meta, entries);
 }
 
-export function getSourceMetadata<T>(instance: T): Array<BindingMetadata> {
+export function getSourceMetadata<T>(instance: T): Array<FieldBoundMetadata> {
   const constructor = instance.constructor;
 
   return constructor.hasOwnProperty(RESOURCE_METADATA_KEY) ? (constructor as any)[RESOURCE_METADATA_KEY] : [];
