@@ -1,5 +1,5 @@
 /*
- * Public API Surface of material-forms
+ * Public API Surface of material-fields
  */
 
-export * from './lib/material-forms.module';
+export * from './lib/material-fields.module';
