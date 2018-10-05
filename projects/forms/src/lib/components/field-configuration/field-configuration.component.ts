@@ -5,7 +5,9 @@ import { FieldComponent } from '../field/field.component';
   selector: 'hm-field[hmOverrideFieldNamed]'
 })
 export class OverrideFieldNamedDirective {
-  @Input() named: string;
+  @Input() hmOverrideFieldNamed: string;
 
-  constructor(@Host() private fieldConfiguration: FieldComponent) {}
+  get named() { return this.hmOverrideFieldNamed; }
+
+  constructor(@Host() public fieldConfiguration: FieldComponent) {}
 }
