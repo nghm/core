@@ -6,4 +6,4 @@ import { NgModule } from '@angular/core';
   declarations: [],
   exports: []
 })
-export class MaterialFormsModule { }
+export class MaterialFieldsModule { }

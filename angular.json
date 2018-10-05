@@ -202,38 +202,38 @@
         }
       }
     },
-    "material-forms": {
-      "root": "projects/material-forms",
-      "sourceRoot": "projects/material-forms/src",
+    "material-fields": {
+      "root": "projects/material-fields",
+      "sourceRoot": "projects/material-fields/src",
       "projectType": "library",
       "prefix": "lib",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-ng-packagr:build",
           "options": {
-            "tsConfig": "projects/material-forms/tsconfig.lib.json",
-            "project": "projects/material-forms/ng-package.json"
+            "tsConfig": "projects/material-fields/tsconfig.lib.json",
+            "project": "projects/material-fields/ng-package.json"
           },
           "configurations": {
             "production": {
-              "project": "projects/material-forms/ng-package.prod.json"
+              "project": "projects/material-fields/ng-package.prod.json"
             }
           }
         },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
-            "main": "projects/material-forms/src/test.ts",
-            "tsConfig": "projects/material-forms/tsconfig.spec.json",
-            "karmaConfig": "projects/material-forms/karma.conf.js"
+            "main": "projects/material-fields/src/test.ts",
+            "tsConfig": "projects/material-fields/tsconfig.spec.json",
+            "karmaConfig": "projects/material-fields/karma.conf.js"
           }
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": [
-              "projects/material-forms/tsconfig.lib.json",
-              "projects/material-forms/tsconfig.spec.json"
+              "projects/material-fields/tsconfig.lib.json",
+              "projects/material-fields/tsconfig.spec.json"
             ],
             "exclude": [
               "**/node_modules/**"
