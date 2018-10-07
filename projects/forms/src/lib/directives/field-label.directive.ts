@@ -1,4 +1,4 @@
-import { TemplateRef, Directive } from '@angular/core';
+import { TemplateRef, Directive, Optional, Injector } from '@angular/core';
 import { FieldConfigurationComponent } from '../components/field-config/field-config.component';
 
 @Directive({
@@ -7,7 +7,12 @@ import { FieldConfigurationComponent } from '../components/field-config/field-co
 export class FieldLabelDirective {
   named: string;
 
-  constructor(public templateRef: TemplateRef<any>, { name, override: { named } }: FieldConfigurationComponent) {
-    this.named = named || name;
+  constructor(public templateRef: TemplateRef<any>, injector: Injector) {
+    const fieldConfiguration = injector.get(FieldConfigurationComponent, { name: '*', override: false });
+
+    if (fieldConfiguration) {
+      const { override, name } = fieldConfiguration;
+      this.named = override && override.named || name;
+    }
   }
 }
