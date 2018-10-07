@@ -1,4 +1,4 @@
-import { Component, Input, QueryList, ContentChildren, ViewChild } from '@angular/core';
+import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
@@ -8,7 +8,7 @@ import { map } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../field-config/field-config.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 
-export function formGroupFactory({control}) {
+export function formGroupFactory({ ngForm: { control }}) {
   return control;
 }
 
@@ -18,19 +18,24 @@ export function formGroupFactory({control}) {
   providers: [{ provide: PARENT_FORM_GROUP, useFactory: formGroupFactory, deps: [FormComponent] }]
 })
 export class FormComponent {
-  fields: Array<Observable<InputConfiguration>>;
+  inputConfigurations: Array<Observable<InputConfiguration>>;
 
   private _action: Function;
 
   private _fieldOverrides: { [name: string]: Observable<InputConfiguration> };
   private _remoteConfigurations: { [name: string]: InputConfiguration };
+  private _labels: { [name: string]: TemplateRef<any> } = {};
 
   @ViewChild(NgForm) ngForm: NgForm;
+  @ContentChildren(FieldLabelDirective, { descendants: true }) set labels(labels: QueryList<FieldLabelDirective>) {
+    if (!labels) {
+      return;
+    }
 
-  @ContentChildren(FieldLabelDirective) labels;
-
-  get control() {
-    return this.ngForm && this.ngForm.control;
+    this._labels = {};
+    labels.forEach(({named, templateRef}) => {
+      this._labels[named] = templateRef;
+    });
   }
 
   @ContentChildren(FieldConfigurationComponent)
@@ -52,14 +57,14 @@ export class FormComponent {
     this._fieldOverrides = fieldConfigurations;
 
     if (this._remoteConfigurations) {
-      this.fields = Array.from(this.computeFields());
+      this.inputConfigurations = Array.from(this.computeFields());
     }
   }
 
   @Input()
   set action(action: Function & { fields?: any }) {
     if (!action) {
-      this._action = this.fields = undefined;
+      this._action = this.inputConfigurations = undefined;
 
       return;
     }
@@ -67,7 +72,7 @@ export class FormComponent {
     this._action = action;
     this._remoteConfigurations = action.fields;
 
-    this.fields = Array.from(this.computeFields());
+    this.inputConfigurations = Array.from(this.computeFields());
   }
 
   * computeFields(): Iterable<Observable<InputConfiguration>> {

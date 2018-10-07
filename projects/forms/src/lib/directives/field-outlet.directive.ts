@@ -1,4 +1,4 @@
-import { Directive, Input, Injector, ViewContainerRef, Inject, Optional } from '@angular/core';
+import { Directive, Input, Injector, ViewContainerRef, Inject, Optional, TemplateRef, ComponentRef } from '@angular/core';
 import { FieldConfiguration } from '@nghm/forms';
 
 import { InputConfiguration } from '../components/field-configuration/input-configuration';
@@ -12,6 +12,10 @@ import { FormGroup } from '@angular/forms';
   selector: '[hmFieldOutlet]'
 })
 export class FieldOutletDirective {
+  _componentRef: ComponentRef<any>;
+
+  @Input() hmFieldOutletLabel: TemplateRef<string>;
+
   @Input() set hmFieldOutlet(inputConfiguration: InputConfiguration) {
     if (!inputConfiguration) {
       return;
@@ -20,6 +24,7 @@ export class FieldOutletDirective {
     const { name } = inputConfiguration;
     const inputFactory = this.inputComponentFactoryResolver.resolve(inputConfiguration.type);
     const formControl = this.formControlFactory.make(inputConfiguration);
+    const labelTemplateRef = this.hmFieldOutletLabel;
 
     this.control.addControl(inputConfiguration.name, formControl);
 
@@ -27,10 +32,12 @@ export class FieldOutletDirective {
       provide: FieldConfiguration,
       useValue: {
         formControl,
+        labelTemplateRef,
         name
       }
     });
-    this.viewContainerRef.createComponent(inputFactory, 0, proxyInjector);
+
+    this._componentRef = this.viewContainerRef.createComponent(inputFactory, 0, proxyInjector);
   }
 
   constructor(

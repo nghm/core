@@ -30,7 +30,7 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
       debounceTime(10)
     );
 
-  constructor(@Optional() @Host() private override: OverrideFieldNamedDirective) {}
+  constructor(@Optional() @Host() public override: OverrideFieldNamedDirective) {}
 
   ngOnChanges(): void {
     const configuration = {} as InputConfiguration;
