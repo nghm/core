@@ -1,9 +1,11 @@
 import { Component, Input, QueryList, ContentChildren, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { OverrideFieldNamedDirective } from '../field-configuration/field-configuration.component';
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { PARENT_FORM } from './parent-form';
+import { of, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { FieldConfigurationComponent } from '../field-config/field-config.component';
 
 @Component({
   selector: 'hm-form',
@@ -11,30 +13,36 @@ import { PARENT_FORM } from './parent-form';
   providers: [{ provide: PARENT_FORM, useExisting: FormComponent }]
 })
 export class FormComponent {
-  fields: Iterable<{ remote: InputConfiguration, override: InputConfiguration }>;
+  fields: Iterable<Observable<InputConfiguration>>;
 
   private _action: Function;
 
-  private _fieldOverrides: { [name: string]: InputConfiguration };
+  private _fieldOverrides: { [name: string]: Observable<InputConfiguration> };
   private _remoteConfigurations: { [name: string]: InputConfiguration };
 
   @ViewChild(NgForm) ngForm: NgForm;
 
-  @ContentChildren(OverrideFieldNamedDirective)
-  set fieldConfigurations(fc: QueryList<OverrideFieldNamedDirective>) {
+  @ContentChildren(FieldConfigurationComponent)
+  set fieldConfigurations(fc: QueryList<FieldConfigurationComponent>) {
     if (!fc) {
       return;
     }
 
     const fieldConfigurations = {};
 
-    fc.forEach(({ named, fieldConfiguration }) => {
-      fieldConfigurations[named] = fieldConfiguration;
+    fc.forEach(({ name, override, inputConfiguration }) => {
+      if (!override) {
+        fieldConfigurations[name] = inputConfiguration;
+      } else {
+        fieldConfigurations[override.named] = inputConfiguration;
+      }
     });
 
     this._fieldOverrides = fieldConfigurations;
 
-    this.fields = Array.from(this.computeFields());
+    if (this._remoteConfigurations) {
+      this.fields = Array.from(this.computeFields());
+    }
   }
 
   @Input()
@@ -52,24 +60,32 @@ export class FormComponent {
   }
 
   * computeFields()
-      : Iterable<{ remote: InputConfiguration, override: InputConfiguration }> {
+      : Iterable<Observable<InputConfiguration>> {
     const {
-      _fieldOverrides: fieldOverrides = {},
+      _fieldOverrides: localConfigurations$ = {},
       _remoteConfigurations: remoteConfigurations = {}
     } = this;
 
     const remoteNames = Object.keys(remoteConfigurations);
-    // const localNames = Object.keys(fieldOverrides);
-    const names = remoteNames;
+    const localNames = Object.keys(localConfigurations$);
+    const names = this.unique(remoteNames.concat(localNames));
 
     for (const name of names) {
       const remote = remoteConfigurations[name];
-      const override = fieldOverrides[name];
+      const override = localConfigurations$[name];
 
-      yield {
-        remote, override
-      };
+      if (override) {
+        yield override.pipe(
+          map(local => ({ ...remote, ...local }))
+        );
+      } else {
+        return of(remote);
+      }
     }
+  }
+
+  unique(array: Array<any>): Array<any> {
+    return array.filter((value, index) => index === array.indexOf(value));
   }
 
   onSubmit(event) {

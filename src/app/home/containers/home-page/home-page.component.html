@@ -22,9 +22,11 @@
 </p>
 
 <hm-form [action]="updateTitle">
-  <hm-field
-    hmOverrideFieldNamed="title"
-    value="Other value"
-  >
-  </hm-field>
+  <hm-form-field hmFieldNamed="title" value="Other value">
+    <ng-container *hmLabel>Test</ng-container>
+  </hm-form-field>
+
+  <hm-form-field name="acceptConditions" type="boolean" required="true">
+    <span *hmFieldLabel>Test</span>
+  </hm-form-field>
 </hm-form>
