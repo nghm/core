@@ -1,5 +1,3 @@
-import { ComponentFactory } from '@angular/core';
-
 export interface InputConfiguration {
   name: string;
   value: any;
@@ -12,10 +10,4 @@ export interface InputConfiguration {
   minLength?: number;
   email?: boolean;
   pattern?: string;
-}
-
-export interface FieldConfiguration {
-  name: string;
-  inputFactory: ComponentFactory<any>;
-  configuration: InputConfiguration;
 }

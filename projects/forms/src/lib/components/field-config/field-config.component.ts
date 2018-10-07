@@ -32,13 +32,6 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
 
   constructor(@Optional() @Host() private override: OverrideFieldNamedDirective) {}
 
-  @ContentChild(FieldLabelDirective)
-  set labelTemplateRef(fieldLabel: FieldLabelDirective) {
-    if (!fieldLabel) {
-      return;
-    }
-  }
-
   ngOnChanges(): void {
     const configuration = {} as InputConfiguration;
     const mappable = ['name', 'value', 'type', 'required', 'max', 'min', 'maxLength', 'minLength', 'email', 'pattern'];
