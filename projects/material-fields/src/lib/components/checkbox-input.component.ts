@@ -2,9 +2,9 @@ import { Component } from '@angular/core';
 import { FieldConfiguration, FieldComponent } from '@nghm/forms';
 
 @Component({
-  selector: 'hm-mat-text-input',
-  templateUrl: './text-input.component.html'
+  selector: 'hm-mat-checkbox-input',
+  templateUrl: './checkbox-input.component.html'
 })
-export class TextInputComponent extends FieldComponent {
+export class CheckboxInputComponent extends FieldComponent {
   constructor(configuration: FieldConfiguration) { super(configuration); }
 }

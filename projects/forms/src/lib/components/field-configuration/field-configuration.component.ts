@@ -1,13 +1,10 @@
-import { Directive, Input, Host } from '@angular/core';
-import { FieldComponent } from '../field/field.component';
+import { Directive, Input } from '@angular/core';
 
 @Directive({
-  selector: 'hm-field[hmOverrideFieldNamed]'
+  selector: 'hm-form-field[hmFieldNamed]'
 })
 export class OverrideFieldNamedDirective {
-  @Input() hmOverrideFieldNamed: string;
+  @Input() hmFieldNamed: string;
 
-  get named() { return this.hmOverrideFieldNamed; }
-
-  constructor(@Host() public fieldConfiguration: FieldComponent) {}
+  get named() { return this.hmFieldNamed; }
 }
