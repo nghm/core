@@ -7,6 +7,7 @@ import { of, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../field-config/field-config.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
+import { FieldErrorDirective } from '../../directives/field-error.directive';
 
 export function formGroupFactory({ ngForm: { control }}) {
   return control;
@@ -19,14 +20,16 @@ export function formGroupFactory({ ngForm: { control }}) {
 })
 export class FormComponent {
   inputConfigurations: Array<Observable<InputConfiguration>>;
+  _labels: { [name: string]: TemplateRef<any> } = {};
+  _errors: { [name: string]: TemplateRef<any> } = {};
 
   private _action: Function;
 
   private _fieldOverrides: { [name: string]: Observable<InputConfiguration> };
   private _remoteConfigurations: { [name: string]: InputConfiguration };
-  private _labels: { [name: string]: TemplateRef<any> } = {};
 
   @ViewChild(NgForm) ngForm: NgForm;
+
   @ContentChildren(FieldLabelDirective, { descendants: true }) set labels(labels: QueryList<FieldLabelDirective>) {
     if (!labels) {
       return;
@@ -35,6 +38,17 @@ export class FormComponent {
     this._labels = {};
     labels.forEach(({named, templateRef}) => {
       this._labels[named] = templateRef;
+    });
+  }
+
+  @ContentChildren(FieldErrorDirective, { descendants: true }) set errors(errors: QueryList<FieldErrorDirective>) {
+    if (!errors) {
+      return;
+    }
+
+    this._errors = {};
+    errors.forEach(({named, templateRef}) => {
+      this._errors[named] = templateRef;
     });
   }
 

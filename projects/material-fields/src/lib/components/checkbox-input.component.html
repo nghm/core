@@ -1,3 +1,3 @@
-<mat-checkbox [formControl]="configuration.formControl">
-  <ng-container *ngTemplateOutlet="configuration.labelTemplateRef; context: { $implicit: configuration.name }"></ng-container>
+<mat-checkbox [formControl]="formControl">
+  <ng-container *ngTemplateOutlet="labelTemplateRef; context: { $implicit: name }"></ng-container>
 </mat-checkbox>

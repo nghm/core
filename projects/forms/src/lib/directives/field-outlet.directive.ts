@@ -14,7 +14,8 @@ import { FormGroup } from '@angular/forms';
 export class FieldOutletDirective {
   _componentRef: ComponentRef<any>;
 
-  @Input() hmFieldOutletLabels: TemplateRef<string>;
+  @Input() hmFieldOutletLabels: { [name: string]: TemplateRef<string> };
+  @Input() hmFieldOutletErrors: { [name: string]: TemplateRef<string> };
 
   @Input() set hmFieldOutlet(inputConfiguration: InputConfiguration) {
     if (!inputConfiguration) {
@@ -24,7 +25,9 @@ export class FieldOutletDirective {
     const { name } = inputConfiguration;
     const inputFactory = this.inputComponentFactoryResolver.resolve(inputConfiguration.type);
     const formControl = this.formControlFactory.make(inputConfiguration);
+
     const labelTemplateRef = this.hmFieldOutletLabels && this.hmFieldOutletLabels[name] || this.hmFieldOutletLabels['*'];
+    const errorTemplateRef = this.hmFieldOutletErrors && this.hmFieldOutletErrors[name] || this.hmFieldOutletErrors['*'];
 
     this.control.addControl(inputConfiguration.name, formControl);
 
@@ -33,6 +36,7 @@ export class FieldOutletDirective {
       useValue: {
         formControl,
         labelTemplateRef,
+        errorTemplateRef,
         name
       }
     });
