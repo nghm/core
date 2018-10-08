@@ -29,7 +29,7 @@ export class FieldOutletDirective {
     const labelTemplateRef = this.hmFieldOutletLabels && this.hmFieldOutletLabels[name] || this.hmFieldOutletLabels['*'];
     const errorTemplateRef = this.hmFieldOutletErrors && this.hmFieldOutletErrors[name] || this.hmFieldOutletErrors['*'];
 
-    this.control.addControl(inputConfiguration.name, formControl);
+    this.control.addControl(name, formControl);
 
     const proxyInjector = this.proxyInjectorFactory.make(this.injector, {
       provide: FieldConfiguration,

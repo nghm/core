@@ -23,19 +23,9 @@
 
 <hm-form [action]="updateTitle">
   <ng-container *hmLabel="let name">{{ name }}</ng-container>
-  <ng-container *hmError="let error; let field = field">{{ error.name }} {{ error.value | json }} {{ field }}</ng-container>
+  <ng-container *hmError="let error">{{ error.name }}</ng-container>
 
-  <hm-form-field named="title" value="Other value" pattern="[a-z]{0,5}">
-    <ng-container *hmLabel>Title</ng-container>
-    <ng-container *hmError="let error; let field = field" [ngSwitch]="error?.name">
-      <ng-container *ngSwitchCase="'pattern'">
-        The title must have at least 5 characters that are lower cased letters... obviously
-      </ng-container>
-    </ng-container>
-  </hm-form-field>
+  <hm-form-field named="title" value="Other value" pattern="Test"></hm-form-field>
 
-  <hm-form-field name="acceptConditions" type="boolean" required="true">
-    <ng-container *hmLabel>Agree to our terms and conditions?</ng-container>
-  </hm-form-field>
+  <hm-form-field name="acceptConditions" [value]="false" type="boolean" [required]="true"></hm-form-field>
 </hm-form>
-

@@ -10,4 +10,6 @@ export interface InputConfiguration {
   minLength?: number;
   email?: boolean;
   pattern?: string;
+
+  disabled?: boolean;
 }

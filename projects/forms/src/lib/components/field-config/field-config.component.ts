@@ -23,6 +23,8 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
   @Input() email?: boolean;
   @Input() pattern?: string;
 
+  @Input() disabled?: boolean;
+
   inputConfiguration = from(this.inputConfigurationSubject)
     .pipe(
       debounceTime(10)
@@ -36,7 +38,9 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
 
   ngOnChanges(): void {
     const configuration = {} as InputConfiguration;
-    const mappable = ['name', 'value', 'type', 'required', 'max', 'min', 'maxLength', 'minLength', 'email', 'pattern'];
+    const mappable = ['name', 'value', 'type', 'required',
+                      'max', 'min', 'maxLength', 'minLength',
+                      'email', 'pattern', 'disabled'];
 
     for (const key of mappable) {
       if (this[key] !== undefined) {
