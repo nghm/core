@@ -11,9 +11,11 @@ import { FormControlFactory } from './services/form-control.factory';
 import { ProxyInjectorFactory } from './services/proxy-injector.factory';
 import { FieldOutletDirective } from './directives/field-outlet.directive';
 import { FieldLabelDirective } from './directives/field-label.directive';
+import { FieldErrorDirective } from './directives/field-error.directive';
 
 const COMPONENTS =  [
   FieldLabelDirective,
+  FieldErrorDirective,
   OverrideFieldNamedDirective,
   FormComponent,
   FieldConfigurationComponent,
