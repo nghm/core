@@ -22,10 +22,14 @@
 </p>
 
 <hm-form [action]="updateTitle">
-  <ng-container *hmLabel="let name">{{ name }}</ng-container>
-  <ng-container *hmError="let error; let name = name">{{ error }} {{ name }}</ng-container>
+  <ng-container *hmLabel="let name">DEFAULT {{ name }}</ng-container>
+  <ng-container *hmError="let error; let field = field">{{ error }}</ng-container>
 
-  <hm-form-field hmFieldNamed="title" value="Other value"></hm-form-field>
+  <hm-form-field named="title" value="Other value">
+    <ng-container *hmLabel>Title</ng-container>
+  </hm-form-field>
 
-  <hm-form-field name="acceptConditions" type="boolean" required="true"></hm-form-field>
+  <hm-form-field name="acceptConditions" type="boolean" required="true">
+    <ng-container *hmLabel>Agree to our terms and conditions?</ng-container>
+  </hm-form-field>
 </hm-form>
