@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { DevpageComponent } from '@nghm/material-devpage';
 
 export const routes: Routes = [
   {
@@ -9,5 +10,9 @@ export const routes: Routes = [
   {
     path: 'home',
     loadChildren: './home/home.module#HomeModule'
+  },
+  {
+    path: '**',
+    component: DevpageComponent
   }
 ];

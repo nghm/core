@@ -10,6 +10,7 @@ import { CoreModule as AppCoreModule } from './core/core.module';
 import { AppRootComponent } from './core/containers/app.component';
 
 import { routes } from './routes';
+import { MaterialDevpageModule } from '@nghm/material-devpage';
 
 @NgModule({
   imports: [
@@ -19,6 +20,7 @@ import { routes } from './routes';
 
     RouterModule.forRoot(routes),
     CoreModule,
+    MaterialDevpageModule,
     FormsModule,
     MaterialFieldsModule
   ],

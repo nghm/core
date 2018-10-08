@@ -10,12 +10,24 @@ export class PropertyBoundMetadata implements FieldBoundMetadata {
   constructor(public propertyName: string, public bindingName: string) { }
 }
 
+export class PropertiesBoundMetadata implements FieldBoundMetadata {
+  constructor(public bindingName: string) { }
+}
+
 export class LinkBoundMetadata implements FieldBoundMetadata {
   constructor(public linkName: string, public bindingName: string) { }
 }
 
+export class LinksBoundMetadata implements FieldBoundMetadata {
+  constructor(public bindingName: string) { }
+}
+
 export class ActionBoundMetadata implements FieldBoundMetadata {
   constructor(public actionName: string, public bindingName: string) { }
+}
+
+export class ActionsBoundMetadata implements FieldBoundMetadata {
+  constructor(public bindingName: string) { }
 }
 
 export class ActionListenerBoundMetadata implements FieldBoundMetadata {
@@ -26,6 +38,10 @@ export class EntityBoundMetadata implements FieldBoundMetadata {
   constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
 }
 
+export class RootEntityBoundMetadata implements FieldBoundMetadata {
+  constructor(public type: Type<any>, public bindingName: string) { }
+}
+
 export class EntitiesBoundMetadata implements FieldBoundMetadata {
   constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
 }
@@ -33,6 +49,13 @@ export class EntitiesBoundMetadata implements FieldBoundMetadata {
 export function Property(propertyName?: string): PropertyDecorator {
   return function<T>(target: T, bindingName: string) {
     const metadata = new PropertyBoundMetadata(propertyName || bindingName, bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
+export function Properties(): PropertyDecorator {
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new PropertiesBoundMetadata(bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
@@ -50,10 +73,26 @@ export function Link({ linkName }: LinkMeta = {})
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
+export function Links()
+  : PropertyDecorator {
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new LinksBoundMetadata(bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
 export function Action<T>(actionName?: string)
   : PropertyDecorator {
   return function(target: T, bindingName: string) {
     const metadata = new ActionBoundMetadata(actionName || bindingName, bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
+export function Actions<T>()
+  : PropertyDecorator {
+  return function(target: T, bindingName: string) {
+    const metadata = new ActionsBoundMetadata(bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
@@ -69,6 +108,13 @@ export function ActionListener(actionName: string, ...events: Array<string>)
 export function Entity<T>(query: string, type: Type<any>): PropertyDecorator {
   return function(target: T, bindingName: string) {
     const metadata = new EntityBoundMetadata(query, type, bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
+export function RootEntity<T>(type: Type<any>): PropertyDecorator {
+  return function(target: T, bindingName: string) {
+    const metadata = new RootEntityBoundMetadata(type, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
