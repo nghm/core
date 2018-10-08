@@ -22,8 +22,8 @@
 </p>
 
 <hm-form [action]="updateTitle">
-  <ng-container *hmLabel="let name">DEFAULT {{ name }}</ng-container>
-  <ng-container *hmError="let error; let field = field">DEFAULT {{ error }}</ng-container>
+  <ng-container *hmLabel="let name">{{ name }}</ng-container>
+  <ng-container *hmError="let error; let field = field">{{ error.name }} {{ error.value | json }} {{ field }}</ng-container>
 
   <hm-form-field named="title" value="Other value" pattern="[a-z]{0,5}">
     <ng-container *hmLabel>Title</ng-container>
@@ -38,3 +38,4 @@
     <ng-container *hmLabel>Agree to our terms and conditions?</ng-container>
   </hm-form-field>
 </hm-form>
+

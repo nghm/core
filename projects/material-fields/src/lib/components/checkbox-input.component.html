@@ -1,3 +1,8 @@
 <mat-checkbox [formControl]="formControl">
   <ng-container *ngTemplateOutlet="labelTemplateRef; context: { $implicit: name }"></ng-container>
 </mat-checkbox>
+<mat-error *ngIf="formControl.invalid">
+  <div *ngFor="let error of errors">
+    <ng-container *ngTemplateOutlet="errorTemplateRef, context: { $implicit: error, field: name }"></ng-container>
+  </div>
+</mat-error>
