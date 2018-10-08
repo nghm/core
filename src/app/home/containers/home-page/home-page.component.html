@@ -5,11 +5,11 @@
   {{ description }} is present
 </p>
 
-<a *ngIf="aboutUs" [href]="aboutUs">Link {{ aboutUs }}</a>
+<a *ngIf="aboutUs" [hmLink]="aboutUs()">Link</a>
 <br>
-<a *ngIf="page && page({ no: 1 }) as href" [href]="href">Page {{ href }}</a>
+<a *ngIf="page" [hmLink]="page({ no: 1 })">Page 1</a>
 <br>
-<a *ngIf="next as href" [href]="href">Next {{ href }}</a>
+<a *ngIf="next" [hmLink]="next()">Next</a>
 
 <p style="color: green">
   {{ firstChapter?.title }}

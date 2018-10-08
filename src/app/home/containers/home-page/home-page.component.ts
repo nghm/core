@@ -24,8 +24,8 @@ export class HomePageComponent {
   @Entity(':root > .chapter:last-child', Chapter)
   lastChapter: Chapter;
 
-  @Link() aboutUs: string;
-  @Link() next: string;
+  @Link() aboutUs: LinkFunction<void>;
+  @Link() next: LinkFunction<void>;
   @Link() page: LinkFunction<{ no: number }>;
 
   @Action() updateTitle: ParameterizedActionFunction<{ title: string }>;

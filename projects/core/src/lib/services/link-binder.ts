@@ -13,10 +13,10 @@ export class LinkBinder implements Binder {
     const { links: { [linkName]: { href } = { href: undefined } } } = source;
 
     const hasInterpolationParameters = this.urlInterpolator.hasInterpolationParameters(href);
-    const interpolationMethod = hasInterpolationParameters && (parameters => this.urlInterpolator.interpolate(href, parameters));
+    const interpolationMethod = (parameters => hasInterpolationParameters && this.urlInterpolator.interpolate(href, parameters) || href);
 
     Object.defineProperty(target, bindingName, {
-      get: () => interpolationMethod || href
+      get: () => interpolationMethod
     });
   }
 }
