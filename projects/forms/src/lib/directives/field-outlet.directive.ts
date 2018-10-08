@@ -1,12 +1,12 @@
 import { Directive, Input, Injector, ViewContainerRef, Inject, Optional, TemplateRef, ComponentRef } from '@angular/core';
-import { FieldConfiguration } from '@nghm/forms';
+import { FormGroup } from '@angular/forms';
 
 import { InputConfiguration } from '../components/field-configuration/input-configuration';
 import { FormControlFactory } from '../services/form-control.factory';
 import { ProxyInjectorFactory } from '../services/proxy-injector.factory';
 import { InputComponentFactoryResolver } from '../services/input-component-resolver.factory';
 import { PARENT_FORM_GROUP } from '../components/form/parent-form';
-import { FormGroup } from '@angular/forms';
+import { FieldConfiguration } from '../services/field-configuration';
 
 @Directive({
   selector: '[hmFieldOutlet]'
