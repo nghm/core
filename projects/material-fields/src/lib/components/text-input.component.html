@@ -3,7 +3,7 @@
     <ng-container *ngTemplateOutlet="labelTemplateRef; context: { $implicit: name }"></ng-container>
   </mat-label>
   <input matInput [formControl]="formControl"/>
-  <mat-error *ngIf="formControl.invalid">
+  <mat-error *ngIf="invalid">
     <div *ngFor="let error of errors">
       <ng-container *ngTemplateOutlet="errorTemplateRef, context: { $implicit: error, field: name }"></ng-container>
     </div>

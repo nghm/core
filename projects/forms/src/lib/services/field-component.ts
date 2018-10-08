@@ -8,6 +8,10 @@ export class FieldComponent {
   formControl: FormControl;
   labelTemplateRef: TemplateRef<string>;
 
+  get invalid(): boolean {
+    return this.formControl.invalid && this.formControl.dirty;
+  }
+
   get errors(): Array<{name: string, value: any }> {
     const keys = Object.keys(this.formControl.errors);
 
