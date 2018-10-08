@@ -18,6 +18,10 @@ import { EntityBinderFactory } from './services/entity-binder-factory';
 import { CssQueryFactory } from './services/css-query-factory';
 import { EntitiesBinderFactory } from './services/entities-binder-factory';
 import { UrlScopeTrimmer } from './services/url-scope-trimmer';
+import { RootEntityBinderFactory } from './services/root-entity-binder-factory';
+import { PropertiesBinderFactory } from './services/properties-binder-factory';
+import { LinksBinderFactory } from './services/links-binder-factory';
+import { ActionsBinderFactory } from './services/actions-binder-factory';
 
 @NgModule({
   imports: [],
@@ -34,10 +38,14 @@ import { UrlScopeTrimmer } from './services/url-scope-trimmer';
     CssQueryFactory,
     UrlScopeTrimmer,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: LinksBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: ActionsBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: PropertiesBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: RootEntityBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: EntitiesBinderFactory, multi: true }
   ],
   exports: []

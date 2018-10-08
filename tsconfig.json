@@ -14,7 +14,8 @@
     ],
     "lib": [
       "es2017",
-      "dom"
+      "dom",
+      "esnext.asynciterable"
     ],
     "paths": {
       "@nghm/core": [
@@ -28,6 +29,9 @@
       ],
       "@nghm/router": [
         "projects/router/src/public_api"
+      ],
+      "@nghm/material-devpage": [
+        "projects/material-devpage/src/public_api"
       ]
     }
   }
