@@ -1,9 +1,7 @@
 <form (submit)="onSubmit($event)">
-  <ng-template #defaultLabel let-name="$implicit">{{ name }}</ng-template>
-
-  <ng-container *ngFor="let inputConfiguration$ of inputConfigurations">
+  <div *ngFor="let inputConfiguration$ of inputConfigurations">
     <ng-container *ngIf="inputConfiguration$ | async as inputConfiguration">
-      <ng-container *hmFieldOutlet="inputConfiguration; label: _labels[inputConfiguration.name] || _labels['*'] || defaultLabel"></ng-container>
+      <ng-container *hmFieldOutlet="inputConfiguration; labels: _labels"></ng-container>
     </ng-container>
-  </ng-container>
+  </div>
 </form>

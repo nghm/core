@@ -1,6 +1,6 @@
 <mat-form-field>
   <mat-label>
-    <ng-container *ngTemplateOutlet="configuration.labelTemplateRef"></ng-container>
+    <ng-container *ngTemplateOutlet="configuration.labelTemplateRef; context: { $implicit: configuration.name }"></ng-container>
   </mat-label>
   <input matInput [formControl]="configuration.formControl"/>
 </mat-form-field>

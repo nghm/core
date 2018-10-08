@@ -88,7 +88,7 @@ export class FormComponent {
 
       if (override) {
         yield override.pipe(
-          map(local => ({ ...remote, ...local }))
+          map(local => ({ name, ...remote, ...local }))
         );
       } else {
         yield of(remote);
