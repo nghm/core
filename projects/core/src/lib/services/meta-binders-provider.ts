@@ -1,4 +1,4 @@
-import { Injectable, Inject, Type } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { getSourceMetadata } from '../decorators';
 import { Binder } from './binder';
