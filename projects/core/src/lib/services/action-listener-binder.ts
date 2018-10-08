@@ -14,7 +14,7 @@ export class ActionListenerBinder implements Binder {
 
     this.eventSubscription = this.actionExecutor
       .on(actionName, ...events)
-      .subscribe(_ => target[bindingName] && target[bindingName]());
+      .subscribe(({ payload }) => target[bindingName] && target[bindingName](payload));
   }
 
   dispose(): void {

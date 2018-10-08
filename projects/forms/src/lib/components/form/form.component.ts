@@ -20,8 +20,8 @@ export function formGroupFactory({ ngForm: { control }}) {
 })
 export class FormComponent {
   inputConfigurations: Array<Observable<InputConfiguration>>;
-  _labels: { [name: string]: TemplateRef<any> } = {};
-  _errors: { [name: string]: TemplateRef<any> } = {};
+  labels: { [name: string]: TemplateRef<any> } = {};
+  errors: { [name: string]: TemplateRef<any> } = {};
 
   private _action: Function;
 
@@ -30,25 +30,25 @@ export class FormComponent {
 
   @ViewChild(NgForm) ngForm: NgForm;
 
-  @ContentChildren(FieldLabelDirective, { descendants: true }) set labels(labels: QueryList<FieldLabelDirective>) {
+  @ContentChildren(FieldLabelDirective, { descendants: true }) set setLabels(labels: QueryList<FieldLabelDirective>) {
     if (!labels) {
       return;
     }
 
-    this._labels = {};
+    this.labels = {};
     labels.forEach(({named, templateRef}) => {
-      this._labels[named] = templateRef;
+      this.labels[named] = templateRef;
     });
   }
 
-  @ContentChildren(FieldErrorDirective, { descendants: true }) set errors(errors: QueryList<FieldErrorDirective>) {
+  @ContentChildren(FieldErrorDirective, { descendants: true }) set setErrors(errors: QueryList<FieldErrorDirective>) {
     if (!errors) {
       return;
     }
 
-    this._errors = {};
+    this.errors = {};
     errors.forEach(({named, templateRef}) => {
-      this._errors[named] = templateRef;
+      this.errors[named] = templateRef;
     });
   }
 

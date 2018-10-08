@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { Property, Link, LinkFunction, Action, ActionFunction, Entity,
   ParameterizedActionFunction, ActionListener, HypermediaRef, Entities } from '@nghm/core';
 
@@ -33,10 +33,16 @@ export class HomePageComponent {
 
   constructor(private hypermediaRef: HypermediaRef) {}
 
-  @ActionListener('updateTitle', 'success')
-  @ActionListener('clearDescription', 'success')
-  refresh(): void {
+  @ActionListener('*', 'success')
+  refresh({ action, response: { status }}): void {
+    console.log(status);
+
     this.hypermediaRef.fetch();
+  }
+
+  @ActionListener('*', 'error')
+  error({ error: { status } }): void {
+    console.log(status);
   }
 
   hmAfterBinding() {

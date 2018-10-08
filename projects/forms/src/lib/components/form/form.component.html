@@ -1,7 +1,7 @@
 <form (submit)="onSubmit($event)">
   <div *ngFor="let inputConfiguration$ of inputConfigurations">
     <ng-container *ngIf="inputConfiguration$ | async as inputConfiguration">
-      <ng-container *hmFieldOutlet="inputConfiguration; labels: _labels; errors: _errors"></ng-container>
+      <ng-container *hmFieldOutlet="inputConfiguration; labels: labels; errors: errors"></ng-container>
     </ng-container>
   </div>
 </form>

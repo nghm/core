@@ -9,8 +9,8 @@
     },
     "actions": {
       "clearDescription": {
-          "href": "http://localhost:4200/home/description",
-          "method": "PATCH",
+          "href": "http://localhost:54287/api/home/description",
+          "method": "POST",
           "fields": {
               "description": {
                   "value": "",
@@ -19,7 +19,7 @@
           }
       },
       "updateTitle": {
-          "href": "http://localhost:4200/home/title",
+          "href": "http://localhost:54287/api/home/title",
           "method": "PATCH",
           "fields": {
               "title": {
