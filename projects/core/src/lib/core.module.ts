@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 
-import { CoreComponent } from './core.component';
 import { ComponentInstantiationInterceptor } from './services/component-instantiation.interceptor';
 import { ResourcePathNormalizer } from './services/resource-path-normalizer';
 import { MetaBinder } from './services/meta-binders-provider';
@@ -18,10 +17,11 @@ import { HypermediaRef } from './services/hypermedia-ref';
 import { EntityBinderFactory } from './services/entity-binder-factory';
 import { CssQueryFactory } from './services/css-query-factory';
 import { EntitiesBinderFactory } from './services/entities-binder-factory';
+import { UrlScopeTrimmer } from './services/url-scope-trimmer';
 
 @NgModule({
   imports: [],
-  declarations: [CoreComponent],
+  declarations: [],
   providers: [
     ComponentInstantiationInterceptor,
     ResourcePathNormalizer,
@@ -32,6 +32,7 @@ import { EntitiesBinderFactory } from './services/entities-binder-factory';
     LifetimeEvents,
     HypermediaRef,
     CssQueryFactory,
+    UrlScopeTrimmer,
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
@@ -39,7 +40,7 @@ import { EntitiesBinderFactory } from './services/entities-binder-factory';
     { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: EntitiesBinderFactory, multi: true }
   ],
-  exports: [CoreComponent]
+  exports: []
 })
 export class CoreModule {
   constructor(interceptor: ComponentInstantiationInterceptor) { }

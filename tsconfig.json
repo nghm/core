@@ -25,6 +25,9 @@
       ],
       "@nghm/material-fields": [
         "projects/material-fields/src/public_api"
+      ],
+      "@nghm/router": [
+        "projects/router/src/public_api"
       ]
     }
   }
