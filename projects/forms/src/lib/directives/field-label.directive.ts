@@ -12,7 +12,7 @@ export class FieldLabelDirective {
 
     if (fieldConfiguration) {
       const { override, name } = fieldConfiguration;
-      this.named = override && override.named || name;
+      this.named = (override && override.named) || name;
     }
   }
 }

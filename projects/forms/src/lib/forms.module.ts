@@ -13,8 +13,8 @@ import { FieldOutletDirective } from './directives/field-outlet.directive';
 import { FieldLabelDirective } from './directives/field-label.directive';
 
 const COMPONENTS =  [
-  OverrideFieldNamedDirective,
   FieldLabelDirective,
+  OverrideFieldNamedDirective,
   FormComponent,
   FieldConfigurationComponent,
   FieldOutletDirective

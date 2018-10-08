@@ -1,10 +1,9 @@
-import { Component, Input, OnChanges, Host, Optional, ContentChild, TemplateRef } from '@angular/core';
+import { Component, Input, OnChanges, Host, Optional, Attribute } from '@angular/core';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { ReplaySubject, from } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
 import { OverrideFieldNamedDirective } from '../field-configuration/field-configuration.component';
-import { FieldLabelDirective } from '../../directives/field-label.directive';
 
 @Component({
   selector: 'hm-form-field',
@@ -13,7 +12,6 @@ import { FieldLabelDirective } from '../../directives/field-label.directive';
 export class FieldConfigurationComponent implements InputConfiguration, OnChanges {
   private inputConfigurationSubject = new ReplaySubject<InputConfiguration>(1);
 
-  @Input() name: string;
   @Input() value: any;
   @Input() type: string;
 
@@ -30,7 +28,11 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
       debounceTime(10)
     );
 
-  constructor(@Optional() @Host() public override: OverrideFieldNamedDirective) {}
+  constructor(
+    @Optional() @Host() public override: OverrideFieldNamedDirective,
+    @Attribute('name') public name: string) {
+    this.name = this.name === null ? undefined : this.name;
+  }
 
   ngOnChanges(): void {
     const configuration = {} as InputConfiguration;

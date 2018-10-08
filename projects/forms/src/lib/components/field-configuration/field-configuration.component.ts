@@ -1,10 +1,9 @@
-import { Directive, Input } from '@angular/core';
+import { Directive, Attribute } from '@angular/core';
 
 @Directive({
-  selector: 'hm-form-field[hmFieldNamed]'
+  // tslint:disable-next-line:directive-selector
+  selector: 'hm-form-field[named]'
 })
 export class OverrideFieldNamedDirective {
-  @Input() hmFieldNamed: string;
-
-  get named() { return this.hmFieldNamed; }
+  constructor(@Attribute('named') public named: string) {}
 }
