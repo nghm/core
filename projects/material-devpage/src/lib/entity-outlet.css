@@ -21,3 +21,8 @@ mat-panel-title {
 .capizalize {
   text-transform: capitalize;
 }
+
+.fieldless-action {
+  margin-top: 8px;
+  display: block;
+}

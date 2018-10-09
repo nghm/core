@@ -19,7 +19,7 @@ export class ActionsBinder implements Binder {
 
       const execute: Function & { fields?: any } = parameters => this.actionExecutor.execute({ name, ...action }, parameters);
 
-      execute.fields = action.fields;
+      execute.fields = action.fields || {};
 
       finalActions.push({
         name, ...action, execute
