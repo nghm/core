@@ -17,7 +17,7 @@ export class ResolverService {
   }
 
   resolve(target: any): void {
-    const resource = this.location.pathname;
+    const resource = this.location.pathname + this.location.search;
     const normalizedResource = this.resourcePathNormalizer.normalize(resource);
 
     this.http

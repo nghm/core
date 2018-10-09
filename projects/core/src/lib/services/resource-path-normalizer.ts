@@ -1,12 +1,15 @@
 import { Injectable } from '@angular/core';
+import { UrlScopeTrimmer } from './url-scope-trimmer';
 
 @Injectable()
 export class ResourcePathNormalizer {
-    normalize(path: string): string {
-        if (path.startsWith('/')) {
-            path = path.substring(1);
-        }
+  constructor(private urlScopeTrimmer: UrlScopeTrimmer) { }
 
-        return `/assets/resources/${path}.json`;
+  normalize(path: string): string {
+    if (path.startsWith('/')) {
+      path = path.substring(1);
     }
+
+    return this.urlScopeTrimmer.unTrimToLocalScope(path);
+  }
 }
