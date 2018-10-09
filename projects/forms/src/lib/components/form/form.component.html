@@ -3,5 +3,9 @@
     <ng-container *ngIf="inputConfiguration$ | async as inputConfiguration">
       <ng-container *hmFieldOutlet="inputConfiguration; labels: labels; errors: errors"></ng-container>
     </ng-container>
+
+    <div *ngIf="submit">
+      <ng-container *ngTemplateOutlet="submit.templateRef"></ng-container>
+    </div>
   </div>
 </form>

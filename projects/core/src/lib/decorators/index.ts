@@ -14,6 +14,10 @@ export class PropertiesBoundMetadata implements FieldBoundMetadata {
   constructor(public bindingName: string) { }
 }
 
+export class ClassesBoundMetadata implements FieldBoundMetadata {
+  constructor(public bindingName: string) { }
+}
+
 export class LinkBoundMetadata implements FieldBoundMetadata {
   constructor(public linkName: string, public bindingName: string) { }
 }
@@ -56,6 +60,13 @@ export function Property(propertyName?: string): PropertyDecorator {
 export function Properties(): PropertyDecorator {
   return function<T>(target: T, bindingName: string) {
     const metadata = new PropertiesBoundMetadata(bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
+}
+
+export function Classes(): PropertyDecorator {
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new ClassesBoundMetadata(bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }

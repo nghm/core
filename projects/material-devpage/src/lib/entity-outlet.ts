@@ -4,20 +4,48 @@ import { ExplorableEntitiy } from './explorable-entitiy';
 @Component({
   selector: 'hm-entity-outlet',
   template: `
-  <mat-card>
-    <ng-container *ngIf="entity.properties as properties">
-      <mat-card-title>{{properties.name || properties.title || properties.id}}</mat-card-title>
-      <mat-card-content>
-        <h4>Properties:</h4>
-        <code>
-          {{ properties | json}}
-        </code>
-      </mat-card-content>
-    </ng-container>
-    ,ng
-  </mat-card>
-  `
+  <mat-accordion>
+    <mat-expansion-panel [expanded]="open">
+      <mat-expansion-panel-header>
+        <mat-panel-title *ngIf="entity.properties as properties">
+          {{ properties.name || properties.title || properties.id }}
+        </mat-panel-title>
+        <mat-panel-description *ngIf="entity.classes">
+          <span *ngFor="let class of entity.classes">{{ class }}</span>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-tab-group>
+        <mat-tab label="Properties" *ngIf="entity.properties as properties">
+          <div class="code-wrapper">
+            <pre>{{ properties | json}}</pre>
+          </div>
+        </mat-tab>
+        <mat-tab label="Entities" *ngIf="entity?.entities.length > 0">
+          <hm-entity-outlet *ngFor="let entity of entity.entities" [entity]="entity"></hm-entity-outlet>
+        </mat-tab>
+        <mat-tab label="Actions" *ngIf="entity?.actions.length > 0">
+          <div *ngFor="let action of entity.actions">
+            <h3 class="capizalize">{{ action.name }}</h3>
+            <hm-form [action]="action.execute">
+              <div *hmLabel="let name" class="capizalize">{{ name }}</div>
+              <div *hmError="let name" class="capizalize">{{ name }}</div>
+
+              <button *hmSubmit mat-button>Execute</button>
+            </hm-form>
+          </div>
+        </mat-tab>
+        <mat-tab label="Links" *ngIf="entity?.links.length > 0">
+          <div class="links">
+            <a mat-button *ngFor="let link of entity.links" [hmLink]="link.href" color="primary">{{link.name}}</a>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
+    </mat-expansion-panel>
+  </mat-accordion>
+  `,
+  styleUrls: ['./entity-outlet.css']
 })
 export class EntityOutletComponent {
+  @Input() open = false;
   @Input() entity: ExplorableEntitiy;
 }

@@ -4,7 +4,7 @@ import { ExplorableEntitiy } from './explorable-entitiy';
 
 @Component({
   template: `
-  <hm-entity-outlet *ngIf="entity" [entity]="entity"></hm-entity-outlet>`
+  <hm-entity-outlet *ngIf="entity" [entity]="entity" [open]="true"></hm-entity-outlet>`
 })
 export class DevpageComponent {
   @RootEntity(ExplorableEntitiy) entity: ExplorableEntitiy;

@@ -1,0 +1,23 @@
+.code-wrapper {
+  background: #444444;
+  color: #eee;
+  padding: 16px;
+  margin: 0;
+}
+
+mat-panel-title {
+  max-width: 192px;
+}
+
+.links {
+  margin-top: 16px;
+}
+
+.links a {
+  margin-right: 14px;
+  text-transform: capitalize;
+}
+
+.capizalize {
+  text-transform: capitalize;
+}

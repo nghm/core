@@ -22,6 +22,7 @@ import { RootEntityBinderFactory } from './services/root-entity-binder-factory';
 import { PropertiesBinderFactory } from './services/properties-binder-factory';
 import { LinksBinderFactory } from './services/links-binder-factory';
 import { ActionsBinderFactory } from './services/actions-binder-factory';
+import { ClassesBinderFactory } from './services/classes-binder-factory';
 
 @NgModule({
   imports: [],
@@ -43,6 +44,7 @@ import { ActionsBinderFactory } from './services/actions-binder-factory';
     { provide: BINDER_FACTORIES, useClass: ActionsBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertyBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: PropertiesBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: ClassesBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: RootEntityBinderFactory, multi: true },

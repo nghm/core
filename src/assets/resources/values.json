@@ -1,78 +1,57 @@
 {
-    "properties": {
-        "title": "Values",
-        "description": "Test description"
-    },
-    "links": {
-        "aboutUs": { "href": "http://localhost:54287/api/about-us" },
-        "page": { "href": "http://localhost:54287/api/home/{no}" }
-    },
-    "actions": {
-      "clearDescription": {
-          "href": "http://localhost:54287/api/home/description",
-          "method": "POST",
-          "fields": {
-              "description": {
-                  "value": "",
-                  "type": "text"
-              }
-          }
+  "properties": {
+    "title": "Book Orders",
+    "description": "A page for management of book ordering",
+    "booksOrderCount": 12
+  },
+  "links": {
+    "home": { "href": "http://localhost:54287/api/home" }
+  },
+  "actions": {},
+  "entities": [
+    {
+      "class": ["chapter"],
+      "properties": {
+        "title": "First chapter"
       },
-      "updateTitle": {
-          "href": "http://localhost:54287/api/home/title",
-          "method": "PATCH",
-          "fields": {
-              "title": {
-                  "value": "Test",
-                  "type": "text"
-              }
+      "entities": [
+        {
+          "class": ["chapter", "sub-chapter"],
+          "properties": {
+            "title": "DEEP First chapter"
           }
-      }
-    },
-    "entities": [
-      {
-        "class": ["chapter"],
-        "properties": {
-          "title": "First chapter"
         },
-        "entities": [
-          {
-            "class": ["chapter", "sub-chapter"],
-            "properties": {
-              "title": "DEEP First chapter"
-            }
-          },
-          {
-            "class": ["chapter", "sub-chapter"],
-            "properties": {
-              "title": "DEEP Middle chapter"
-            }
-          },
-          {
-            "class": ["chapter", "sub-chapter"],
-            "properties": {
-              "title": "DEEP Last chapter"
-            }
+        {
+          "class": ["chapter", "sub-chapter"],
+          "properties": {
+            "title": "DEEP Middle chapter"
           }
-        ]
-      },
-      {
-        "class": ["chapter"],
-        "properties": {
-          "title": "Middle chapter"
+        },
+        {
+          "class": ["chapter", "sub-chapter"],
+          "properties": {
+            "title": "DEEP Last chapter"
+          }
         }
-      },
-      {
-        "class": ["chapter"],
-        "properties": {
-          "title": "Middle chapter 2"
-        }
-      },
-      {
-        "class": ["chapter"],
-        "properties": {
-          "title": "Last chapter"
-        }
+      ]
+    },
+    {
+      "class": ["chapter"],
+      "properties": {
+        "title": "Middle chapter"
       }
-    ]
+    },
+    {
+      "class": ["chapter"],
+      "properties": {
+        "title": "Middle chapter 2"
+      }
+    },
+    {
+      "class": ["chapter"],
+      "properties": {
+        "title": "Last chapter"
+      }
+    }
+  ]
 }
