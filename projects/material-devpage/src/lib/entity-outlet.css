@@ -26,3 +26,8 @@ mat-panel-title {
   margin-top: 8px;
   display: block;
 }
+
+.chip-list {
+  position: absolute;
+  margin-top: -8px;
+}

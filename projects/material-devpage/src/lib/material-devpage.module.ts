@@ -6,7 +6,7 @@ import { MaterialFieldsModule } from '@nghm/material-fields';
 
 import { DevpageComponent } from './devpage.component';
 import { EntityOutletComponent } from './entity-outlet';
-import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule } from '@angular/material';
+import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule, MatChipsModule } from '@angular/material';
 @NgModule({
   imports: [
     CommonModule,
@@ -16,7 +16,8 @@ import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule } 
     MatExpansionModule,
     MatTabsModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    MatChipsModule
   ],
   declarations: [DevpageComponent, EntityOutletComponent],
   exports: [DevpageComponent]

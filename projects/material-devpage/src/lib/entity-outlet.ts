@@ -11,7 +11,9 @@ import { ExplorableEntitiy } from './explorable-entitiy';
           {{ properties.name || properties.title || properties.id }}
         </mat-panel-title>
         <mat-panel-description *ngIf="entity.classes">
-          <span *ngFor="let class of entity.classes">{{ class }}</span>
+          <mat-chip-list class="chip-list">
+            <mat-chip disableRipple="true" *ngFor="let class of entity.classes">{{ class }}</mat-chip>
+          </mat-chip-list>
         </mat-panel-description>
       </mat-expansion-panel-header>
       <mat-tab-group>
