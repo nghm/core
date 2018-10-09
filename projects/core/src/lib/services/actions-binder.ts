@@ -22,7 +22,7 @@ export class ActionsBinder implements Binder {
       execute.fields = action.fields;
 
       finalActions.push({
-        ...action, execute
+        name, ...action, execute
       });
     });
 

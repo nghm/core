@@ -1,4 +1,4 @@
-import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef } from '@angular/core';
+import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../field-config/field-config.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 import { FieldErrorDirective } from '../../directives/field-error.directive';
+import { FormSubmitDirective } from '../../directives/form-submit.directive';
 
 export function formGroupFactory({ ngForm: { control }}) {
   return control;
@@ -29,6 +30,8 @@ export class FormComponent {
   private _remoteConfigurations: { [name: string]: InputConfiguration };
 
   @ViewChild(NgForm) ngForm: NgForm;
+
+  @ContentChild(FormSubmitDirective) submit: FormSubmitDirective;
 
   @ContentChildren(FieldLabelDirective, { descendants: true }) set setLabels(labels: QueryList<FieldLabelDirective>) {
     if (!labels) {
@@ -105,7 +108,7 @@ export class FormComponent {
           map(local => ({ name, ...remote, ...local }))
         );
       } else {
-        yield of(remote);
+        yield of({ name, ...remote });
       }
     }
   }

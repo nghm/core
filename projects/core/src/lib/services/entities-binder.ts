@@ -16,8 +16,9 @@ export class EntitiesBinder implements Binder {
     const query = this.queryFactory.make(queryString);
     const matches = query(source);
 
+    const entities = new Array<typeof type>();
+
     if (matches && matches.length > 0) {
-      const entities = new Array<typeof type>();
 
       for (const match of matches) {
         const instance = new type();
@@ -25,10 +26,10 @@ export class EntitiesBinder implements Binder {
         this.metaBinder.bind(instance, match);
         entities.push(instance);
       }
-
-      Object.defineProperty(target, bindingName, {
-        get: () => entities
-      });
     }
+
+    Object.defineProperty(target, bindingName, {
+      get: () => entities
+    });
   }
 }
