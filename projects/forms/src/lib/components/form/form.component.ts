@@ -3,7 +3,7 @@ import { NgForm } from '@angular/forms';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { PARENT_FORM_GROUP } from './parent-form';
-import { of, Observable } from 'rxjs';
+import { of, Observable, empty } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../field-config/field-config.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
@@ -98,6 +98,10 @@ export class FormComponent {
     const remoteNames = Object.keys(remoteConfigurations);
     const localNames = Object.keys(localConfigurations$);
     const names = this.unique(remoteNames.concat(localNames));
+
+    if (names.length === 0) {
+      yield empty();
+    }
 
     for (const name of names) {
       const remote = remoteConfigurations[name];

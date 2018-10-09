@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpRequest, HttpHeaders, HttpResponse, HttpEventType } from '@angular/common/http';
+import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import { Subject, from, Observable } from 'rxjs';
-import { filter, takeUntil, map, catchError } from 'rxjs/operators';
+import { filter, takeUntil, catchError } from 'rxjs/operators';
 import { LifetimeEvents } from 'projects/core/src/lib/services/lifetime-events';
 
 export interface ActionEvent {
@@ -17,10 +17,8 @@ export class ActionExecutor {
 
   constructor(private lifetimeEvents: LifetimeEvents, private http: HttpClient) {}
 
-  private request({ href, method }, body): Observable<HttpResponse<any>> {
-    const request = new HttpRequest<any>(method, href, body);
-
-    return this.http.request(request)
+  private request({ href: url, method }, body): Observable<HttpResponse<any>> {
+    return this.http.request(method, url, { body })
       .pipe(
         filter<HttpResponse<any>>(event => event.type === HttpEventType.Response)
       );

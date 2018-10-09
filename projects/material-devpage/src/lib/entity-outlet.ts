@@ -25,12 +25,17 @@ import { ExplorableEntitiy } from './explorable-entitiy';
         </mat-tab>
         <mat-tab label="Actions" *ngIf="entity?.actions.length > 0">
           <div *ngFor="let action of entity.actions">
-            <h3 class="capizalize">{{ action.name }}</h3>
-            <hm-form [action]="action.execute">
+            <h3 class="capizalize" *ngIf="action.fields">{{ action.name }}</h3>
+            <hm-form [action]="action.execute" [ngClass]="{ 'fieldless-action': !action.fields }">
               <div *hmLabel="let name" class="capizalize">{{ name }}</div>
               <div *hmError="let name" class="capizalize">{{ name }}</div>
 
-              <button *hmSubmit mat-button>Execute</button>
+              <button *hmSubmit mat-button>
+                <ng-container *ngIf="action.fields else noFields">Execute</ng-container>
+                <ng-template #noFields>
+                  <div class="capizalize">{{ action.name }}</div>
+                </ng-template>
+              </button>
             </hm-form>
           </div>
         </mat-tab>
