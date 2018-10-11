@@ -42,9 +42,11 @@ import { ExplorableEntitiy } from './explorable-entitiy';
           </div>
         </mat-tab>
         <mat-tab label="Links" *ngIf="entity?.links.length > 0">
-          <div class="links">
-            <a mat-button *ngFor="let link of entity.links" [hmLink]="link.href" color="primary">{{link.name}}</a>
-          </div>
+          <mat-chip-list class="links">
+            <mat-chip mat-button *ngFor="let link of entity.links" [hmLink]="link.href" color="primary" class="link">
+              <span *ngFor="let rel of link.rel; let last = last">{{ rel }}</span>
+            </mat-chip>
+          </mat-chip-list>
         </mat-tab>
       </mat-tab-group>
     </mat-expansion-panel>

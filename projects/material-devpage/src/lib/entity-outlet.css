@@ -9,15 +9,6 @@ mat-panel-title {
   max-width: 192px;
 }
 
-.links {
-  margin-top: 16px;
-}
-
-.links a {
-  margin-right: 14px;
-  text-transform: capitalize;
-}
-
 .capizalize {
   text-transform: capitalize;
 }
@@ -27,7 +18,15 @@ mat-panel-title {
   display: block;
 }
 
+/deep/ .mat-chip-list-wrapper {
+  margin: 0 !important;
+}
+
 .chip-list {
   position: absolute;
   margin-top: -8px;
+}
+
+.link:not(:last-child)::after {
+  content: ':';
 }

@@ -10,7 +10,8 @@ export class ActionBinder implements Binder {
 
   bind(target, source): void {
     const { actionName, bindingName } = this.meta;
-    const { actions: { [actionName]: action } } = source;
+    const { actions = [] } = source;
+    const action = actions.find(({ name }) => name === actionName);
 
     if (!action) {
       return;

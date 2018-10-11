@@ -10,22 +10,19 @@ export class ActionsBinder implements Binder {
 
   bind(target, source): void {
     const { bindingName } = this.meta;
-    const { actions = {} } = source;
+    const { actions = [] } = source;
 
     const finalActions = [];
 
-    Object.keys(actions).forEach(name => {
-      const action = actions[name];
+    for (const action of actions) {
+      const execute: Function & { fields?: any } = parameters => this.actionExecutor.execute(action, parameters);
 
-      const execute: Function & { fields?: any } = parameters => this.actionExecutor.execute({ name, ...action }, parameters);
-
-      execute.fields = action.fields || {};
+      execute.fields = action.fields || [];
 
       finalActions.push({
-        name, ...action, execute
+        ...action, execute
       });
-    });
-
+    }
 
     Object.defineProperty(target, bindingName, {
       get: () => finalActions

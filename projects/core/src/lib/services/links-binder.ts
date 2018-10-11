@@ -11,20 +11,18 @@ export class LinksBinder implements Binder {
 
   bind(target, source): void {
     const { bindingName } = this.meta;
-    const { links = {} } = source;
+    const { links = [] } = source;
 
     const finalLinks = [];
 
-    Object.keys(links).forEach(name => {
-      const { href } = links[name];
+    for (const { href, rel } of links) {
       const hasInterpolationParameters = this.urlInterpolator.hasInterpolationParameters(href);
       const make = (parameters => hasInterpolationParameters && this.urlInterpolator.interpolate(href, parameters) || href);
 
       finalLinks.push({
-        ...links[name],
-        name, make
+        href, rel, make
       });
-    });
+    }
 
     Object.defineProperty(target, bindingName, {
       get: () => finalLinks
