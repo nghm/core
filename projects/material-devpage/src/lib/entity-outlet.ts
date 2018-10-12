@@ -1,12 +1,13 @@
-import { Input, Component } from '@angular/core';
+import { Input, Component, Sanitizer } from '@angular/core';
 import { ExplorableEntitiy } from './explorable-entitiy';
 import { MatIconRegistry } from '@angular/material';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'hm-entity-outlet',
   template: `
     <mat-card>
-      <div class="classes" [ngStyle]="{ 'background-image': entity.background }">
+      <div class="classes" [style.background]="sanitize.bypassSecurityTrustStyle(entity.background)">
         <mat-card-header>
           <div mat-card-avatar class="avatar">
             <mat-icon>star</mat-icon>
@@ -63,7 +64,7 @@ export class EntityOutletComponent {
   @Input() open = false;
   @Input() entity: ExplorableEntitiy;
 
-  constructor(private registry: MatIconRegistry) { }
+  constructor(public sanitize: DomSanitizer) { }
 
   getIcon() {
   }
