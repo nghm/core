@@ -1,15 +1,66 @@
 .code-wrapper {
-  background: #444444;
-  color: #eee;
-  padding: 16px;
+  background: #eee;
+  border-left: 4px solid #673ab7;
+  color: #444;
+  margin-bottom: 16px;
+}
+
+.code-wrapper pre {
+  padding: 8px 16px;
   margin: 0;
+}
+
+.classes {
+  position: relative;
+  margin-top: 16px !important;
+  margin: 16px -24px;
+  padding: 16px 24px;
+  color: #fff;
+}
+
+.classes:after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+}
+
+.classes mat-card-header {
+  position: absolute;
+  top: -24px;
+}
+
+.classes h2 {
+  margin: 0 0 8px 0;
+}
+
+.classes .subtitle,
+.classes .subtitle a {
+  color: #e2e2e2;
+}
+
+.focused-chip {
+  box-shadow: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
+  outline: 0;
+}
+
+.avatar {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  background: #cacaca;
+  color: #fbfbfb;
+  box-shadow: 0 3px 3px -2px rgba(0,0,0,.2), 0 3px 4px 0 rgba(0,0,0,.14), 0 1px 8px 0 rgba(0,0,0,.12);
 }
 
 mat-panel-title {
   max-width: 192px;
 }
 
-.capizalize {
+/deep/ .capitalize {
   text-transform: capitalize;
 }
 
@@ -22,11 +73,40 @@ mat-panel-title {
   margin: 0 !important;
 }
 
-.chip-list {
-  position: absolute;
-  margin-top: -8px;
-}
-
 .link:not(:last-child)::after {
   content: ':';
+}
+
+
+.top-right-buttons {
+  position: absolute;
+  right: 16px;
+  top: 16px;
+}
+
+.entities {
+  border-top: 1px solid #cccccc;
+
+  margin-left: -24px;
+  margin-right: -24px;
+  margin-bottom: -24px !important;
+
+  padding-top: 16px;
+  padding-left: 24px;
+  padding-right: 24px;
+
+  background: #eeeeee;
+}
+
+.entities::after {
+  content: '';
+  display: block;
+  clear: both;
+}
+
+.entities mat-card {
+  width: 330px;
+  float: left;
+  margin-right: 16px;
+  margin-bottom: 16px;
 }

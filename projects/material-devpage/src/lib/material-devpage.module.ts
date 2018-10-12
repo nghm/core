@@ -6,7 +6,9 @@ import { MaterialFieldsModule } from '@nghm/material-fields';
 
 import { DevpageComponent } from './devpage.component';
 import { EntityOutletComponent } from './entity-outlet';
-import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule, MatChipsModule } from '@angular/material';
+import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule,
+  MatChipsModule, MatToolbarModule, MatCardModule, MatIconModule, MatMenuModule } from '@angular/material';
+import { ActionDialogComponent } from './action-dialog.component';
 @NgModule({
   imports: [
     CommonModule,
@@ -14,12 +16,16 @@ import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule, M
     FormsModule,
     MaterialFieldsModule,
     MatExpansionModule,
+    MatCardModule,
     MatTabsModule,
     MatDividerModule,
     MatButtonModule,
+    MatToolbarModule,
+    MatIconModule,
+    MatMenuModule,
     MatChipsModule
   ],
-  declarations: [DevpageComponent, EntityOutletComponent],
+  declarations: [DevpageComponent, ActionDialogComponent, EntityOutletComponent],
   exports: [DevpageComponent]
 })
 export class MaterialDevpageModule { }
