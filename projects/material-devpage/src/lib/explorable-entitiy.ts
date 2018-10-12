@@ -18,9 +18,9 @@ export class ExplorableEntitiy {
   }
 
   get background() {
-    return `linear-gradient(45deg, ${this.hashColors}),
-            linear-gradient(#00000040, #ff000000),
-            linear-gradient(#ffffff61 95%, #ff000000)`;
+    return `linear-gradient(#00000040, #ff000000),
+            linear-gradient(#ffffff61 95%, #ff000000),
+            linear-gradient(45deg, ${this.hashColors})`;
   }
 }
 
