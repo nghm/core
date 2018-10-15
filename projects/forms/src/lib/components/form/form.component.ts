@@ -1,10 +1,10 @@
-import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild } from '@angular/core';
+import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild, AfterViewInit, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { PARENT_FORM_GROUP } from './parent-form';
-import { of, Observable, empty } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { of, Observable, empty, from } from 'rxjs';
+import { map, tap, filter, mergeMap, buffer, scan, switchMap } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../field-config/field-config.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 import { FieldErrorDirective } from '../../directives/field-error.directive';
@@ -19,19 +19,14 @@ export function formGroupFactory({ ngForm: { control }}) {
   templateUrl: 'form.component.html',
   providers: [{ provide: PARENT_FORM_GROUP, useFactory: formGroupFactory, deps: [FormComponent] }]
 })
-export class FormComponent {
-  inputConfigurations: Array<Observable<InputConfiguration>>;
+export class FormComponent implements AfterViewInit {
+  inputConfigurations: Observable<{ name: string, configuration: InputConfiguration }[]> ;
   labels: { [name: string]: TemplateRef<any> } = {};
   errors: { [name: string]: TemplateRef<any> } = {};
 
-  private _action: Function;
-
-  private _fieldOverrides: { [name: string]: Observable<InputConfiguration> };
-  private _remoteConfigurations: { [name: string]: InputConfiguration };
-
   @ViewChild(NgForm) ngForm: NgForm;
 
-  @ContentChild(FormSubmitDirective) submit: FormSubmitDirective;
+  @ContentChild(FormSubmitDirective) submitDirective: FormSubmitDirective;
 
   @ContentChildren(FieldLabelDirective, { descendants: true }) set setLabels(labels: QueryList<FieldLabelDirective>) {
     if (!labels) {
@@ -55,79 +50,70 @@ export class FormComponent {
     });
   }
 
-  @ContentChildren(FieldConfigurationComponent)
-  set fieldConfigurations(fc: QueryList<FieldConfigurationComponent>) {
-    if (!fc) {
-      return;
-    }
+  @ContentChildren(FieldConfigurationComponent) fieldConfigurations: QueryList<FieldConfigurationComponent>;
+  @Input() action: Function & { fields?: any };
 
-    const fieldConfigurations = {};
-
-    fc.forEach(({ name, override, inputConfiguration }) => {
-      if (!override) {
-        fieldConfigurations[name] = inputConfiguration;
-      } else {
-        fieldConfigurations[override.named] = inputConfiguration;
-      }
-    });
-
-    this._fieldOverrides = fieldConfigurations;
-
-    if (this._remoteConfigurations) {
-      this.inputConfigurations = Array.from(this.computeFields());
-    }
-  }
-
-  @Input()
-  set action(action: Function & { fields?: any }) {
-    if (!action) {
-      this._action = this.inputConfigurations = undefined;
-
-      return;
-    }
-
-    this._action = action;
-    this._remoteConfigurations = action.fields;
-
-    this.inputConfigurations = Array.from(this.computeFields());
-  }
-
-  * computeFields(): Iterable<Observable<InputConfiguration>> {
-    const { _fieldOverrides: localConfigurations$ = {}, _remoteConfigurations: remoteConfigurations = {} } = this;
-
+  computeFields(
+    remoteConfigurations: { [name: string]: InputConfiguration },
+    localConfigurations$: { [name: string]: Observable<InputConfiguration> })
+    : Observable<{ name: string, configuration: InputConfiguration }[]> {
     const remoteNames = Object.keys(remoteConfigurations);
     const localNames = Object.keys(localConfigurations$);
     const names = this.unique(remoteNames.concat(localNames));
 
-    if (names.length === 0) {
-      yield empty();
-    }
+    return from(names).pipe(
+      mergeMap(name => {
+        const remoteConfiguration = remoteConfigurations[name];
 
-    for (const name of names) {
-      const remote = remoteConfigurations[name];
-      const override = localConfigurations$[name];
-
-      if (override) {
-        yield override.pipe(
-          map(local => ({ name, ...remote, ...local }))
+        return of(remoteConfiguration).pipe(
+          switchMap(remote =>
+            localConfigurations$[name] &&
+            localConfigurations$[name].pipe(
+              map(local => ({...remote, ...local})
+              )
+            ) ||
+            [remote]
+          )
         );
-      } else {
-        yield of({ name, ...remote });
-      }
-    }
+      }),
+      scan((acc, configuration: InputConfiguration) => {
+        const filtered = acc.filter(({name}) => name !== configuration.name);
+
+        return [...filtered, { name: configuration.name, configuration }];
+      }, [])
+    );
   }
 
   unique(array: Array<any>): Array<any> {
     return array.filter((value, index) => index === array.indexOf(value));
   }
 
-  onSubmit(event) {
-    event.preventDefault();
-
+  submit() {
     const { value, valid } = this.ngForm;
 
     if (valid) {
-      this._action(value);
+      this.action(value);
     }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.action || !this.fieldConfigurations) {
+      return;
+    }
+
+    setTimeout(() => {
+      const remoteConfigurations = this.action.fields.reduce((acc, field) => ({...acc, [field.name]: field}), {});
+      const localConfiguration = {};
+
+      this.fieldConfigurations.forEach(({ name, override, inputConfiguration }) => {
+        if (!override) {
+          localConfiguration[name] = inputConfiguration;
+        } else {
+          localConfiguration[override.named] = inputConfiguration;
+        }
+      });
+
+      this.inputConfigurations = this.computeFields(remoteConfigurations, localConfiguration);
+    });
   }
 }

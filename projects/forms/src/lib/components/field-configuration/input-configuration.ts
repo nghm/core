@@ -12,4 +12,6 @@ export interface InputConfiguration {
   pattern?: string;
 
   disabled?: boolean;
+
+  component?: { pack: string, name: string };
 }

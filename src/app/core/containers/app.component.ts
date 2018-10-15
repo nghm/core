@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,24 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppRootComponent {
-  title = 'app';
+  menuLinks: Array<any>;
+  opened = false;
+
+  constructor(private title: Title) { }
+
+  setTitle(title: string): void {
+    this.title.setTitle(title);
+  }
+
+  setMenuLinks(menuLinks: Array<any>): void {
+    this.menuLinks = menuLinks;
+  }
+
+  closeSidenav(): void {
+    this.opened = false;
+  }
+
+  openSidenav(): void {
+    this.opened = true;
+  }
 }

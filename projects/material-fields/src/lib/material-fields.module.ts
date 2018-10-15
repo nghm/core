@@ -3,7 +3,7 @@ import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerMod
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
-import { DEFAULT_INPUT_COMPONENT_TYPE } from '@nghm/forms';
+import { COMPONENT_REGISTRATION, ComponentRegistration } from '@nghm/forms';
 import { TextInputComponent } from './components/text-input.component';
 import { CheckboxInputComponent } from './components/checkbox-input.component';
 import { DatepickerInputComponent } from './components/datepicker-input.component';
@@ -28,11 +28,51 @@ const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputCom
   exports: COMPONENTS,
   entryComponents: COMPONENTS,
   providers: [
-    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'text', inputType: TextInputComponent }, multi: true },
-    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'text', inputType: TextareaInputComponent }, multi: true },
-    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'boolean', inputType: CheckboxInputComponent }, multi: true },
-    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'password', inputType: PasswordInputComponent }, multi: true },
-    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'date', inputType: DatepickerInputComponent }, multi: true }
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'text',
+        type: 'text',
+        inputType: TextInputComponent
+      } as ComponentRegistration,
+      multi: true },
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'textarea',
+        type: 'text',
+        inputType: TextareaInputComponent
+      } as ComponentRegistration,
+      multi: true },
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'checkbox',
+        type: 'boolean',
+        inputType: CheckboxInputComponent
+      } as ComponentRegistration,
+      multi: true },
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'password',
+        type: 'password',
+        inputType: PasswordInputComponent
+      } as ComponentRegistration,
+      multi: true },
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'date',
+        type: 'date',
+        inputType: DatepickerInputComponent
+      } as ComponentRegistration,
+      multi: true }
   ]
 })
 export class MaterialFieldsModule { }
