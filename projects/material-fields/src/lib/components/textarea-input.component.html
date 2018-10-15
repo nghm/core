@@ -1,0 +1,11 @@
+<mat-form-field *ngIf="formControl">
+  <mat-label *ngIf="labelTemplateRef as labelTemplateRef">
+    <ng-container *ngTemplateOutlet="labelTemplateRef; context: { $implicit: name }"></ng-container>
+  </mat-label>
+  <textarea matInput [formControl]="formControl"></textarea>
+  <mat-error *ngIf="invalid">
+    <div *ngFor="let error of errors">
+      <ng-container *ngTemplateOutlet="errorTemplateRef, context: { $implicit: error, field: name }"></ng-container>
+    </div>
+  </mat-error>
+</mat-form-field>

@@ -8,8 +8,9 @@ import { TextInputComponent } from './components/text-input.component';
 import { CheckboxInputComponent } from './components/checkbox-input.component';
 import { DatepickerInputComponent } from './components/datepicker-input.component';
 import { PasswordInputComponent } from './components/password-input.component';
+import { TextareaInputComponent } from './components/textarea-input.component';
 
-const COMPONENTS = [TextInputComponent, CheckboxInputComponent, PasswordInputComponent, DatepickerInputComponent];
+const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputComponent, PasswordInputComponent, DatepickerInputComponent];
 
 @NgModule({
   imports: [
@@ -28,6 +29,7 @@ const COMPONENTS = [TextInputComponent, CheckboxInputComponent, PasswordInputCom
   entryComponents: COMPONENTS,
   providers: [
     { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'text', inputType: TextInputComponent }, multi: true },
+    { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'text', inputType: TextareaInputComponent }, multi: true },
     { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'boolean', inputType: CheckboxInputComponent }, multi: true },
     { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'password', inputType: PasswordInputComponent }, multi: true },
     { provide: DEFAULT_INPUT_COMPONENT_TYPE, useValue: { type: 'date', inputType: DatepickerInputComponent }, multi: true }

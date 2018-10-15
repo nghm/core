@@ -6,7 +6,7 @@ import { UrlScopeTrimmer } from '@nghm/core';
   selector: '[hmLink]'
 })
 export class LinkDirective {
-  @Input() hmLink: string;
+  @Input() hmLink: { href: string};
   @Input() scope: string;
 
   constructor(private router: Router, private scopedUrlTrimmer: UrlScopeTrimmer) { }
@@ -14,7 +14,9 @@ export class LinkDirective {
   @HostListener('click', ['$event'])
   onClick() {
     const { scopedUrlTrimmer } = this;
-    const path = this.scope && scopedUrlTrimmer.trimToScope(this.hmLink, this.scope) || scopedUrlTrimmer.trimWhatever(this.hmLink);
+    const { href } = this.hmLink;
+
+    const path = this.scope && scopedUrlTrimmer.trimToScope(href, this.scope) || scopedUrlTrimmer.trimWhatever(href);
 
     this.router.navigateByUrl(path);
   }
