@@ -22,8 +22,8 @@ export class FieldOutletDirective {
       return;
     }
 
-    const { name } = inputConfiguration;
-    const inputFactory = this.inputComponentFactoryResolver.resolve(inputConfiguration.type);
+    const { name, component } = inputConfiguration;
+    const inputFactory = this.inputComponentFactoryResolver.resolve(inputConfiguration.type, component);
     const formControl = this.formControlFactory.make(inputConfiguration);
 
     const labelTemplateRef = this.hmFieldOutletLabels && this.hmFieldOutletLabels[name] || this.hmFieldOutletLabels['*'];

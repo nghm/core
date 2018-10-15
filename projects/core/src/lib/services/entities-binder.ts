@@ -2,12 +2,14 @@ import { EntityBoundMetadata } from '../decorators';
 import { Binder } from './binder';
 import { MetaBinder } from './meta-binders-provider';
 import { CssQueryFactory } from './css-query-factory';
+import { ResolverService } from './current-resolver.service';
 
 export class EntitiesBinder implements Binder {
   constructor(
     private meta: EntityBoundMetadata,
     private metaBinder: MetaBinder,
-    private queryFactory: CssQueryFactory
+    private queryFactory: CssQueryFactory,
+    private resolver: ResolverService
   ) { }
 
   bind(target, source): void {
@@ -23,13 +25,16 @@ export class EntitiesBinder implements Binder {
       for (const match of matches) {
         const instance = new type();
 
-        this.metaBinder.bind(instance, match);
+        if (match.href) {
+          this.resolver.resolve(instance, match.href);
+        } else {
+          this.metaBinder.bind(instance, match);
+        }
+
         entities.push(instance);
       }
     }
 
-    Object.defineProperty(target, bindingName, {
-      get: () => entities
-    });
+    target[bindingName] = entities;
   }
 }

@@ -1,10 +1,9 @@
-<form (submit)="onSubmit($event)">
-  <div *ngFor="let inputConfiguration$ of inputConfigurations">
-    <ng-container *ngIf="inputConfiguration$ | async as inputConfiguration">
-      <ng-container *hmFieldOutlet="inputConfiguration; labels: labels; errors: errors"></ng-container>
-    </ng-container>
+<form (submit)="submit(); $event.preventDefault()">
+  <div *ngFor="let bundle of inputConfigurations | async">
+    {{ bundle | json }}
+    <ng-container *hmFieldOutlet="bundle.configuration; labels: labels; errors: errors"></ng-container>
   </div>
-  <div *ngIf="submit">
-    <ng-container *ngTemplateOutlet="submit.templateRef"></ng-container>
+  <div *ngIf="submitDirective">
+    <ng-container *ngTemplateOutlet="submitDirective.templateRef"></ng-container>
   </div>
 </form>

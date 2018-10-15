@@ -27,8 +27,6 @@ export class LinkBinder implements Binder {
 
     const response = { href, rel: [...rel], make };
 
-    Object.defineProperty(target, bindingName, {
-      get: () => response
-    });
+    target[bindingName] = response;
   }
 }

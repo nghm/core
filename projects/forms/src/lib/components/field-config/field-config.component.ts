@@ -2,7 +2,6 @@ import { Component, Input, OnChanges, Host, Optional, Attribute } from '@angular
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { ReplaySubject, from } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
 import { OverrideFieldNamedDirective } from '../field-configuration/field-configuration.component';
 
 @Component({
@@ -11,9 +10,11 @@ import { OverrideFieldNamedDirective } from '../field-configuration/field-config
 })
 export class FieldConfigurationComponent implements InputConfiguration, OnChanges {
   private inputConfigurationSubject = new ReplaySubject<InputConfiguration>(1);
+  component: { pack: string, name: string };
 
   @Input() value: any;
   @Input() type: string;
+
 
   @Input() required?: boolean;
   @Input() max?: number;
@@ -25,22 +26,33 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
 
   @Input() disabled?: boolean;
 
-  inputConfiguration = from(this.inputConfigurationSubject)
-    .pipe(
-      debounceTime(10)
-    );
+  inputConfiguration = from(this.inputConfigurationSubject);
 
   constructor(
     @Optional() @Host() public override: OverrideFieldNamedDirective,
-    @Attribute('name') public name: string) {
+    @Attribute('name') public name: string,
+    @Attribute('component') component: string) {
     this.name = this.name === null ? undefined : this.name;
+
+    if (component) {
+      const componentSelector = component.split('|');
+
+      if (componentSelector.length !== 2) {
+        throw new Error('The component selector is not in the correct format!');
+      }
+
+      this.component = {
+        name: componentSelector[1],
+        pack: componentSelector[0]
+      };
+    }
   }
 
-  ngOnChanges(): void {
+  getConfiguration(): any {
     const configuration = {} as InputConfiguration;
     const mappable = ['name', 'value', 'type', 'required',
                       'max', 'min', 'maxLength', 'minLength',
-                      'email', 'pattern', 'disabled'];
+                      'email', 'pattern', 'disabled', 'component'];
 
     for (const key of mappable) {
       if (this[key] !== undefined) {
@@ -48,6 +60,10 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
       }
     }
 
-    this.inputConfigurationSubject.next(configuration);
+    return configuration;
+  }
+
+  ngOnChanges(): void {
+    this.inputConfigurationSubject.next(this.getConfiguration());
   }
 }

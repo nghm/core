@@ -10,22 +10,27 @@ export class LinksBinder implements Binder {
   ) { }
 
   bind(target, source): void {
-    const { bindingName } = this.meta;
-    const { links = [] } = source;
+    const { nameFactory, linkQueries, bindingName } = this.meta;
+    const { links: sourceLinks = [] } = source;
+    const links = sourceLinks.filter(({ rel: rels = []}) =>
+      linkQueries.some(linkQuery =>
+        linkQuery.every(requiredRel => rels.includes(requiredRel))
+      )
+    ) || {} as any;
 
     const finalLinks = [];
 
-    for (const { href, rel } of links) {
+    for (const link of links) {
+      const { href, rel } = link;
       const hasInterpolationParameters = this.urlInterpolator.hasInterpolationParameters(href);
       const make = (parameters => hasInterpolationParameters && this.urlInterpolator.interpolate(href, parameters) || href);
+      const name = nameFactory(link);
 
       finalLinks.push({
-        href, rel, make
+        href, rel, make, name
       });
     }
 
-    Object.defineProperty(target, bindingName, {
-      get: () => finalLinks
-    });
+    target[bindingName] = finalLinks;
   }
 }

@@ -1,9 +1,20 @@
-import { Component, HostListener } from '@angular/core';
-import { Property, Link, LinkFunction, Action, ActionFunction, Entity,
-  ParameterizedActionFunction, ActionListener, HypermediaRef, Entities } from '@nghm/core';
+import { Component } from '@angular/core';
+import { Property, ActionListener, HypermediaRef, Links, Link, Entities, Action } from '@nghm/core';
+import { AppRootComponent } from 'src/app/core/containers/app.component';
 
-export class Chapter {
+export class Book {
+  loading = true;
+
   @Property() title: string;
+  @Property() description: string;
+
+  @Link() self: string;
+
+  @Action() update;
+
+  hmAfterBinding() {
+    this.loading = false;
+  }
 }
 
 @Component({
@@ -12,29 +23,22 @@ export class Chapter {
   styleUrls: ['./home-page.component.css']
 })
 export class HomePageComponent {
-  @Property() title: string;
-  @Property() description: string;
+  @Links(link => link.rel.find(rel => rel !== 'menu'), ['menu'])
+  set menuLinks(links) {
+    this.appRoot.setMenuLinks(links);
+  }
 
-  @Entity(':root > .chapter:first-child', Chapter)
-  firstChapter: Chapter;
+  @Link() topRatedBook;
 
-  @Entities('.chapter', Chapter)
-  middleChapters: Array<Chapter>;
+  @Property() title;
+  @Property() description;
 
-  @Entity(':root > .chapter:last-child', Chapter)
-  lastChapter: Chapter;
+  @Entities('.latest-book', Book) latestBooks;
 
-  @Link() aboutUs: LinkFunction<void>;
-  @Link() next: LinkFunction<void>;
-  @Link() page: LinkFunction<{ no: number }>;
-
-  @Action() updateTitle: ParameterizedActionFunction<{ title: string }>;
-  @Action() clearDescription: ActionFunction;
-
-  constructor(private hypermediaRef: HypermediaRef) {}
+  constructor(private hypermediaRef: HypermediaRef, private appRoot: AppRootComponent) {}
 
   @ActionListener('*', 'success')
-  refresh({ action, response: { status }}): void {
+  refresh({ response: { status }}): void {
     console.log(status);
 
     this.hypermediaRef.fetch();
@@ -46,6 +50,5 @@ export class HomePageComponent {
   }
 
   hmAfterBinding() {
-    this.clearDescription();
   }
 }

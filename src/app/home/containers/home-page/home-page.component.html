@@ -1,29 +1,25 @@
-<p>
-  {{ title }} works!
-</p>
-<p>
-  {{ description }} is present
+<h1 class="mat-h1">{{title}}</h1>
+
+<p class="mat-p">{{description}}</p>
+
+<p class="mat-p">
+  <a mat-raised-button *ngIf="topRatedBook" [hmLink]="topRatedBook">Top rated book</a>
 </p>
 
-<a *ngIf="aboutUs" [hmLink]="aboutUs()">Link</a>
-<br>
-<a *ngIf="page" [hmLink]="page({ no: 1 })">Page 1</a>
-<br>
-<a *ngIf="next" [hmLink]="next()">Next</a>
-
-<p style="color: green">
-  {{ firstChapter?.title }}
-</p>
-<p style="color: red" *ngFor="let middleChapter of middleChapters">
-  {{ middleChapter.title }}
-</p>
-<p style="color: blue">
-  {{ lastChapter?.title }}
-</p>
-
-<hm-form [action]="updateTitle">
-  <ng-container *hmLabel="let name">{{ name }}</ng-container>
-  <ng-container *hmError="let error">{{ error.name }}</ng-container>
-
-  <hm-form-field name="acceptConditions" [value]="false" type="boolean" [required]="true"></hm-form-field>
-</hm-form>
+<ng-container *ngFor="let book of latestBooks">
+  <mat-card *ngIf="!book.loading" class="latest-book">
+    <mat-card-title>{{ book.title }}</mat-card-title>
+    <mat-card-content>
+      {{ book.description }}
+    </mat-card-content>
+    <mat-card-content>
+      <hm-form [action]="book.update" #saveForm>
+        <hm-form-field named="description" component="mat|textarea"></hm-form-field>
+      </hm-form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button (click)="saveForm.submit()">SAVE</button>
+      <button mat-button [hmLink]="book.self" color="primary">GO TO</button>
+    </mat-card-actions>
+  </mat-card>
+</ng-container>

@@ -23,7 +23,10 @@ export class LinkBoundMetadata implements FieldBoundMetadata {
 }
 
 export class LinksBoundMetadata implements FieldBoundMetadata {
-  constructor(public bindingName: string) { }
+  constructor(
+    public nameFactory: (link: { href: string, rel: Array<string>}) => string,
+    public linkQueries: Array<Array<string>>,
+    public bindingName: string) { }
 }
 
 export class ActionBoundMetadata implements FieldBoundMetadata {
@@ -79,10 +82,10 @@ export function Link(...linkQueries: Array<Array<string>>)
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
-export function Links()
+export function Links(nameFactory: (link: { href: string, rel: string[] }) => string, ...linkQueries: Array<Array<string>>)
   : PropertyDecorator {
   return function<T>(target: T, bindingName: string) {
-    const metadata = new LinksBoundMetadata(bindingName);
+    const metadata = new LinksBoundMetadata(nameFactory, linkQueries, bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
