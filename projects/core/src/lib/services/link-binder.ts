@@ -9,9 +9,14 @@ export class LinkBinder implements Binder {
   ) { }
 
   bind(target, source): void {
-    const { linkName, bindingName } = this.meta;
+    const { linkQueries, bindingName } = this.meta;
     const { links = [] } = source;
-    const { href, rel = [] } = links.find(({ rel: rels = []}) => rels.includes(linkName)) || {} as any;
+    const { href, rel = [] } =
+      links.find(({ rel: rels = []}) =>
+          linkQueries.some(linkQuery =>
+            linkQuery.every(requiredRel => rels.includes(requiredRel))
+          )
+      ) || {} as any;
 
     if (!href) {
       return;

@@ -19,7 +19,7 @@ export class ClassesBoundMetadata implements FieldBoundMetadata {
 }
 
 export class LinkBoundMetadata implements FieldBoundMetadata {
-  constructor(public linkName: string, public bindingName: string) { }
+  constructor(public linkQueries: Array<Array<string>>, public bindingName: string) { }
 }
 
 export class LinksBoundMetadata implements FieldBoundMetadata {
@@ -71,15 +71,10 @@ export function Classes(): PropertyDecorator {
   } as (target: {}, propertyName: string | symbol) => void;
 }
 
-interface LinkMeta {
-  linkName?: string;
-  params?: boolean;
-}
-
-export function Link({ linkName }: LinkMeta = {})
+export function Link(...linkQueries: Array<Array<string>>)
   : PropertyDecorator {
   return function<T>(target: T, bindingName: string) {
-    const metadata = new LinkBoundMetadata(linkName || bindingName, bindingName);
+    const metadata = new LinkBoundMetadata(linkQueries.length !== 0 && linkQueries || [[bindingName]], bindingName);
     setMetadataEntry<T>(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }

@@ -1,6 +1,5 @@
 import { Input, Component, Sanitizer } from '@angular/core';
 import { ExplorableEntitiy } from './explorable-entitiy';
-import { MatIconRegistry } from '@angular/material';
 import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
@@ -8,10 +7,10 @@ import { DomSanitizer } from '@angular/platform-browser';
   template: `
     <mat-card>
       <div class="classes" [style.background]="sanitize.bypassSecurityTrustStyle(entity.background)">
-        <mat-card-header>
-          <div mat-card-avatar class="avatar">
-            <mat-icon>star</mat-icon>
-          </div>
+        <mat-card-header *ngIf="entity.relation as relation">
+          <button mat-icon-button mat-card-avatar class="avatar" [hmLink]="relation">
+            <mat-icon>{{ relation.rel.includes('details') ? 'arrow_forward':'arrow_back' }}</mat-icon>
+          </button>
         </mat-card-header>
         <h2 class="mat-h2" *ngIf="entity.properties as properties">
           {{ properties.name || properties.title || properties.id }}
@@ -19,8 +18,8 @@ import { DomSanitizer } from '@angular/platform-browser';
         <div class="top-right-buttons">
           <ng-container *ngIf="entity?.links.length > 0">
             <mat-menu #linkMenu="matMenu">
-              <a mat-menu-item *ngFor="let link of entity.links" [hmLink]="link.href" color="primary">
-                <span *ngFor="let rel of link.rel; let last = last">{{ rel }}</span>
+              <a mat-menu-item *ngFor="let link of entity.links" [hmLink]="link" class="link" color="primary">
+                <span *ngFor="let rel of link.rel; let last = last" class="capitalize">{{ rel }}</span>
               </a>
             </mat-menu>
             <button mat-icon-button [matMenuTriggerFor]="linkMenu" class="link-menu-icon">
@@ -65,7 +64,4 @@ export class EntityOutletComponent {
   @Input() entity: ExplorableEntitiy;
 
   constructor(public sanitize: DomSanitizer) { }
-
-  getIcon() {
-  }
 }

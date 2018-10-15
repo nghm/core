@@ -7,6 +7,7 @@ export class ExplorableEntitiy {
   @Entities(':root > *', ExplorableEntitiy) entities: Array<ExplorableEntitiy>;
   @Links() links;
   @Link() self;
+  @Link(['details'], ['parent']) relation;
   @Actions() actions;
 
   get hashColors() {
@@ -31,9 +32,13 @@ function hashColor(hash) {
   const sqmax = Math.sqrt(Number.MAX_SAFE_INTEGER);
   const pozHash = hash > 0 ? hash : -hash;
 
-  colorQty[0] = min + Math.floor(pozHash % 155);
-  colorQty[1] = min + Math.floor(max / pozHash % 155);
-  colorQty[2] = min + Math.floor(sqmax / pozHash % 155);
+  const red = pozHash % 155;
+  const green = red % 2 === 0 ? max / pozHash % 155 : sqmax / pozHash % 155;
+  const blue = red % 2 !== 0 ? max / pozHash % 155 : sqmax / pozHash % 155;
+
+  colorQty[0] = min + Math.floor(red);
+  colorQty[1] = min + Math.floor(green);
+  colorQty[2] = min + Math.floor(blue);
 
   return `#${colorQty[0].toString(16)}${colorQty[1].toString(16)}${colorQty[2].toString(16)}`;
 }
