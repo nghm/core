@@ -1,3 +1,4 @@
+
 .code-wrapper {
   background: #eee;
   border-left: 4px solid #673ab7;
@@ -96,9 +97,25 @@ mat-panel-title {
   clear: both;
 }
 
+.entities {
+  display: flex;
+  flex-flow: wrap;
+}
+
 .entities mat-card {
   width: 330px;
-  float: left;
   margin-right: 16px;
   margin-bottom: 16px;
+}
+
+.card-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-bar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
 }
