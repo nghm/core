@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { RootEntity, ActionListener, HypermediaRef } from '@nghm/core';
 import { ExplorableEntitiy } from './explorable-entitiy';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 
 @Component({
   template: `
@@ -13,9 +13,14 @@ export class DevpageComponent {
   @ActionListener('*', 'success')
   refresh(): void {
     this.dialog.closeAll();
+    this.snackBar.open('The action was executed with success!', undefined, { duration: 5000 });
 
     this.hypermediaRef.fetch();
   }
 
-  constructor(public dialog: MatDialog, public hypermediaRef: HypermediaRef) {}
+  constructor(
+    public dialog: MatDialog,
+    public snackBar: MatSnackBar,
+    public hypermediaRef: HypermediaRef
+  ) {}
 }

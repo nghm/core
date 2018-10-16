@@ -7,7 +7,8 @@ import { MaterialFieldsModule } from '@nghm/material-fields';
 import { DevpageComponent } from './devpage.component';
 import { EntityOutletComponent } from './entity-outlet';
 import { MatExpansionModule, MatDividerModule, MatTabsModule, MatButtonModule,
-  MatChipsModule, MatToolbarModule, MatCardModule, MatIconModule, MatMenuModule } from '@angular/material';
+  MatChipsModule, MatToolbarModule, MatCardModule, MatIconModule, MatMenuModule,
+  MatSnackBarModule, MatProgressBarModule } from '@angular/material';
 import { ActionDialogComponent } from './action-dialog.component';
 @NgModule({
   imports: [
@@ -23,7 +24,9 @@ import { ActionDialogComponent } from './action-dialog.component';
     MatToolbarModule,
     MatIconModule,
     MatMenuModule,
-    MatChipsModule
+    MatChipsModule,
+    MatSnackBarModule,
+    MatProgressBarModule
   ],
   declarations: [DevpageComponent, ActionDialogComponent, EntityOutletComponent],
   exports: [DevpageComponent]

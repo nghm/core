@@ -2,6 +2,9 @@
 import { Entities, Classes, Properties, Links, Actions, Link } from '@nghm/core';
 
 export class ExplorableEntitiy {
+  loading = true;
+  background = '';
+
   @Classes() classes: Array<string>;
   @Properties() properties: any;
   @Entities(':root > *', ExplorableEntitiy) entities: Array<ExplorableEntitiy>;
@@ -58,7 +61,7 @@ export class ExplorableEntitiy {
       .join(', ');
   }
 
-  get background() {
+  makeBackground() {
     const hashColors = this.getHashColors();
     const hashColorsShadows = this.getHashColorShadows();
 
@@ -66,6 +69,11 @@ export class ExplorableEntitiy {
             linear-gradient(#ffffff61 95%, #ff000000),
             linear-gradient(45deg, ${hashColorsShadows}),
             linear-gradient(45deg, ${hashColors})`;
+  }
+
+  hmAfterBinding(): void {
+    this.background = this.makeBackground();
+    this.loading = false;
   }
 }
 
