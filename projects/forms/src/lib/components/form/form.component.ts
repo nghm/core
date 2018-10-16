@@ -116,4 +116,8 @@ export class FormComponent implements AfterViewInit {
       this.inputConfigurations = this.computeFields(remoteConfigurations, localConfiguration);
     });
   }
+
+  propertyTracker(property): any {
+    return (_, obj) => obj[property];
+  }
 }

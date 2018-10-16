@@ -1,4 +1,4 @@
-import { Component, Input, OnChanges, Host, Optional, Attribute } from '@angular/core';
+import { Component, Input, OnChanges, Host, Optional, Attribute, AfterViewInit } from '@angular/core';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { ReplaySubject, from } from 'rxjs';
@@ -8,7 +8,7 @@ import { OverrideFieldNamedDirective } from '../field-configuration/field-config
   selector: 'hm-form-field',
   templateUrl: './field-config.component.html'
 })
-export class FieldConfigurationComponent implements InputConfiguration, OnChanges {
+export class FieldConfigurationComponent implements InputConfiguration, OnChanges, AfterViewInit {
   private inputConfigurationSubject = new ReplaySubject<InputConfiguration>(1);
   component: { pack: string, name: string };
 
@@ -64,6 +64,10 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
   }
 
   ngOnChanges(): void {
+    this.inputConfigurationSubject.next(this.getConfiguration());
+  }
+
+  ngAfterViewInit(): void {
     this.inputConfigurationSubject.next(this.getConfiguration());
   }
 }

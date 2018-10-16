@@ -1,6 +1,5 @@
 <form (submit)="submit(); $event.preventDefault()">
-  <div *ngFor="let bundle of inputConfigurations | async">
-    {{ bundle | json }}
+  <div *ngFor="let bundle of inputConfigurations | async; trackBy: propertyTracker('name')">
     <ng-container *hmFieldOutlet="bundle.configuration; labels: labels; errors: errors"></ng-container>
   </div>
   <div *ngIf="submitDirective">
