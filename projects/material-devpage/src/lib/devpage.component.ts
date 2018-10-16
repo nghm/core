@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
-import { RootEntity } from '@nghm/core';
+import { RootEntity, ActionListener, HypermediaRef } from '@nghm/core';
 import { ExplorableEntitiy } from './explorable-entitiy';
+import { MatDialog } from '@angular/material';
 
 @Component({
   template: `
@@ -9,7 +10,12 @@ import { ExplorableEntitiy } from './explorable-entitiy';
 export class DevpageComponent {
   @RootEntity(ExplorableEntitiy) entity: ExplorableEntitiy;
 
-  hmAfterBinding() {
-    console.log(this.entity);
+  @ActionListener('*', 'success')
+  refresh(): void {
+    this.dialog.closeAll();
+
+    this.hypermediaRef.fetch();
   }
+
+  constructor(public dialog: MatDialog, public hypermediaRef: HypermediaRef) {}
 }

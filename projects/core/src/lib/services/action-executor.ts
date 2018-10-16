@@ -20,7 +20,7 @@ export class ActionExecutor {
   private request({ href: url, method }, body): Observable<HttpResponse<any>> {
     return this.http.request(method, url, { body })
       .pipe(
-        filter<HttpResponse<any>>(event => event.type === HttpEventType.Response)
+        filter<HttpResponse<any>>(event => !event || event.type === HttpEventType.Response)
       );
   }
 

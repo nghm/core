@@ -7,6 +7,7 @@ import { ResolverService } from './current-resolver.service';
 @Injectable({ providedIn: 'root' })
 export class ComponentInstantiationInterceptor {
   private componentInstantiation: Observable<any>;
+  public currentPage: any;
 
   constructor({ events }: Router, outlets: ChildrenOutletContexts, currentResolver: ResolverService) {
     this.componentInstantiation = events.pipe(
@@ -15,6 +16,7 @@ export class ComponentInstantiationInterceptor {
     );
 
     this.componentInstantiation.subscribe(component => {
+      this.currentPage = component;
       currentResolver.resolve(component);
     });
   }
