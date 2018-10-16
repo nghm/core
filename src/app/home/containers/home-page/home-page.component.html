@@ -7,7 +7,7 @@
 </p>
 
 <ng-container *ngFor="let book of latestBooks">
-  <mat-card *ngIf="!book.loading" class="latest-book">
+  <mat-card *ngIf="!book.loading; else loading" class="latest-book">
     <mat-card-title>{{ book.title }}</mat-card-title>
     <mat-card-content>
       {{ book.description }}
@@ -22,4 +22,9 @@
       <button mat-button [hmLink]="book.self" color="primary">GO TO</button>
     </mat-card-actions>
   </mat-card>
+  <ng-template #loading>
+    <mat-card class="latest-book">
+      Loading...
+    </mat-card>
+  </ng-template>
 </ng-container>
