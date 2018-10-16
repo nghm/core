@@ -8,6 +8,8 @@
 .code-wrapper pre {
   padding: 8px 16px;
   margin: 0;
+  text-overflow: ellipsis;
+  overflow: hidden;
 }
 
 .classes {

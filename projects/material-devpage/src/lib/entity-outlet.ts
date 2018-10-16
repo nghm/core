@@ -1,4 +1,4 @@
-import { Input, Component, Sanitizer } from '@angular/core';
+import { Input, Component } from '@angular/core';
 import { ExplorableEntitiy } from './explorable-entitiy';
 import { DomSanitizer } from '@angular/platform-browser';
 

@@ -38,15 +38,13 @@ export class HomePageComponent {
   constructor(private hypermediaRef: HypermediaRef, private appRoot: AppRootComponent) {}
 
   @ActionListener('*', 'success')
-  refresh({ response: { status }}): void {
-    console.log(status);
-
+  refresh(): void {
     this.hypermediaRef.fetch();
   }
 
   @ActionListener('*', 'error')
-  error({ error: { status } }): void {
-    console.log(status);
+  error({ error }): void {
+    console.log(error);
   }
 
   hmAfterBinding() {

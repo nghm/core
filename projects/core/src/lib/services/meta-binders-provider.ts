@@ -31,7 +31,9 @@ export class MetaBinder {
       return;
     }
 
-    binders.forEach(binder => binder.bind(target, source));
+    for (const binder of binders) {
+      binder.bind(target, source);
+    }
 
     if ('hmAfterBinding' in target && target.hmAfterBinding instanceof Function) {
       target.hmAfterBinding();

@@ -12,11 +12,13 @@ export class LinksBinder implements Binder {
   bind(target, source): void {
     const { nameFactory, linkQueries, bindingName } = this.meta;
     const { links: sourceLinks = [] } = source;
-    const links = sourceLinks.filter(({ rel: rels = []}) =>
-      linkQueries.some(linkQuery =>
-        linkQuery.every(requiredRel => rels.includes(requiredRel))
-      )
-    ) || {} as any;
+    const links =
+      linkQueries.length === 0 && sourceLinks ||
+      sourceLinks.filter(({ rel: rels = []}) =>
+        linkQueries.some(linkQuery =>
+          linkQuery.every(requiredRel => rels.includes(requiredRel))
+        )
+      ) || {} as any;
 
     const finalLinks = [];
 
