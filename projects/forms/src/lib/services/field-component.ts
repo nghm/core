@@ -18,6 +18,10 @@ export class FieldComponent {
     return keys.reduce((acc, name) => [...acc, { name, value: this.formControl[name] }], []);
   }
 
+  get options(): Array<{name: string, value: any }> {
+    return this.formControl['options'];
+  }
+
   constructor({ name, errorTemplateRef, formControl, labelTemplateRef }: FieldConfiguration) {
     this.name = name;
     this.errorTemplateRef = errorTemplateRef;
