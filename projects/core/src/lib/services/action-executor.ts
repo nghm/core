@@ -11,7 +11,7 @@ export interface ActionEvent {
 }
 
 @Injectable()
-export class ActionExecutor {
+export class ActionExecutorService {
   private eventsSubject = new Subject<ActionEvent>();
   private eventsObservable = from(this.eventsSubject);
 

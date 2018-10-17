@@ -9,10 +9,11 @@ import { MetaBinder } from './binding/meta-binders-provider';
 export class ResolverService {
   private location: Location;
 
-  constructor(private http: HttpClient,
-              private metaBinder: MetaBinder,
-              private resourcePathNormalizer: ResourcePathNormalizer,
-              @Inject(DOCUMENT) { location }: Document) {
+  constructor(
+    private http: HttpClient,
+    private metaBinder: MetaBinder,
+    private resourcePathNormalizer: ResourcePathNormalizer,
+    @Inject(DOCUMENT) { location }: Document) {
     this.location = location;
   }
 
