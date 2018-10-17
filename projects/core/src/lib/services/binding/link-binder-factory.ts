@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
-import { LinkBoundMetadata } from '../decorators';
-import { UrlInterpolator } from './url-interpolator';
+import { LinkBoundMetadata } from '../../decorators';
+import { UrlInterpolator } from '../url-interpolator';
 import { LinkBinder } from './link-binder';
 import { MetaBinderFactory } from './meta-binder-factory';
 

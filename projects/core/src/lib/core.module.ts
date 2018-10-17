@@ -2,27 +2,27 @@ import { NgModule } from '@angular/core';
 
 import { ComponentInstantiationInterceptor } from './services/component-instantiation.interceptor';
 import { ResourcePathNormalizer } from './services/resource-path-normalizer';
-import { MetaBinder } from './services/meta-binders-provider';
+import { MetaBinder } from './services/binding/meta-binders-provider';
 import { ResolverService } from './services/current-resolver.service';
 import { UrlInterpolator } from './services/url-interpolator';
-import { BINDER_FACTORIES } from './services/meta-binder-factory';
+import { BINDER_FACTORIES } from './services/binding/meta-binder-factory';
 
-import { LinkBinderFactory } from './services/link-binder-factory';
-import { ActionBinderFactory } from './services/action-binder-factory';
-import { PropertyBinderFactory } from './services/property-binder-factory';
+import { LinkBinderFactory } from './services/binding/link-binder-factory';
+import { ActionBinderFactory } from './services/binding/action-binder-factory';
+import { PropertyBinderFactory } from './services/binding/property-binder-factory';
 import { ActionExecutor } from './services/action-executor';
-import { ActionListenerFactory } from './services/action-listener-factory';
+import { ActionListenerFactory } from './services/binding/action-listener-factory';
 import { LifetimeEvents } from './services/lifetime-events';
 import { HypermediaRef } from './services/hypermedia-ref';
-import { EntityBinderFactory } from './services/entity-binder-factory';
+import { EntityBinderFactory } from './services/binding/entity-binder-factory';
 import { CssQueryFactory } from './services/css-query-factory';
-import { EntitiesBinderFactory } from './services/entities-binder-factory';
+import { EntitiesBinderFactory } from './services/binding/entities-binder-factory';
 import { UrlScopeTrimmer } from './services/url-scope-trimmer';
-import { RootEntityBinderFactory } from './services/root-entity-binder-factory';
-import { PropertiesBinderFactory } from './services/properties-binder-factory';
-import { LinksBinderFactory } from './services/links-binder-factory';
-import { ActionsBinderFactory } from './services/actions-binder-factory';
-import { ClassesBinderFactory } from './services/classes-binder-factory';
+import { RootEntityBinderFactory } from './services/binding/root-entity-binder-factory';
+import { PropertiesBinderFactory } from './services/binding/properties-binder-factory';
+import { LinksBinderFactory } from './services/binding/links-binder-factory';
+import { ActionsBinderFactory } from './services/binding/actions-binder-factory';
+import { ClassesBinderFactory } from './services/binding/classes-binder-factory';
 
 @NgModule({
   imports: [],
