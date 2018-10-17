@@ -1,26 +1,14 @@
 import { Component } from '@angular/core';
-import { Property, ActionListener, HypermediaRef, Links, Link, Entities, Action } from '@nghm/core';
+import { Property, ActionListener, HypermediaRef, Links, Link, Entities } from '@nghm/core';
 import { AppRootComponent } from 'src/app/core/containers/app.component';
-
-export class Book {
-  loading = true;
-
-  @Property() title: string;
-  @Property() description: string;
-
-  @Link() self: string;
-
-  @Action() update;
-
-  hmAfterBinding() {
-    this.loading = false;
-  }
-}
+import { animations } from './home-page.animations';
+import { Book } from './book.model';
 
 @Component({
   selector: 'app-home-page',
   templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  styleUrls: ['./home-page.component.css'],
+  animations
 })
 export class HomePageComponent {
   @Links(link => link.rel.find(rel => rel !== 'menu'), ['menu'])
@@ -35,7 +23,9 @@ export class HomePageComponent {
 
   @Entities('.latest-book', Book) latestBooks;
 
-  constructor(private hypermediaRef: HypermediaRef, private appRoot: AppRootComponent) {}
+  constructor(
+    private hypermediaRef: HypermediaRef,
+    private appRoot: AppRootComponent) {}
 
   @ActionListener('*', 'success')
   refresh(): void {
@@ -45,8 +35,5 @@ export class HomePageComponent {
   @ActionListener('*', 'error')
   error({ error }): void {
     console.log(error);
-  }
-
-  hmAfterBinding() {
   }
 }
