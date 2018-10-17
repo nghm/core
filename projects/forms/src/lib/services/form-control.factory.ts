@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { FormControl, FormBuilder, Validators } from '@angular/forms';
-import { InputConfiguration } from '../components/field-configuration/input-configuration';
+import { InputConfiguration } from '../interfaces/input-configuration';
 
 @Injectable()
 export class FormControlFactory {

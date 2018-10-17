@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { FormControlFactory } from './form-control.factory';
-import { InputConfiguration } from '../components/field-configuration/input-configuration';
+import { InputConfiguration } from '../interfaces/input-configuration';
 
 @Injectable()
 export class FormControlBinder {
