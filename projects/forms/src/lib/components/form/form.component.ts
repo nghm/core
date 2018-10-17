@@ -3,9 +3,9 @@ import { NgForm } from '@angular/forms';
 
 import { InputConfiguration } from '../field-configuration/input-configuration';
 import { PARENT_FORM_GROUP } from './parent-form';
-import { of, Observable, empty, from } from 'rxjs';
-import { map, tap, filter, mergeMap, buffer, scan, switchMap } from 'rxjs/operators';
-import { FieldConfigurationComponent } from '../field-config/field-config.component';
+import { of, Observable, from } from 'rxjs';
+import { map, mergeMap, scan, switchMap } from 'rxjs/operators';
+import { FieldConfigurationComponent } from '../form-field/form-field.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 import { FieldErrorDirective } from '../../directives/field-error.directive';
 import { FormSubmitDirective } from '../../directives/form-submit.directive';

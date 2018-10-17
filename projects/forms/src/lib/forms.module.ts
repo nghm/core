@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule as NgFormsModule } from '@angular/forms';
 
 import { FormComponent } from './components/form/form.component';
-import { FieldConfigurationComponent } from './components/field-config/field-config.component';
+import { FieldConfigurationComponent } from './components/form-field/form-field.component';
 import { OverrideFieldNamedDirective } from './components/field-configuration/field-configuration.component';
 
 import { InputComponentFactoryResolver } from './services/input-component-resolver.factory';

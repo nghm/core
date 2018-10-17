@@ -1,5 +1,5 @@
-import { TemplateRef, Directive, Optional, Injector } from '@angular/core';
-import { FieldConfigurationComponent } from '../components/field-config/field-config.component';
+import { TemplateRef, Directive, Injector } from '@angular/core';
+import { FieldConfigurationComponent } from '../components/form-field/form-field.component';
 
 @Directive({
   selector: '[hmError]'
