@@ -8,7 +8,8 @@ export class FormControlFactory {
 
   }
 
-  make({ value, required, pattern, max, min, maxLength, minLength, email, disabled }: InputConfiguration): FormControl {
+  make({ value, required, pattern, max, min,
+    maxLength, minLength, email, disabled, options }: InputConfiguration): FormControl {
     const validators = [];
 
     if (required) {
@@ -48,6 +49,10 @@ export class FormControlFactory {
 
     if (disabled) {
       control.disable();
+    }
+
+    if (options) {
+      control['options'] = options;
     }
 
     return control;

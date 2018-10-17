@@ -3,6 +3,8 @@ export interface InputConfiguration {
   value: any;
   type: string;
 
+  options?: Array<{ name: string, value: any }>;
+
   required?: boolean;
   max?: number;
   min?: number;

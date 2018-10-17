@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule, MatNativeDateModule } from '@angular/material';
+import { MatFormFieldModule, MatInputModule, MatCheckboxModule, MatDatepickerModule,
+   MatNativeDateModule, MatSelectModule } from '@angular/material';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
@@ -9,8 +10,10 @@ import { CheckboxInputComponent } from './components/boolean/checkbox-input.comp
 import { DatepickerInputComponent } from './components/date/datepicker-input.component';
 import { PasswordInputComponent } from './components/password/password-input.component';
 import { TextareaInputComponent } from './components/text/textarea-input.component';
+import { SelectInputComponent } from './components/option/select-input.component';
 
-const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputComponent, PasswordInputComponent, DatepickerInputComponent];
+const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputComponent,
+  PasswordInputComponent, DatepickerInputComponent, SelectInputComponent];
 
 @NgModule({
   imports: [
@@ -22,7 +25,8 @@ const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputCom
     MatFormFieldModule,
     MatCheckboxModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatSelectModule
   ],
   declarations: COMPONENTS,
   exports: COMPONENTS,
@@ -71,6 +75,15 @@ const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputCom
         name: 'date',
         type: 'date',
         inputType: DatepickerInputComponent
+      } as ComponentRegistration,
+      multi: true },
+    {
+      provide: COMPONENT_REGISTRATION,
+      useValue: {
+        pack: 'mat',
+        name: 'select',
+        type: 'option',
+        inputType: SelectInputComponent
       } as ComponentRegistration,
       multi: true }
   ]
