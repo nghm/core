@@ -1,6 +1,6 @@
-import { ActionsBoundMetadata } from '../decorators';
+import { ActionsBoundMetadata } from '../../decorators';
 import { Binder } from './binder';
-import { ActionExecutor } from './action-executor';
+import { ActionExecutor } from '../action-executor';
 
 export class ActionsBinder implements Binder {
   constructor(

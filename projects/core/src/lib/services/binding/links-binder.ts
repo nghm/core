@@ -1,6 +1,6 @@
 
-import { LinksBoundMetadata } from '../decorators';
-import { UrlInterpolator } from './url-interpolator';
+import { LinksBoundMetadata } from '../../decorators';
+import { UrlInterpolator } from '../url-interpolator';
 import { Binder } from './binder';
 
 export class LinksBinder implements Binder {

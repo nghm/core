@@ -1,8 +1,8 @@
-import { EntityBoundMetadata } from '../decorators';
+import { EntityBoundMetadata } from '../../decorators';
 import { Binder } from './binder';
 import { MetaBinder } from './meta-binders-provider';
-import { CssQueryFactory } from './css-query-factory';
-import { ResolverService } from './current-resolver.service';
+import { CssQueryFactory } from '../css-query-factory';
+import { ResolverService } from '../current-resolver.service';
 
 export class EntityBinder implements Binder {
   constructor(

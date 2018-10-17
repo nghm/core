@@ -1,4 +1,4 @@
-import { PropertyBoundMetadata } from '../decorators';
+import { PropertyBoundMetadata } from '../../decorators';
 import { Binder } from './binder';
 
 export class PropertyBinder implements Binder {
