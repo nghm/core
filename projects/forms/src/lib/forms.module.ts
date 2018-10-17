@@ -4,7 +4,7 @@ import { FormsModule as NgFormsModule } from '@angular/forms';
 
 import { FormComponent } from './components/form/form.component';
 import { FieldConfigurationComponent } from './components/form-field/form-field.component';
-import { OverrideFieldNamedDirective } from './components/field-configuration/field-configuration.component';
+import { OverrideFieldNamedDirective } from './directives/field-configuration.directive';
 
 import { InputComponentFactoryResolver } from './services/input-component-resolver.factory';
 import { FormControlFactory } from './services/form-control.factory';

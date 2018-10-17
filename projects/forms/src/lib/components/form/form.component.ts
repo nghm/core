@@ -1,8 +1,8 @@
 import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild, AfterViewInit, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
-import { InputConfiguration } from '../field-configuration/input-configuration';
-import { PARENT_FORM_GROUP } from './parent-form';
+import { InputConfiguration } from '../../interfaces/input-configuration';
+import { PARENT_FORM_GROUP } from '../../di/parent-form';
 import { of, Observable, from } from 'rxjs';
 import { map, mergeMap, scan, switchMap } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../form-field/form-field.component';

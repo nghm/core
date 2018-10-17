@@ -2,7 +2,7 @@
  * Public API Surface of forms
  */
 export { COMPONENT_REGISTRATION } from './lib/services/input-component-resolver.factory';
-export { InputConfiguration } from './lib/components/field-configuration/input-configuration';
+export { InputConfiguration } from './lib/interfaces/input-configuration';
 export { FieldConfiguration } from './lib/services/field-configuration';
 export { FieldComponent } from './lib/services/field-component';
 export { ComponentRegistration } from './lib/services/input-component-resolver.factory';
