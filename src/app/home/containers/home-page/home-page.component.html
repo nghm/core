@@ -6,25 +6,27 @@
   <a mat-raised-button *ngIf="topRatedBook" [hmLink]="topRatedBook">Top rated book</a>
 </p>
 
-<ng-container *ngFor="let book of latestBooks">
-  <mat-card *ngIf="!book.loading; else loading" class="latest-book">
-    <mat-card-title>{{ book.title }}</mat-card-title>
-    <mat-card-content>
-      {{ book.description }}
-    </mat-card-content>
-    <mat-card-content>
-      <hm-form [action]="book.update" #saveForm>
-        <hm-form-field named="description" component="mat|textarea"></hm-form-field>
-      </hm-form>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-button (click)="saveForm.submit()">SAVE</button>
-      <button mat-button [hmLink]="book.self" color="primary">GO TO</button>
-    </mat-card-actions>
-  </mat-card>
-  <ng-template #loading>
-    <mat-card class="latest-book">
-      Loading...
+<div>
+  <ng-container *ngFor="let book of latestBooks">
+    <mat-card *ngIf="!book.loading; else loading" class="latest-book">
+      <mat-card-title>{{ book.title }}</mat-card-title>
+      <mat-card-content>
+        {{ book.description }}
+      </mat-card-content>
+      <mat-card-content>
+        <hm-form [action]="book.update" #saveForm>
+          <hm-form-field named="description" component="mat|textarea"></hm-form-field>
+        </hm-form>
+      </mat-card-content>
+      <mat-card-actions>
+        <button mat-button (click)="saveForm.submit()">SAVE</button>
+        <button mat-button [hmLink]="book.self" color="primary">GO TO</button>
+      </mat-card-actions>
     </mat-card>
-  </ng-template>
-</ng-container>
+    <ng-template #loading>
+      <mat-card class="latest-book">
+        <mat-progress-spinner mode="indeterminate"></mat-progress-spinner>
+      </mat-card>
+    </ng-template>
+  </ng-container>
+</div>
