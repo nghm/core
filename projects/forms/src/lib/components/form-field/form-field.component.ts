@@ -6,7 +6,7 @@ import { OverrideFieldNamedDirective } from '../field-configuration/field-config
 
 @Component({
   selector: 'hm-form-field',
-  templateUrl: './field-config.component.html'
+  templateUrl: './form-field.component.html'
 })
 export class FieldConfigurationComponent implements InputConfiguration, OnChanges, AfterViewInit {
   private inputConfigurationSubject = new ReplaySubject<InputConfiguration>(1);

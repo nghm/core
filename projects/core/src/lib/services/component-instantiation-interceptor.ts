@@ -17,6 +17,7 @@ export class ComponentInstantiationInterceptor {
 
     this.componentInstantiation.subscribe(component => {
       this.currentPage = component;
+
       currentResolver.resolve(component);
     });
   }
