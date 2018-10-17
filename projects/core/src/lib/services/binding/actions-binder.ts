@@ -1,11 +1,11 @@
 import { ActionsBoundMetadata } from '../../decorators';
 import { Binder } from './binder';
-import { ActionExecutor } from '../action-executor';
+import { ActionExecutorService } from '../action-executor';
 
 export class ActionsBinder implements Binder {
   constructor(
     private meta: ActionsBoundMetadata,
-    private actionExecutor: ActionExecutor
+    private actionExecutor: ActionExecutorService
   ) { }
 
   bind(target, source): void {

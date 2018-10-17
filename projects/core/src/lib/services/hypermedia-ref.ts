@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { ResolverService } from './current-resolver.service';
-import { ComponentInstantiationInterceptor } from './component-instantiation.interceptor';
+import { ResolverService } from './current-resolver';
+import { ComponentInstantiationInterceptor } from './component-instantiation-interceptor';
 
 @Injectable()
 export class HypermediaRef {

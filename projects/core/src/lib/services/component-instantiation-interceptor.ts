@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router, ChildrenOutletContexts, PRIMARY_OUTLET, Scroll } from '@angular/router';
 import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
-import { ResolverService } from './current-resolver.service';
+import { ResolverService } from './current-resolver';
 
 @Injectable({ providedIn: 'root' })
 export class ComponentInstantiationInterceptor {
