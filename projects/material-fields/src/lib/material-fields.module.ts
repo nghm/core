@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 import { COMPONENT_REGISTRATION, ComponentRegistration } from '@nghm/forms';
-import { TextInputComponent } from './components/text-input.component';
-import { CheckboxInputComponent } from './components/checkbox-input.component';
-import { DatepickerInputComponent } from './components/datepicker-input.component';
-import { PasswordInputComponent } from './components/password-input.component';
-import { TextareaInputComponent } from './components/textarea-input.component';
+import { TextInputComponent } from './components/text/text-input.component';
+import { CheckboxInputComponent } from './components/boolean/checkbox-input.component';
+import { DatepickerInputComponent } from './components/date/datepicker-input.component';
+import { PasswordInputComponent } from './components/password/password-input.component';
+import { TextareaInputComponent } from './components/text/textarea-input.component';
 
 const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputComponent, PasswordInputComponent, DatepickerInputComponent];
 
@@ -41,8 +41,8 @@ const COMPONENTS = [TextInputComponent, TextareaInputComponent, CheckboxInputCom
       provide: COMPONENT_REGISTRATION,
       useValue: {
         pack: 'mat',
-        name: 'textarea',
         type: 'text',
+        name: 'textarea',
         inputType: TextareaInputComponent
       } as ComponentRegistration,
       multi: true },
