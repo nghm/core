@@ -1,0 +1,1215 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>nghm documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	      <link rel="stylesheet" href="../styles/style.css">
+    </head>
+    <body>
+
+        <div class="navbar navbar-default navbar-fixed-top visible-xs">
+            <a href="../" class="navbar-brand">nghm documentation</a>
+            <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search">
+    <input type="text" placeholder="Type to search">
+</div>
+            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="hidden-xs menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+<ol class="breadcrumb">
+  <li>Components</li>
+  <li>FormComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="active">
+            <a href="#info" role="tab" id="info-tab" data-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li >
+            <a href="#source" role="tab" id="source-tab" data-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li >
+            <a href="#templateData" role="tab" id="templateData-tab" data-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li >
+            <a href="#tree" role="tab" id="tree-tab" data-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="c-info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>projects/forms/src/lib/components/form/form.component.ts</code>
+</p>
+
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code><a href="https://angular.io/api/core/AfterViewInit" target="_blank" >AfterViewInit</a></code>
+    </p>
+
+
+<section>
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover">
+        <tbody>
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">providers</td>
+                <td class="col-md-9">
+                            <code><a href="../components/FormComponent.html" target="_self" >{ provide: PARENT_FORM_GROUP, useFactory: formGroupFactory, deps: [FormComponent] }</a></code>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>hm-form</code></td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>form.component.html</code></td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#errors">errors</a>
+                            </li>
+                            <li>
+                                <a href="#fieldConfigurations">fieldConfigurations</a>
+                            </li>
+                            <li>
+                                <a href="#inputConfigurations">inputConfigurations</a>
+                            </li>
+                            <li>
+                                <a href="#isSubmitting">isSubmitting</a>
+                            </li>
+                            <li>
+                                <a href="#labels">labels</a>
+                            </li>
+                            <li>
+                                <a href="#ngForm">ngForm</a>
+                            </li>
+                            <li>
+                                <a href="#submitDirective">submitDirective</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#computeFields">computeFields</a>
+                            </li>
+                            <li>
+                                <a href="#ngAfterViewInit">ngAfterViewInit</a>
+                            </li>
+                            <li>
+                                <a href="#propertyTracker">propertyTracker</a>
+                            </li>
+                            <li>
+                                <a href="#submit">submit</a>
+                            </li>
+                            <li>
+                                <a href="#unique">unique</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#action">action</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Accessors</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                    <a href="#setLabels">setLabels</a>
+                                </li>
+                                <li>
+                                    <a href="#setErrors">setErrors</a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+        </tbody>
+    </table>
+</section>
+
+    <section>
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor(actionExecutror: <a href="../injectables/ActionExecutorService.html">ActionExecutorService</a>)</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:56</a></div>
+                            </td>
+                        </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                            <div>
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>actionExecutror</td>
+                                                  
+                                                        <td>
+                                                                    <code><a href="../injectables/ActionExecutorService.html" target="_self" >ActionExecutorService</a></code>
+                                                        </td>
+                                                  
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-2">
+                        <a name="action"></a>
+                        <code>action</code>
+                    </td>
+                    <td class="col-md-10">
+                            <p>
+                            <em>Type :</em>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </p>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:56</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section>
+    
+        <h3 id="methods">
+            Methods
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="computeFields"></a>
+                        <span class="name">
+                            <b>
+                            computeFields
+                            </b>
+                            <a href="#computeFields"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>computeFields(remoteConfigurations: literal type, localConfigurations$: literal type)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:60</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>remoteConfigurations</td>
+                                                        <td>
+                                                                    <code>literal type</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                                <tr>
+                                                        <td>localConfigurations$</td>
+                                                        <td>
+                                                                    <code>literal type</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Observable&lt;literal type[]&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngAfterViewInit"></a>
+                        <span class="name">
+                            <b>
+                            ngAfterViewInit
+                            </b>
+                            <a href="#ngAfterViewInit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>ngAfterViewInit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:104</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="propertyTracker"></a>
+                        <span class="name">
+                            <b>
+                            propertyTracker
+                            </b>
+                            <a href="#propertyTracker"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>propertyTracker(property: )</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:125</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>property</td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="submit"></a>
+                        <span class="name">
+                            <b>
+                            submit
+                            </b>
+                            <a href="#submit"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>submit()</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:95</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                            </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="unique"></a>
+                        <span class="name">
+                            <b>
+                            unique
+                            </b>
+                            <a href="#unique"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+<code>unique(array: Array<any>)</code>
+                    </td>
+                </tr>
+
+
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:91</a></div>
+                            </td>
+                        </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+
+                            <div class="io-description">
+                                    <b>Parameters :</b>
+                                    <table class="params">
+                                        <thead>
+                                            <tr>
+                                                <td>Name</td>
+                                                    <td>Type</td>
+                                                <td>Optional</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                                <tr>
+                                                        <td>array</td>
+                                                        <td>
+                                                                    <code>Array&lt;any&gt;</code>
+                                                        </td>
+                                                    
+                                                    <td>
+                                                            No
+                                                    </td>
+                                                    
+
+                                                </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                            <div>
+                            </div>
+                            <div class="io-description">
+                                <b>Returns : </b>    <code>Array&lt;any&gt;</code>
+
+                            </div>
+                                <div class="io-description">
+                                    
+                                </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    
+        <h3 id="inputs">
+            Properties
+        </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errors"></a>
+                        <span class="name">
+                            <b>
+                            errors
+                            </b>
+                            <a href="#errors"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>errors:     <code>literal type</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>literal type</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="27" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:27</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fieldConfigurations"></a>
+                        <span class="name">
+                            <b>
+                            fieldConfigurations
+                            </b>
+                            <a href="#fieldConfigurations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>fieldConfigurations:     <code><a href="../classes/FieldConfiguration.html" target="_self" >QueryList&lt;FieldConfigurationComponent&gt;</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="../classes/FieldConfiguration.html" target="_self" >QueryList&lt;FieldConfigurationComponent&gt;</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>ContentChildren</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:55</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="inputConfigurations"></a>
+                        <span class="name">
+                            <b>
+                            inputConfigurations
+                            </b>
+                            <a href="#inputConfigurations"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>inputConfigurations:     <code>Observable&lt;literal type[]&gt;</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>Observable&lt;literal type[]&gt;</code>
+
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="24" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:24</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isSubmitting"></a>
+                        <span class="name">
+                            <b>
+                            isSubmitting
+                            </b>
+                            <a href="#isSubmitting"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>isSubmitting:     <code></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>false</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="25" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:25</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="labels"></a>
+                        <span class="name">
+                            <b>
+                            labels
+                            </b>
+                            <a href="#labels"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>labels:     <code>literal type</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>literal type</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Default value : </i><code>{}</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="26" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:26</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ngForm"></a>
+                        <span class="name">
+                            <b>
+                            ngForm
+                            </b>
+                            <a href="#ngForm"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>ngForm:     <code><a href="https://angular.io/api/forms/NgForm" target="_blank" >NgForm</a></code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code><a href="https://angular.io/api/forms/NgForm" target="_blank" >NgForm</a></code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>ViewChild</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="29" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:29</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="submitDirective"></a>
+                        <span class="name">
+                            <b>
+                            submitDirective
+                            </b>
+                            <a href="#submitDirective"><span class="icon ion-ios-link"></span></a>
+                        </span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <code>submitDirective:     <code>FormSubmitDirective</code>
+</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Type : </i>    <code>FormSubmitDirective</code>
+
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <i>Decorators : </i><code>ContentChild</code>
+                        </td>
+                    </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="31" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:31</a></div>
+                            </td>
+                        </tr>
+
+
+            </tbody>
+        </table>
+</section>
+
+    <section>
+    <h3 id="accessors">
+        Accessors
+    </h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setLabels"></a>
+                        <span class="name"><b>setLabels</b><a href="#setLabels"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>setLabels(labels: )</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="33" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:33</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>labels</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="setErrors"></a>
+                        <span class="name"><b>setErrors</b><a href="#setErrors"><span class="icon ion-ios-link"></span></a></span>
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="col-md-4">
+                        <span class="accessor"><b>set</b><code>setErrors(errors: )</code></span>
+                    </td>
+                </tr>
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-line">Defined in <a href="" data-line="44" class="link-to-prism">projects/forms/src/lib/components/form/form.component.ts:44</a></div>
+                                </td>
+                            </tr>
+                    <tr>
+                        <td class="col-md-4">
+
+                                <div class="io-description">
+                                        <b>Parameters :</b>
+                                        <table class="params">
+                                            <thead>
+                                                <tr>
+                                                    <td>Name</td>
+                                                    <td>Optional</td>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                    <tr>
+                                                            <td>errors</td>
+                                                    
+                                                    
+                                                        <td>
+                                                                No
+                                                        </td>
+                                                        
+                                                    </tr>
+                                            </tbody>
+                                        </table>
+                                </div>
+                                <div>
+                                </div>
+                                <div class="io-description">
+                                    <b>Returns : </b>    <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                                </div>
+                        </td>
+                    </tr>
+            </tbody>
+        </table>
+</section>
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="c-source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild, AfterViewInit, NgZone } from &#x27;@angular/core&#x27;;
+import { NgForm } from &#x27;@angular/forms&#x27;;
+
+import { InputConfiguration } from &#x27;../../interfaces/input-configuration&#x27;;
+import { PARENT_FORM_GROUP } from &#x27;../../di/parent-form&#x27;;
+import { of, Observable, from } from &#x27;rxjs&#x27;;
+import { map, mergeMap, scan, switchMap } from &#x27;rxjs/operators&#x27;;
+import { FieldConfigurationComponent } from &#x27;../form-field/form-field.component&#x27;;
+import { FieldLabelDirective } from &#x27;../../directives/field-label.directive&#x27;;
+import { FieldErrorDirective } from &#x27;../../directives/field-error.directive&#x27;;
+import { FormSubmitDirective } from &#x27;../../directives/form-submit.directive&#x27;;
+import { ActionExecutorService } from &#x27;projects/core/src/lib/services/action-executor&#x27;;
+
+export function formGroupFactory({ ngForm: { control }}) {
+  return control;
+}
+
+@Component({
+  selector: &#x27;hm-form&#x27;,
+  templateUrl: &#x27;form.component.html&#x27;,
+  providers: [{ provide: PARENT_FORM_GROUP, useFactory: formGroupFactory, deps: [FormComponent] }]
+})
+export class FormComponent implements AfterViewInit {
+  inputConfigurations: Observable&lt;{ name: string, configuration: InputConfiguration }[]&gt;;
+  isSubmitting &#x3D; false;
+  labels: { [name: string]: TemplateRef&lt;any&gt; } &#x3D; {};
+  errors: { [name: string]: TemplateRef&lt;any&gt; } &#x3D; {};
+
+  @ViewChild(NgForm) ngForm: NgForm;
+
+  @ContentChild(FormSubmitDirective) submitDirective: FormSubmitDirective;
+
+  @ContentChildren(FieldLabelDirective, { descendants: true }) set setLabels(labels: QueryList&lt;FieldLabelDirective&gt;) {
+    if (!labels) {
+      return;
+    }
+
+    this.labels &#x3D; {};
+    labels.forEach(({named, templateRef}) &#x3D;&gt; {
+      this.labels[named] &#x3D; templateRef;
+    });
+  }
+
+  @ContentChildren(FieldErrorDirective, { descendants: true }) set setErrors(errors: QueryList&lt;FieldErrorDirective&gt;) {
+    if (!errors) {
+      return;
+    }
+
+    this.errors &#x3D; {};
+    errors.forEach(({named, templateRef}) &#x3D;&gt; {
+      this.errors[named] &#x3D; templateRef;
+    });
+  }
+
+  @ContentChildren(FieldConfigurationComponent) fieldConfigurations: QueryList&lt;FieldConfigurationComponent&gt;;
+  @Input() action: any;
+
+  constructor(private actionExecutror: ActionExecutorService) { }
+
+  computeFields(
+    remoteConfigurations: { [name: string]: InputConfiguration },
+    localConfigurations$: { [name: string]: Observable&lt;InputConfiguration&gt; })
+    : Observable&lt;{ name: string, configuration: InputConfiguration }[]&gt; {
+    const remoteNames &#x3D; Object.keys(remoteConfigurations);
+    const localNames &#x3D; Object.keys(localConfigurations$);
+    const names &#x3D; this.unique(remoteNames.concat(localNames));
+
+    return from(names).pipe(
+      mergeMap(name &#x3D;&gt; {
+        const remoteConfiguration &#x3D; remoteConfigurations[name];
+
+        return of(remoteConfiguration).pipe(
+          switchMap(remote &#x3D;&gt;
+            localConfigurations$[name] &amp;&amp;
+            localConfigurations$[name].pipe(
+              map(local &#x3D;&gt; ({...remote, ...local})
+              )
+            ) ||
+            [remote]
+          )
+        );
+      }),
+      scan((acc, configuration: InputConfiguration) &#x3D;&gt; {
+        const filtered &#x3D; acc.filter(({name}) &#x3D;&gt; name !&#x3D;&#x3D; configuration.name);
+
+        return [...filtered, { name: configuration.name, configuration }];
+      }, [])
+    );
+  }
+
+  unique(array: Array&lt;any&gt;): Array&lt;any&gt; {
+    return array.filter((value, index) &#x3D;&gt; index &#x3D;&#x3D;&#x3D; array.indexOf(value));
+  }
+
+  submit() {
+    const { value, valid } &#x3D; this.ngForm;
+    this.isSubmitting &#x3D; true;
+
+    if (valid) {
+      this.actionExecutror.execute(this.action, value, () &#x3D;&gt; this.isSubmitting &#x3D; false);
+    }
+  }
+
+  ngAfterViewInit(): void {
+    if (!this.action || !this.fieldConfigurations) {
+      return;
+    }
+
+    setTimeout(() &#x3D;&gt; {
+      const remoteConfigurations &#x3D; this.action.fields.reduce((acc, field) &#x3D;&gt; ({...acc, [field.name]: field}), {});
+      const localConfiguration &#x3D; {};
+
+      this.fieldConfigurations.forEach(({ name, override, inputConfiguration }) &#x3D;&gt; {
+        if (!override) {
+          localConfiguration[name] &#x3D; inputConfiguration;
+        } else {
+          localConfiguration[override.named] &#x3D; inputConfiguration;
+        }
+      });
+
+      this.inputConfigurations &#x3D; this.computeFields(remoteConfigurations, localConfiguration);
+    });
+  }
+
+  propertyTracker(property): any {
+    return (_, obj) &#x3D;&gt; obj[property];
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;form (submit)&#x3D;&quot;submit(); $event.preventDefault()&quot;&gt;
+  &lt;div *ngFor&#x3D;&quot;let bundle of inputConfigurations | async; trackBy: propertyTracker(&#x27;name&#x27;)&quot;&gt;
+    &lt;ng-container *hmFieldOutlet&#x3D;&quot;bundle.configuration; labels: labels; errors: errors&quot;&gt;&lt;/ng-container&gt;
+  &lt;/div&gt;
+  &lt;div *ngIf&#x3D;&quot;submitDirective&quot;&gt;
+    &lt;ng-container *ngTemplateOutlet&#x3D;&quot;submitDirective.templateRef&quot;&gt;&lt;/ng-container&gt;
+  &lt;/div&gt;
+&lt;/form&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="c-tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><form (submit)="submit(); $event.preventDefault()">  <div *ngFor="let bundle of inputConfigurations | async; trackBy: propertyTracker(\'name\')">    <ng-container *hmFieldOutlet="bundle.configuration; labels: labels; errors: errors"></ng-container>  </div>  <div *ngIf="submitDirective">    <ng-container *ngTemplateOutlet="submitDirective.templateRef"></ng-container>  </div></form></div>'
+    var COMPONENTS = [{'name': 'ActionDialogComponent', 'selector': 'hm-action-dialog'},{'name': 'AppRootComponent', 'selector': 'app-root'},{'name': 'CheckboxInputComponent', 'selector': 'hm-mat-checkbox-input'},{'name': 'DatepickerInputComponent', 'selector': 'hm-mat-calendar-input'},{'name': 'DevpageComponent', 'selector': ''},{'name': 'EntityOutletComponent', 'selector': 'hm-entity-outlet'},{'name': 'FieldConfigurationComponent', 'selector': 'hm-form-field'},{'name': 'FormComponent', 'selector': 'hm-form'},{'name': 'HomePageComponent', 'selector': 'app-home-page'},{'name': 'PasswordInputComponent', 'selector': 'hm-mat-password-input'},{'name': 'SelectInputComponent', 'selector': 'hm-mat-select-input'},{'name': 'TextInputComponent', 'selector': 'hm-mat-text-input'},{'name': 'TextareaInputComponent', 'selector': 'hm-mat-textarea-input'}];
+    var DIRECTIVES = [{'name': 'FieldErrorDirective', 'selector': '[hmError]'},{'name': 'FieldLabelDirective', 'selector': '[hmLabel]'},{'name': 'FieldOutletDirective', 'selector': '[hmFieldOutlet]'},{'name': 'FormSubmitDirective', 'selector': '[hmSubmit]'},{'name': 'LinkDirective', 'selector': '[hmLink]'},{'name': 'OverrideFieldNamedDirective', 'selector': 'hm-form-field[named]'}];
+    var ACTUAL_COMPONENT = {'name': 'FormComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> result-matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormComponent.html';
+       </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+       <script src="../js/menu-wc.js"></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+       <script src="../js/libs/zepto.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
