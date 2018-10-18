@@ -1,0 +1,45 @@
+{
+  "properties": {
+    "title": "Book Orders",
+    "description": "A page for management of book ordering",
+    "booksOrderCount": 12
+  },
+  "links": {
+    "home": { "href": "http://localhost:54287/api/home" }
+  },
+  "actions": {},
+  "entities": [
+    {
+      "class": ["order"],
+      "properties": {
+        "id": "dopeId",
+        "title": "Insert Generic Title For Dummies",
+        "quantity": 100,
+        "message": "Yo this book be dope"
+      },
+      "actions": {
+        "confirm": {
+          "href": "http://localhost:54287/api/orders/dopeId/confirm",
+          "method": "POST"
+        },
+        "reject": {
+          "href": "http://localhost:54287/api/orders/dopeId/reject",
+          "method": "POST"
+        },
+        "contact": {
+          "href": "http://localhost:54287/api/users/dope-user/message",
+          "method": "POST",
+          "fields": {
+            "message": {
+              "type": "text",
+              "value": ""
+            }
+          }
+        }
+      },
+      "links": {
+        "owner": { "href": "http://localhost:54287/api/users/dope-user" }
+      }
+    }
+  ]
+}

@@ -14,14 +14,24 @@
     ],
     "lib": [
       "es2017",
-      "dom"
+      "dom",
+      "esnext.asynciterable"
     ],
     "paths": {
       "@nghm/core": [
-        "dist/core"
+        "projects/core/src/public_api"
       ],
-      "@nghm/core/*": [
-        "dist/core/*"
+      "@nghm/forms": [
+        "projects/forms/src/public_api"
+      ],
+      "@nghm/material-fields": [
+        "projects/material-fields/src/public_api"
+      ],
+      "@nghm/router": [
+        "projects/router/src/public_api"
+      ],
+      "@nghm/material-devpage": [
+        "projects/material-devpage/src/public_api"
       ]
     }
   }

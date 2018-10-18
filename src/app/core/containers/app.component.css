@@ -1,0 +1,38 @@
+.app-wrapper {
+  display: block;
+
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-wrapper mat-sidenav {
+  width: 330px;
+}
+
+.app-wrapper .navigation {
+  color: #fff;
+  background: #673ab7;
+}
+
+.app-wrapper .navigation .logo {
+  display: flex;
+  align-items: center;
+  margin-left: 8px;
+}
+
+.app-wrapper .navigation .logo .icon {
+  margin-right: 8px;
+}
+
+.app-wrapper .navigation .logo .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: uppercase;
+
+  text-shadow: 1px 1px 1px black
+}
+
+.router-wrapper {
+  padding: 16px;
+}
