@@ -1,6 +1,9 @@
 {
   "name": "nghm",
-  "version": "0.0.0",
+  "version": "$VERSION",
+  "repository": {
+    "url": "https://github.com/nghm/platform.git"
+  },
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -11,12 +14,12 @@
     "test:material-fields": "ng test material-fields --browsers=ChromeHeadless --progress=false",
     "test:router": "ng test router --browsers=ChromeHeadless --progress=false",
     "test:nghm": "ng test nghm --browsers=ChromeHeadless --progress=false",
-    "compodoc": "./node_modules/.bin/compodoc -p tsconfig.json",
-    "compodoc:core": "./node_modules/.bin/compodoc -p projects/core/tsconfig.lib.json",
-    "compodoc:forms": "./node_modules/.bin/compodoc -p projects/forms/tsconfig.lib.json",
-    "compodoc:material-fields": "./node_modules/.bin/compodoc -p projects/material-fields/tsconfig.lib.json",
-    "compodoc:material-devpage": "./node_modules/.bin/compodoc -p projects/material-devpage/tsconfig.lib.json",
-    "compodoc:router": "./node_modules/.bin/compodoc -p projects/router/tsconfig.lib.json",
+    "echo:version": "echo $VERSION",
+    "compodoc:core": "./node_modules/.bin/compodoc -p projects/core/tsconfig.lib.json -d docs/core --hideGenerator --disableSourceCode --disableGraph --disablePrivate --disableProtected --disableInternal --theme=vagrant",
+    "compodoc:forms": "./node_modules/.bin/compodoc -p projects/forms/tsconfig.lib.json -d docs/forms --hideGenerator --disableSourceCode --disableGraph --disablePrivate --disableProtected --disableInternal --theme=vagrant",
+    "compodoc:material-fields": "./node_modules/.bin/compodoc -p projects/material-fields/tsconfig.lib.json -d docs/material-fields --hideGenerator --disableSourceCode --disableGraph --disablePrivate --disableProtected --disableInternal --theme=vagrant",
+    "compodoc:material-devpage": "./node_modules/.bin/compodoc -p projects/material-devpage/tsconfig.lib.json -d docs/material-devpage --hideGenerator --disableSourceCode --disableGraph --disablePrivate --disableProtected --disableInternal --theme=vagrant",
+    "compodoc:router": "./node_modules/.bin/compodoc -p projects/router/tsconfig.lib.json -d docs/router --hideGenerator --disableSourceCode --disableGraph --disablePrivate --disableProtected --disableInternal --theme=vagrant",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

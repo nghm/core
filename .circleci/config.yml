@@ -12,12 +12,72 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
+            # # Restore local dependencies from cache
+            # - restore_cache:
+            #     keys:
+            #     - v1-dependencies-{{ checksum "package.json" }}
+            #     - v1-dependencies-
+            # # Install project dependencies
+            # - run:
+            #     name: Install local dependencies
+            #     command: npm install
+            # # Cache local dependencies if they don't exist
+            # - save_cache:
+            #     key: v1-dependencies-{{ checksum "package.json" }}
+            #     paths:
+            #         - node_modules
+            # # Lint the source code
+            # - run:
+            #     name: Linting
+            #     command: npm run lint
+            # # Test the source code
+            # - run:
+            #     name: Testing Core
+            #     command: npm run test:core
+            # - run:
+            #     name: Testing Forms
+            #     command: npm run test:forms
+            # - run:
+            #     name: Testing Material Devpage
+            #     command: npm run test:material-devpage
+            # - run:
+            #     name: Testing Material Fields
+            #     command: npm run test:material-fields
+            # - run:
+            #     name: Testing Router
+            #     command: npm run test:router
+            # - run:
+            #     name: Testing Nghm
+            #     command: npm run test:nghm
+    deploy-docs:
+        machine:
+            enabled: true
+        environment:
+            HEROKU_APP: "docs-nghm"
+        steps:
+            - checkout
             # Restore local dependencies from cache
             - restore_cache:
                 keys:
                 - v1-dependencies-{{ checksum "package.json" }}
                 - v1-dependencies-
             # Install project dependencies
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
             - run:
                 name: Install local dependencies
                 command: npm install
@@ -26,26 +86,48 @@ jobs:
                 key: v1-dependencies-{{ checksum "package.json" }}
                 paths:
                     - node_modules
-            # Lint the source code
             - run:
-                name: Linting
-                command: npm run lint
-            # Test the source code
+                name: Display package version
+                command: npm run echo:version
+
             - run:
-                name: Testing Core
-                command: npm run test:core
+                name: Create static file server
+                command: |
+                    git clone https://github.com/mgonto/heroku-static-file-server.git docs
+
+            # Generate documentation
             - run:
-                name: Testing Forms
-                command: npm run test:forms
+                name: Documenting Core
+                command: npm run compodoc:core
             - run:
-                name: Testing Material Devpage
-                command: npm run test:material-devpage
+                name: Documenting Forms
+                command: npm run compodoc:forms
             - run:
-                name: Testing Material Fields
-                command: npm run test:material-fields
+                name: Documenting Material Devpage
+                command: npm run compodoc:core
             - run:
-                name: Testing Router
-                command: npm run test:router
+                name: Documenting Material Fields
+                command: npm run compodoc:core
             - run:
-                name: Testing Nghm
-                command: npm run test:nghm
+                name: Documenting Router
+                command: npm run compodoc:core
+
+            - run:
+                name: Create heroku app
+                command: |
+                    cd docs
+                    git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+workflows:
+    version: 2
+    build-deploy:
+        jobs:
+            - build:
+                filters:
+                    tags:
+                        only: /^v.*/
+            - deploy-docs:
+                requires:
+                    - build
+                filters:
+                    tags:
+                        only: /^v.*/
