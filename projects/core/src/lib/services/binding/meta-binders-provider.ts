@@ -1,4 +1,4 @@
-import { Injectable, Inject } from '@angular/core';
+import { Injectable, Inject, NgZone } from '@angular/core';
 
 import { getSourceMetadata } from '../../decorators';
 import { Binder } from './binder';
@@ -29,6 +29,10 @@ export class MetaBinder {
 
     if (binders.length === 0) {
       return;
+    }
+
+    if ('hmBeforeBinding' in target && target.hmBeforeBinding instanceof Function) {
+      target.hmBeforeBinding();
     }
 
     for (const binder of binders) {

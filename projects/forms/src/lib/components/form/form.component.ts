@@ -9,6 +9,7 @@ import { FieldConfigurationComponent } from '../form-field/form-field.component'
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 import { FieldErrorDirective } from '../../directives/field-error.directive';
 import { FormSubmitDirective } from '../../directives/form-submit.directive';
+import { ActionExecutorService } from 'projects/core/src/lib/services/action-executor';
 
 export function formGroupFactory({ ngForm: { control }}) {
   return control;
@@ -51,7 +52,9 @@ export class FormComponent implements AfterViewInit {
   }
 
   @ContentChildren(FieldConfigurationComponent) fieldConfigurations: QueryList<FieldConfigurationComponent>;
-  @Input() action: Function & { fields?: any };
+  @Input() action: any;
+
+  constructor(private actionExecutror: ActionExecutorService) { }
 
   computeFields(
     remoteConfigurations: { [name: string]: InputConfiguration },
@@ -92,7 +95,7 @@ export class FormComponent implements AfterViewInit {
     const { value, valid } = this.ngForm;
 
     if (valid) {
-      this.action(value);
+      this.actionExecutror.execute(this.action, value);
     }
   }
 

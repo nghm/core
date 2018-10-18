@@ -1,11 +1,9 @@
 import { ActionBoundMetadata } from '../../decorators';
 import { Binder } from './binder';
-import { ActionExecutorService } from '../action-executor';
 
 export class ActionBinder implements Binder {
   constructor(
-    private meta: ActionBoundMetadata,
-    private actionExecutor: ActionExecutorService
+    private meta: ActionBoundMetadata
   ) { }
 
   bind(target, source): void {
@@ -17,12 +15,7 @@ export class ActionBinder implements Binder {
       return;
     }
 
-    const execute: Function & { fields?: any } = parameters => this.actionExecutor.execute({ name: actionName, ...action }, parameters);
-
-    execute.fields = action.fields;
-
-    Object.defineProperty(target, bindingName, {
-      get: () => execute as any
-    });
+    action.parent = target;
+    target[bindingName] = action;
   }
 }

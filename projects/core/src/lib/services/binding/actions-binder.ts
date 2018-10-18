@@ -24,8 +24,6 @@ export class ActionsBinder implements Binder {
       });
     }
 
-    Object.defineProperty(target, bindingName, {
-      get: () => finalActions
-    });
+    target[bindingName] = finalActions;
   }
 }

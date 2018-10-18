@@ -18,11 +18,13 @@ export class ResolverService {
   }
 
   resolve(target: any, resource = this.location.pathname + this.location.search): void {
-    const normalizedResource = this.resourcePathNormalizer.normalize(resource);
+    const resourceUrl = target.__RESOURCE__URI__ || this.resourcePathNormalizer.normalize(resource);
 
     this.http
-      .get(normalizedResource)
+      .get(resourceUrl)
       .subscribe(source => {
+        target.__RESOURCE__URI__ = resourceUrl;
+
         this.metaBinder.bind(target, source);
       });
   }

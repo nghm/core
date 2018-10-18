@@ -12,6 +12,7 @@ import { PropertiesBinderFactory } from './properties-binder-factory';
 import { LinksBinderFactory } from './links-binder-factory';
 import { ActionsBinderFactory } from './actions-binder-factory';
 import { ClassesBinderFactory } from './classes-binder-factory';
+import { RefBinderFactory } from './ref-binder-factory';
 
 @NgModule({
   providers: [
@@ -25,7 +26,8 @@ import { ClassesBinderFactory } from './classes-binder-factory';
     { provide: BINDER_FACTORIES, useClass: ActionListenerFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: EntityBinderFactory, multi: true },
     { provide: BINDER_FACTORIES, useClass: RootEntityBinderFactory, multi: true },
-    { provide: BINDER_FACTORIES, useClass: EntitiesBinderFactory, multi: true }
+    { provide: BINDER_FACTORIES, useClass: EntitiesBinderFactory, multi: true },
+    { provide: BINDER_FACTORIES, useClass: RefBinderFactory, multi: true }
   ]
 })
 export class BinderModule {
