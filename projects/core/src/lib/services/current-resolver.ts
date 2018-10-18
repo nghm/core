@@ -12,34 +12,31 @@ export class ResolverService {
   constructor(
     private http: HttpClient,
     private metaBinder: MetaBinder,
-    private resourcePathNormalizer: ResourcePathNormalizer,
-    @Inject(DOCUMENT) { location }: Document) {
+    private resourcePathNormalizer: ResourcePathNormalizer) {
     this.location = location;
   }
 
-  resolveSelf(target: any) {
-    const { resourceUrl, at } = target.$$resource;
-
-    return this.resolve(target, resourceUrl);
-  }
-
-  resolvePath(target: any, path = this.location.pathname + this.location.search) {
+  resolvePath(target: any, path: string) {
     const uri = this.resourcePathNormalizer.normalize(path);
 
     return this.resolve(target, uri);
   }
 
   resolve(target: any, resourceUrl: string): void {
+    if (target.hmBeforeResolve && target.hmBeforeResolve instanceof Function) {
+      target.hmBeforeResolve();
+    }
+
     this.http
       .get(resourceUrl)
       .subscribe(source => {
-        target.$$resource = { resourceUrl, at: Date.now() };
+        source['href'] = resourceUrl;
 
         this.metaBinder.bind(target, source);
-      });
-  }
 
-  isPath(path: string) {
-    path.startsWith('/');
+        if (target.hmAfterResolve && target.hmAfterResolve instanceof Function) {
+          target.hmAfterResolve();
+        }
+      });
   }
 }
