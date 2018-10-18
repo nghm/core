@@ -1,13 +1,13 @@
 {
   "name": "@nghm/material-devpage",
-  "version": "0.0.1",
+  "version": "$VERSION",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/router": "^6.0.0-rc.0 || ^6.0.0",
-    "@nghm/core": "^0.0.1",
-    "@nghm/router": "^0.0.1",
-    "@nghm/forms": "^0.0.1",
-    "@nghm/material-forms": "^0.0.1"
+    "@nghm/core": "$VERSION",
+    "@nghm/router": "$VERSION",
+    "@nghm/forms": "$VERSION",
+    "@nghm/material-forms": "$VERSION"
   }
 }

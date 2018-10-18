@@ -1,9 +1,9 @@
 {
   "name": "@nghm/router",
-  "version": "0.0.1",
+  "version": "$VERSION",
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
     "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "@nghm/core": "^0.0.1"
+    "@nghm/core": "$VERSION"
   }
 }
