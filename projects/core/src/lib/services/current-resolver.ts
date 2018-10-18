@@ -17,15 +17,29 @@ export class ResolverService {
     this.location = location;
   }
 
-  resolve(target: any, resource = this.location.pathname + this.location.search): void {
-    const resourceUrl = target.__RESOURCE__URI__ || this.resourcePathNormalizer.normalize(resource);
+  resolveSelf(target: any) {
+    const { resourceUrl, at } = target.$$resource;
 
+    return this.resolve(target, resourceUrl);
+  }
+
+  resolvePath(target: any, path = this.location.pathname + this.location.search) {
+    const uri = this.resourcePathNormalizer.normalize(path);
+
+    return this.resolve(target, uri);
+  }
+
+  resolve(target: any, resourceUrl: string): void {
     this.http
       .get(resourceUrl)
       .subscribe(source => {
-        target.__RESOURCE__URI__ = resourceUrl;
+        target.$$resource = { resourceUrl, at: Date.now() };
 
         this.metaBinder.bind(target, source);
       });
+  }
+
+  isPath(path: string) {
+    path.startsWith('/');
   }
 }

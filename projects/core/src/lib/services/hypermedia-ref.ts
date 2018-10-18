@@ -13,7 +13,11 @@ export class HypermediaRef {
   ) {}
 
   fetch(): void {
-    this.resolver.resolve(this.target);
+    if (this.target.$$resource) {
+      this.resolver.resolveSelf(this.target);
+    }
+
+    this.resolver.resolvePath(this.target);
   }
 }
 
@@ -26,6 +30,8 @@ export class CurrentHypermediaRef extends HypermediaRef {
 
     currentPage.subscribe(current => {
       this.target = current;
+
+      delete current.$$resource;
 
       this.fetch();
     });
