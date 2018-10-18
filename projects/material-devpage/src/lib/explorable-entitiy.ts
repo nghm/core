@@ -1,4 +1,5 @@
 
+// tslint:disable:no-bitwise
 import { Entities, Classes, Properties, Links, Actions, Link } from '@nghm/core';
 
 export class ExplorableEntitiy {
