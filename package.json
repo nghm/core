@@ -5,7 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "test": "ng test",
+    "test:core": "ng test core --progress=false",
+    "test:forms": "ng test forms --progress=false",
+    "test:material-devpage": "ng test material-devpage --progress=false",
+    "test:material-fields": "ng test material-fields --progress=false",
+    "test:router": "ng test router",
+    "test:app": "ng test app",
     "lint": "ng lint",
     "e2e": "ng e2e"
   },

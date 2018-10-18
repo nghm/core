@@ -32,5 +32,20 @@ jobs:
                 command: npm run lint
             # Test the source code
             - run:
-                name: Testing
-                command: npm run test
+                name: Testing Core
+                command: npm run test:core
+            - run:
+                name: Testing Forms
+                command: npm run test:forms
+            - run:
+                name: Testing Material Devpage
+                command: npm run test:material-devpage
+            - run:
+                name: Testing Material Fields
+                command: npm run test:material-fields
+            - run:
+                name: Testing Router
+                command: npm run test:router
+            - run:
+                name: Testing App
+                command: npm run test:app

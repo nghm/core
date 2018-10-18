@@ -35,5 +35,4 @@ import { currentHypermediaRef } from './services/current-hypermedia-ref.factory'
   exports: []
 })
 export class CoreModule {
-  constructor(interceptor: ComponentInstantiationInterceptor) { }
 }
