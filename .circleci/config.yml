@@ -49,3 +49,21 @@ jobs:
             - run:
                 name: Testing Nghm
                 command: npm run test:nghm
+
+            # Generate documentation
+
+            - run:
+                name: Documenting Core
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Forms
+                command: npm run compodoc:forms
+            - run:
+                name: Documenting Material Devpage
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Material Fields
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Router
+                command: npm run compodoc:core
