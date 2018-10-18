@@ -1,4 +1,14 @@
 .latest-book {
   margin-right: 16px;
   margin-bottom: 16px;
+
+  position: relative;
+}
+
+.latest-book mat-progress-bar {
+  position: absolute;
+
+  top: 0;
+  left: 0;
+  right: 0;
 }

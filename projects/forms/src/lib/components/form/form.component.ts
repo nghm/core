@@ -21,7 +21,8 @@ export function formGroupFactory({ ngForm: { control }}) {
   providers: [{ provide: PARENT_FORM_GROUP, useFactory: formGroupFactory, deps: [FormComponent] }]
 })
 export class FormComponent implements AfterViewInit {
-  inputConfigurations: Observable<{ name: string, configuration: InputConfiguration }[]> ;
+  inputConfigurations: Observable<{ name: string, configuration: InputConfiguration }[]>;
+  isSubmitting = false;
   labels: { [name: string]: TemplateRef<any> } = {};
   errors: { [name: string]: TemplateRef<any> } = {};
 
@@ -93,9 +94,10 @@ export class FormComponent implements AfterViewInit {
 
   submit() {
     const { value, valid } = this.ngForm;
+    this.isSubmitting = true;
 
     if (valid) {
-      this.actionExecutror.execute(this.action, value);
+      this.actionExecutror.execute(this.action, value, () => this.isSubmitting = false);
     }
   }
 

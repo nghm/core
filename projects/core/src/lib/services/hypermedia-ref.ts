@@ -9,15 +9,17 @@ export function currentHypermediaRef(interceptor: ComponentInstantiationIntercep
 export class HypermediaRef {
   constructor(
     protected target: any,
+    protected href: string,
+
     private resolver: ResolverService
   ) {}
 
   fetch(): void {
-    if (this.target.$$resource) {
-      this.resolver.resolveSelf(this.target);
+    if (this.href) {
+      this.resolver.resolve(this.target, this.href);
+    } else {
+      this.resolver.resolvePath(this.target, location.pathname + location.search);
     }
-
-    this.resolver.resolvePath(this.target);
   }
 }
 
@@ -26,12 +28,10 @@ export class CurrentHypermediaRef extends HypermediaRef {
     currentPage: Observable<any>,
     resolver: ResolverService
   ) {
-    super(undefined, resolver);
+    super(undefined, undefined, resolver);
 
     currentPage.subscribe(current => {
       this.target = current;
-
-      delete current.$$resource;
 
       this.fetch();
     });

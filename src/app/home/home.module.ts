@@ -5,7 +5,8 @@ import { FormsModule } from '@nghm/forms';
 import { RouterModule as HypermediaRouterModule } from '@nghm/router';
 
 import { HomePageComponent } from './containers/home-page/home-page.component';
-import { MatButtonModule, MatSidenavModule, MatCardModule, MatProgressSpinnerModule } from '@angular/material';
+import { MatButtonModule, MatSidenavModule, MatCardModule,
+  MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -16,6 +17,7 @@ import { MatButtonModule, MatSidenavModule, MatCardModule, MatProgressSpinnerMod
     MatSidenavModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    MatProgressBarModule,
     RouterModule.forChild([{
       path: '',
       component: HomePageComponent

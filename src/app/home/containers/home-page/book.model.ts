@@ -9,6 +9,6 @@ export class Book {
   @Action() update;
   @Ref() ref: HypermediaRef;
 
-  hmBeforeBinding() { this.loading = true; }
-  hmAfterBinding() { this.loading = false; }
+  hmBeforeResolve() { this.loading = true; }
+  hmAfterResolve() { this.loading = false; }
 }

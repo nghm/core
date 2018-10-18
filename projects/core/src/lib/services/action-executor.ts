@@ -24,7 +24,7 @@ export class ActionExecutorService {
       );
   }
 
-  execute({ parent, ...action }: any, fields: any) {
+  execute({ parent, ...action }: any, fields: any, success?: () => void) {
     this.request(action, fields).pipe(
         catchError(error => {
           this.eventsSubject.next({
@@ -37,13 +37,19 @@ export class ActionExecutorService {
           return [];
         })
       )
-      .subscribe(response => this.eventsSubject.next({
-        action: action.name,
-        name: 'success',
-        payload: {
-          action, parent, fields, response
+      .subscribe(response => {
+        this.eventsSubject.next({
+          action: action.name,
+          name: 'success',
+          payload: {
+            action, parent, fields, response
+          }
+        });
+
+        if (success) {
+          success();
         }
-      }));
+      });
   }
 
   on(action: string, ...events: Array<string>): Observable<ActionEvent> {
