@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Property, ActionListener, HypermediaRef, Links, Link, Entities } from '@nghm/core';
+import { Property, ActionListener, Links, Link, Entities, HypermediaRef } from '@nghm/core';
 import { AppRootComponent } from 'src/app/core/containers/app.component';
 import { animations } from './home-page.animations';
 import { Book } from './book.model';
@@ -25,11 +25,17 @@ export class HomePageComponent {
 
   constructor(
     private hypermediaRef: HypermediaRef,
-    private appRoot: AppRootComponent) {}
+    private appRoot: AppRootComponent) {
+
+  }
 
   @ActionListener('*', 'success')
-  refresh(): void {
-    this.hypermediaRef.fetch();
+  refresh({ parent }): void {
+    if (parent instanceof Book) {
+      parent.ref.fetch();
+    } else {
+      this.hypermediaRef.fetch();
+    }
   }
 
   @ActionListener('*', 'error')

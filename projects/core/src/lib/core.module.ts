@@ -9,7 +9,7 @@ import { UrlInterpolator } from './services/url-interpolator';
 import { UrlScopeTrimmer } from './services/url-scope-trimmer';
 import { ActionExecutorService } from './services/action-executor';
 import { LifetimeEvents } from './services/lifetime-events';
-import { HypermediaRef } from './services/hypermedia-ref';
+import { currentHypermediaRef, HypermediaRef } from './services/hypermedia-ref';
 import { CssQueryFactory } from './services/css-query.factory';
 
 @NgModule({
@@ -23,7 +23,11 @@ import { CssQueryFactory } from './services/css-query.factory';
     UrlInterpolator,
     ActionExecutorService,
     LifetimeEvents,
-    HypermediaRef,
+    {
+      provide: HypermediaRef,
+      useFactory: currentHypermediaRef,
+      deps: [ComponentInstantiationInterceptor, ResolverService]
+    },
     CssQueryFactory,
     UrlScopeTrimmer
   ],

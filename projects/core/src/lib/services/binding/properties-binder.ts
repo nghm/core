@@ -10,8 +10,6 @@ export class PropertiesBinder implements Binder {
     const { bindingName } = this.meta;
     const { properties } = source;
 
-    Object.defineProperty(target, bindingName, {
-      get: () => properties
-    });
+    target[bindingName] = properties;
   }
 }

@@ -6,6 +6,10 @@ interface FieldBoundMetadata {
   bindingName: string;
 }
 
+export class RefBoundMetadata implements FieldBoundMetadata {
+  constructor(public bindingName: string) { }
+}
+
 export class PropertyBoundMetadata implements FieldBoundMetadata {
   constructor(public propertyName: string, public bindingName: string) { }
 }
@@ -51,6 +55,13 @@ export class RootEntityBoundMetadata implements FieldBoundMetadata {
 
 export class EntitiesBoundMetadata implements FieldBoundMetadata {
   constructor(public queryString: string, public type: Type<any>, public bindingName: string) { }
+}
+
+export function Ref(): PropertyDecorator {
+  return function<T>(target: T, bindingName: string) {
+    const metadata = new RefBoundMetadata(bindingName);
+    setMetadataEntry<T>(target, [metadata]);
+  } as (target: {}, propertyName: string | symbol) => void;
 }
 
 export function Property(propertyName?: string): PropertyDecorator {

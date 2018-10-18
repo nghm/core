@@ -16,9 +16,7 @@ export class RootEntityBinder implements Binder {
 
       this.metaBinder.bind(instance, source);
 
-      Object.defineProperty(target, bindingName, {
-        get: () => instance
-      });
+      target[bindingName] = instance;
     }
   }
 }
