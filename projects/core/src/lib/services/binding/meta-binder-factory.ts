@@ -1,5 +1,5 @@
 import { InjectionToken } from '@angular/core';
-import { Binder } from './Binder';
+import { Binder } from './binder';
 import { MetaBinder } from './meta-binders-provider';
 
 export interface MetaBinderFactory {
