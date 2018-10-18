@@ -1,0 +1,15 @@
+<mat-form-field *ngIf="formControl">
+  <mat-label *ngIf="labelTemplateRef as labelTemplateRef">
+    <ng-container *ngTemplateOutlet="labelTemplateRef; context: { $implicit: name }"></ng-container>
+  </mat-label>
+  <mat-select [formControl]="formControl">
+    <mat-option *ngFor="let option of options" [value]="option.value">
+      {{ option.name }}
+    </mat-option>
+  </mat-select>
+  <mat-error *ngIf="invalid">
+    <div *ngFor="let error of errors">
+      <ng-container *ngTemplateOutlet="errorTemplateRef, context: { $implicit: error, field: name }"></ng-container>
+    </div>
+  </mat-error>
+</mat-form-field>

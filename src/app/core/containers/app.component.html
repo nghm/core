@@ -1,0 +1,25 @@
+<mat-sidenav-container class="app-wrapper">
+  <mat-sidenav mode="side" [(opened)]="opened" class="mat-elevation-z2">
+    <mat-list>
+      <mat-list-item matRipple="true" *ngFor="let menuLink of menuLinks" [hmLink]="menuLink">
+        {{ menuLink.name }}
+      </mat-list-item>
+    </mat-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar class="navigation mat-elevation-z2 mat-typography">
+      <button mat-icon-button (click)="opened = !opened">
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="logo">
+        <mat-icon class="icon">book</mat-icon>
+        <span class="text">
+          Books
+        </span>
+      </div>
+    </mat-toolbar>
+    <div class="router-wrapper">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
