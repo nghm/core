@@ -15,7 +15,6 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
   @Input() value: any;
   @Input() type: string;
 
-
   @Input() required?: boolean;
   @Input() max?: number;
   @Input() min?: number;
