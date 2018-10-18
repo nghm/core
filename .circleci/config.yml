@@ -47,5 +47,5 @@ jobs:
                 name: Testing Router
                 command: npm run test:router
             - run:
-                name: Testing App
-                command: npm run test:app
+                name: Testing Nghm
+                command: npm run test:nghm
