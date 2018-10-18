@@ -9,8 +9,9 @@ import { UrlInterpolator } from './services/url-interpolator';
 import { UrlScopeTrimmer } from './services/url-scope-trimmer';
 import { ActionExecutorService } from './services/action-executor';
 import { LifetimeEvents } from './services/lifetime-events';
-import { currentHypermediaRef, HypermediaRef } from './services/hypermedia-ref';
+import { HypermediaRef } from './services/hypermedia-ref';
 import { CssQueryFactory } from './services/css-query.factory';
+import { currentHypermediaRef } from './services/current-hypermedia-ref.factory';
 
 @NgModule({
   imports: [BinderModule],
