@@ -90,11 +90,6 @@ jobs:
                 name: Display package version
                 command: npm run echo:version
 
-            - run:
-                name: Create static file server
-                command: |
-                    git clone https://github.com/mgonto/heroku-static-file-server.git docs
-
             # Generate documentation
             - run:
                 name: Documenting Core
@@ -117,6 +112,7 @@ jobs:
                 command: |
                     VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
                     cd docs
+                    git init
                     git add .
                     git commit -m "Deployment commit - $VERSION"
                     git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master

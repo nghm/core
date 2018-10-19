@@ -39,4 +39,10 @@ testem.log
 Thumbs.db
 
 # docs
-/docs
+/docs/core
+/docs/forms
+/docs/material-fields
+/docs/material-devpage
+/docs/router
+
+
