@@ -1,0 +1,20 @@
+{
+  "name": "nghm-docs",
+  "version": "0.0.0",
+  "description": "Heroku docs deployment package",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "static",
+    "file",
+    "serve",
+    "heroku"
+  ],
+  "author": "Dan Patiu",
+  "license": "MIT",
+  "dependencies": {
+    "serve": "^1.4.0"
+  }
+}
