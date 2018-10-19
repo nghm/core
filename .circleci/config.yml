@@ -115,7 +115,10 @@ jobs:
             - run:
                 name: Create heroku app
                 command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
                     cd docs
+                    git add .
+                    git commit -m "Deployment commit - $VERSION"
                     git push https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
 workflows:
     version: 2
