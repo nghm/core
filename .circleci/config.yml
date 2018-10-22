@@ -12,43 +12,43 @@ jobs:
             - run:
                 name: Show current branch
                 command: echo ${CIRCLE_BRANCH}
-            # # Restore local dependencies from cache
-            # - restore_cache:
-            #     keys:
-            #     - v1-dependencies-{{ checksum "package.json" }}
-            #     - v1-dependencies-
-            # # Install project dependencies
-            # - run:
-            #     name: Install local dependencies
-            #     command: npm install
-            # # Cache local dependencies if they don't exist
-            # - save_cache:
-            #     key: v1-dependencies-{{ checksum "package.json" }}
-            #     paths:
-            #         - node_modules
-            # # Lint the source code
-            # - run:
-            #     name: Linting
-            #     command: npm run lint
-            # # Test the source code
-            # - run:
-            #     name: Testing Core
-            #     command: npm run test:core
-            # - run:
-            #     name: Testing Forms
-            #     command: npm run test:forms
-            # - run:
-            #     name: Testing Material Devpage
-            #     command: npm run test:material-devpage
-            # - run:
-            #     name: Testing Material Fields
-            #     command: npm run test:material-fields
-            # - run:
-            #     name: Testing Router
-            #     command: npm run test:router
-            # - run:
-            #     name: Testing Nghm
-            #     command: npm run test:nghm
+            # Restore local dependencies from cache
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}
+                - v1-dependencies-
+            # Install project dependencies
+            - run:
+                name: Install local dependencies
+                command: npm install
+            # Cache local dependencies if they don't exist
+            - save_cache:
+                key: v1-dependencies-{{ checksum "package.json" }}
+                paths:
+                    - node_modules
+            # Lint the source code
+            - run:
+                name: Linting
+                command: npm run lint
+            # Test the source code
+            - run:
+                name: Testing Core
+                command: npm run test:core
+            - run:
+                name: Testing Forms
+                command: npm run test:forms
+            - run:
+                name: Testing Material Devpage
+                command: npm run test:material-devpage
+            - run:
+                name: Testing Material Fields
+                command: npm run test:material-fields
+            - run:
+                name: Testing Router
+                command: npm run test:router
+            - run:
+                name: Testing Nghm
+                command: npm run test:nghm
     deploy-docs:
         machine:
             enabled: true
@@ -132,3 +132,5 @@ workflows:
                 filters:
                     tags:
                         only: /^v.*/
+                    branches:
+                        only: master
