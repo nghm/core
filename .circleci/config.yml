@@ -137,8 +137,8 @@ jobs:
             - run:
                 name: Push docs repository
                 command: |
-                    cd docs
                     VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    cd docs
                     git commit -m "Deployment commit - $VERSION"
                     git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
                     cd ../
