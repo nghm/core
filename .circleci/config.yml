@@ -106,6 +106,16 @@ jobs:
                 name: Display package version
                 command: npm run echo:version
 
+            - run:
+                name: Pull docs repository
+                command: |
+                    cd docs
+                    git init
+                    git config user.email "dan.patiu@gmail.com"
+                    git config user.name "Heroku Agent"
+                    git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
+
             # Generate documentation
             - run:
                 name: Documenting Core
@@ -124,16 +134,13 @@ jobs:
                 command: npm run compodoc:core
 
             - run:
-                name: Create heroku app
+                name: Push docs repository
                 command: |
-                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
                     cd docs
-                    git init
-                    git add .
-                    git config user.email "dan.patiu@gmail.com"
-                    git config user.name "Heroku Agent"
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
                     git commit -m "Deployment commit - $VERSION"
                     git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
 workflows:
     version: 2
     build-deploy:
