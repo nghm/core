@@ -1,4 +1,4 @@
-import { RootEntityBoundMetadata } from '../../decorators';
+import { RootEntityBoundMetadata } from '../../decorators/root-entity.bound-metadata';
 import { Binder } from './binder';
 import { MetaBinder } from './meta-binders-provider';
 

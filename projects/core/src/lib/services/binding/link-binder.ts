@@ -1,4 +1,4 @@
-import { LinkBoundMetadata } from '../../decorators';
+import { LinkBoundMetadata } from '../../decorators/link.bound-metadata';
 import { UrlInterpolator } from '../url-interpolator';
 import { Binder } from './binder';
 
