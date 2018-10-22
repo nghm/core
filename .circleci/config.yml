@@ -17,6 +17,22 @@ jobs:
                 keys:
                 - v1-dependencies-{{ checksum "package.json" }}
                 - v1-dependencies-
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
             # Install project dependencies
             - run:
                 name: Install local dependencies
@@ -61,7 +77,6 @@ jobs:
                 keys:
                 - v1-dependencies-{{ checksum "package.json" }}
                 - v1-dependencies-
-            # Install project dependencies
             - run:
                 name: Set environment variables in packages
                 command: |
@@ -78,6 +93,7 @@ jobs:
                     cd ../router
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
                     cd ../../
+            # Install project dependencies
             - run:
                 name: Install local dependencies
                 command: npm install
