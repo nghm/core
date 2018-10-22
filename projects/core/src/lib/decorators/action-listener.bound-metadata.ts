@@ -11,7 +11,7 @@ import { FieldBoundMetadata } from './meta';
 export class ActionListenerBoundMetadata implements FieldBoundMetadata {
   /**
    * Creates an instance of ActionListenerBoundMetadata.
-   * @param {string} actionName The action to listen. The '*' option can be used to listen to all actions
+   * @param {string | '*'} actionName The action to listen. The '*' option can be used to listen to all actions
    * @param {Array<string>} events A list of events to listen
    * @param {string} bindingName The property to be bound to
    * @memberof ActionListenerBoundMetadata
