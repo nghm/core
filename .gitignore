@@ -33,7 +33,17 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
+package-lock.json
 
 # System Files
 .DS_Store
 Thumbs.db
+
+# docs
+/docs/core
+/docs/forms
+/docs/material-fields
+/docs/material-devpage
+/docs/router
+
+

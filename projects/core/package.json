@@ -1,6 +1,6 @@
 {
   "name": "@nghm/core",
-  "version": "0.0.1",
+  "version": "$VERSION",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^6.0.0-rc.0 || ^6.0.0",

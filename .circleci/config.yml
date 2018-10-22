@@ -17,6 +17,22 @@ jobs:
                 keys:
                 - v1-dependencies-{{ checksum "package.json" }}
                 - v1-dependencies-
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
             # Install project dependencies
             - run:
                 name: Install local dependencies
@@ -49,3 +65,99 @@ jobs:
             - run:
                 name: Testing Nghm
                 command: npm run test:nghm
+    deploy-docs:
+        machine:
+            enabled: true
+        environment:
+            HEROKU_APP: "docs-nghm"
+        steps:
+            - checkout
+            # Restore local dependencies from cache
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}
+                - v1-dependencies-
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
+            # Install project dependencies
+            - run:
+                name: Install local dependencies
+                command: npm install
+            # Cache local dependencies if they don't exist
+            - save_cache:
+                key: v1-dependencies-{{ checksum "package.json" }}
+                paths:
+                    - node_modules
+            - run:
+                name: Display package version
+                command: npm run echo:version
+
+            - run:
+                name: Pull docs repository
+                command: |
+                    mkdir -p docs
+                    cd docs
+                    git init
+                    git config user.email "dan.patiu@gmail.com"
+                    git config user.name "Heroku Agent"
+                    git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
+
+            # Generate documentation
+            - run:
+                name: Documenting Core
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Forms
+                command: npm run compodoc:forms
+            - run:
+                name: Documenting Material Devpage
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Material Fields
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Router
+                command: npm run compodoc:core
+
+            - run:
+                name: Push docs repository
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    cd docs
+                    git add .
+                    git commit -m "Deployment commit - $VERSION"
+                    git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
+workflows:
+    version: 2
+    build-deploy:
+        jobs:
+            - build:
+                filters:
+                    tags:
+                        only: /^v.*/
+            - deploy-docs:
+                requires:
+                    - build
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        only:
+                            - master
+                            - /release\/.*/
