@@ -161,4 +161,3 @@ workflows:
                         only:
                             - master
                             - /release\/.*/
-                            - /feature\/.*/
