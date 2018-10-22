@@ -14,6 +14,9 @@ import { ActionsBinderFactory } from './actions-binder-factory';
 import { ClassesBinderFactory } from './classes-binder-factory';
 import { RefBinderFactory } from './ref-binder-factory';
 
+/**
+ * @ignore
+ */
 @NgModule({
   providers: [
     { provide: BINDER_FACTORIES, useClass: LinkBinderFactory, multi: true },
