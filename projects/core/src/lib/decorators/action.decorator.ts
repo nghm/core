@@ -1,9 +1,35 @@
 import { setMetadataEntry } from './meta';
 import { ActionBoundMetadata } from './action.bound-metadata';
 
-export function Action<T>(actionName?: string): PropertyDecorator {
-  return function (target: T, bindingName: string) {
+/**
+ * Binds a action from the source to the host.
+ *
+ * @usageNotes
+ *
+ * The following example declares a page
+ * that will have the clear action bound from the current source.
+ *
+ * The clear is later called in the hmAfterBinding hook.
+ *
+ * ```
+ * class HomePage {
+ *   @Action() clear;
+ *
+ *   hmAfterBinding() {
+ *     clear();
+ *   }
+ * }
+ *
+ * ```
+ *
+ * @Annotation
+ *
+ * @param {string} [actionName]
+ * @returns {PropertyDecorator}
+ */
+export function Action(actionName?: string): PropertyDecorator {
+  return function (target: any, bindingName: string) {
     const metadata = new ActionBoundMetadata(actionName || bindingName, bindingName);
-    setMetadataEntry<T>(target, [metadata]);
+    setMetadataEntry(target, [metadata]);
   } as (target: {}, propertyName: string | symbol) => void;
 }
