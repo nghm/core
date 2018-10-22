@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { EntitiesBoundMetadata } from '../../decorators';
+import { EntitiesBoundMetadata } from '../../decorators/entities.bound-metadata';
 import { EntitiesBinder } from './entities-binder';
 import { MetaBinderFactory } from './meta-binder-factory';
 import { CssQueryFactory } from '../css-query.factory';
