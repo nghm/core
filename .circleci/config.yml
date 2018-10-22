@@ -109,6 +109,7 @@ jobs:
             - run:
                 name: Pull docs repository
                 command: |
+                    mkdir -p docs
                     cd docs
                     git init
                     git config user.email "dan.patiu@gmail.com"
