@@ -107,6 +107,9 @@ jobs:
             - run:
                 name: Build
                 command: npm run build:core
+            - run:
+                name: Test
+                command: npm run test:core
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-core
                 paths:
@@ -126,6 +129,9 @@ jobs:
             - run:
                 name: Build
                 command: npm run build:forms
+            - run:
+                name: Test
+                command: npm run test:forms
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-forms
                 paths:
@@ -149,6 +155,9 @@ jobs:
             - run:
                 name: Build
                 command: npm run build:material-fields
+            - run:
+                name: Test
+                command: npm run test:material-fields
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
                 paths:
@@ -168,6 +177,9 @@ jobs:
             - run:
                 name: Build
                 command: npm run build:router
+            - run:
+                name: Test
+                command: npm run test:router
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-router
                 paths:
@@ -199,66 +211,13 @@ jobs:
             - run:
                 name: Build
                 command: npm run build:material-devpage
+            - run:
+                name: Test
+                command: npm run test:material-devpage
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-devpage
                 paths:
                     - dist/material-devpage
-
-    test-core:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Dependencies
-                keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            - run:
-                name: Test
-                command: npm run test:core
-    test-forms:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Dependencies
-                keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            - run:
-                name: Test
-                command: npm run test:forms
-    test-material-fields:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Dependencies
-                keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            - run:
-                name: Test
-                command: npm run test:material-fields
-    test-router:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Dependencies
-                keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            - run:
-                name: Test
-                command: npm run test:router
-    test-material-devpage:
-        <<: *defaults
-        steps:
-            - checkout
-            - restore_cache:
-                name: Restore Dependencies
-                keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            - run:
-                name: Test
-                command: npm run test:material-devpage
     deploy-docs:
         machine:
             enabled: true
@@ -396,22 +355,6 @@ workflows:
                     - build-router
                     - build-forms
                     - build-material-fields
-
-            - test-core:
-                requires:
-                    - build-core
-            - test-forms:
-                requires:
-                    - build-forms
-            - test-router:
-                requires:
-                    - build-router
-            - test-material-fields:
-                requires:
-                    - build-material-fields
-            - test-material-devpage:
-                requires:
-                    - build-material-devpage
 
             - deploy-docs:
                 requires:
