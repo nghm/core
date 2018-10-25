@@ -398,6 +398,22 @@ workflows:
                     - build-forms
                     - build-material-fields
 
+            - test-core:
+                requires:
+                    - lint-core
+            - test-forms:
+                requires:
+                    - lint-forms
+            - test-router:
+                requires:
+                    - lint-router
+            - test-material-fields:
+                requires:
+                    - lint-material-fields
+            - test-material-devpage:
+                requires:
+                    - lint-material-devpage
+
             - deploy-docs:
                 requires:
                     - build-core
