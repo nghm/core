@@ -1,5 +1,5 @@
-import { PropertiesBoundMetadata } from '../../binding/properties/properties.bound-metadata';
-import { Binder } from './binder';
+import { PropertiesBoundMetadata } from './properties.bound-metadata';
+import { Binder } from '../binder';
 
 export class PropertiesBinder implements Binder {
   constructor(

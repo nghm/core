@@ -1,7 +1,7 @@
-import { RefBoundMetadata } from '../../binding/ref/ref.bound-metadata';
-import { Binder } from './binder';
-import { HypermediaRef } from '../hypermedia-ref';
-import { ResolverService } from '../current-resolver';
+import { RefBoundMetadata } from './ref.bound-metadata';
+import { Binder } from '../binder';
+import { HypermediaRef } from '../../services/hypermedia-ref';
+import { ResolverService } from '../../services/current-resolver';
 
 export class RefBinder implements Binder {
   constructor(

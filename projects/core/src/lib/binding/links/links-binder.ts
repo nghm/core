@@ -1,7 +1,7 @@
 
-import { LinksBoundMetadata } from '../../binding/links/links.bound-metadata';
-import { UrlInterpolator } from '../url-interpolator';
-import { Binder } from './binder';
+import { LinksBoundMetadata } from './links.bound-metadata';
+import { UrlInterpolator } from '../../services/url-interpolator';
+import { Binder } from '../binder';
 
 export class LinksBinder implements Binder {
   constructor(

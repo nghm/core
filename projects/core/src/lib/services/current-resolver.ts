@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { DOCUMENT } from '@angular/platform-browser';
 
 import { ResourcePathNormalizer } from './resource-path-normalizer';
-import { MetaBinder } from './binding/meta-binders-provider';
+import { MetaBinder } from '../binding/meta-binders-provider';
 
 @Injectable()
 export class ResolverService {

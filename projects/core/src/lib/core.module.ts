@@ -1,9 +1,9 @@
 import { NgModule } from '@angular/core';
-import { BinderModule } from './services/binding/binding.module';
+import { BinderModule } from './binding/binding.module';
 
 import { ComponentInstantiationInterceptor } from './services/component-instantiation-interceptor';
 import { ResourcePathNormalizer } from './services/resource-path-normalizer';
-import { MetaBinder } from './services/binding/meta-binders-provider';
+import { MetaBinder } from './binding/meta-binders-provider';
 import { ResolverService } from './services/current-resolver';
 import { UrlInterpolator } from './services/url-interpolator';
 import { UrlScopeTrimmer } from './services/url-scope-trimmer';

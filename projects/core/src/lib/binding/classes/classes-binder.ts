@@ -1,5 +1,5 @@
-import { ClassesBoundMetadata } from '../../binding/classes/classes.bound-metadata';
-import { Binder } from './binder';
+import { ClassesBoundMetadata } from './classes.bound-metadata';
+import { Binder } from '../binder';
 
 export class ClassesBinder implements Binder {
   constructor(

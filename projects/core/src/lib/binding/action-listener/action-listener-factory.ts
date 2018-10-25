@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { ActionListenerBoundMetadata } from '../../binding/action-listener/action-listener.bound-metadata';
+import { ActionListenerBoundMetadata } from './action-listener.bound-metadata';
 import { ActionListenerBinder } from './action-listener-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
-import { ActionExecutorService } from '../action-executor';
+import { MetaBinderFactory } from '../meta-binder-factory';
+import { ActionExecutorService } from '../../services/action-executor';
 
 @Injectable()
 export class ActionListenerFactory implements MetaBinderFactory {

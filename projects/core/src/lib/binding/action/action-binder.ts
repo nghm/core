@@ -1,5 +1,5 @@
-import { ActionBoundMetadata } from '../../binding/action/action.bound-metadata';
-import { Binder } from './binder';
+import { ActionBoundMetadata } from './action.bound-metadata';
+import { Binder } from '../binder';
 
 export class ActionBinder implements Binder {
   constructor(

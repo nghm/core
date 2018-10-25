@@ -1,11 +1,11 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { EntityBoundMetadata } from '../../binding/entity/entity.bound-metadata';
+import { EntityBoundMetadata } from './entity.bound-metadata';
 import { EntityBinder } from './entity-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
-import { CssQueryFactory } from '../css-query.factory';
-import { MetaBinder } from './meta-binders-provider';
-import { ResolverService } from '../current-resolver';
+import { MetaBinderFactory } from '../meta-binder-factory';
+import { CssQueryFactory } from '../../services/css-query.factory';
+import { MetaBinder } from '../meta-binders-provider';
+import { ResolverService } from '../../services/current-resolver';
 
 @Injectable()
 export class EntityBinderFactory implements MetaBinderFactory {

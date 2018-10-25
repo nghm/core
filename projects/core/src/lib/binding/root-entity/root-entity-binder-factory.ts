@@ -1,9 +1,9 @@
 import { Injectable, Inject } from '@angular/core';
 
-import { RootEntityBoundMetadata } from '../../binding/root-entity/root-entity.bound-metadata';
+import { RootEntityBoundMetadata } from './root-entity.bound-metadata';
 import { RootEntityBinder } from './root-entity-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
-import { MetaBinder } from './meta-binders-provider';
+import { MetaBinderFactory } from '../meta-binder-factory';
+import { MetaBinder } from '../meta-binders-provider';
 
 @Injectable()
 export class RootEntityBinderFactory implements MetaBinderFactory {

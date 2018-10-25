@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 
-import { LinksBoundMetadata } from '../../binding/links/links.bound-metadata';
-import { UrlInterpolator } from '../url-interpolator';
+import { LinksBoundMetadata } from './links.bound-metadata';
+import { UrlInterpolator } from '../../services/url-interpolator';
 import { LinksBinder } from './links-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
+import { MetaBinderFactory } from '../meta-binder-factory';
 
 @Injectable()
 export class LinksBinderFactory implements MetaBinderFactory {

@@ -1,9 +1,9 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { RefBoundMetadata } from '../../binding/ref/ref.bound-metadata';
+import { RefBoundMetadata } from './ref.bound-metadata';
 import { RefBinder } from './ref-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
-import { ResolverService } from '../current-resolver';
+import { MetaBinderFactory } from '../meta-binder-factory';
+import { ResolverService } from '../../services/current-resolver';
 
 @Injectable()
 export class RefBinderFactory implements MetaBinderFactory {

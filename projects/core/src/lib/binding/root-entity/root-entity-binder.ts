@@ -1,6 +1,6 @@
-import { RootEntityBoundMetadata } from '../../binding/root-entity/root-entity.bound-metadata';
-import { Binder } from './binder';
-import { MetaBinder } from './meta-binders-provider';
+import { RootEntityBoundMetadata } from './root-entity.bound-metadata';
+import { Binder } from '../binder';
+import { MetaBinder } from '../meta-binders-provider';
 
 export class RootEntityBinder implements Binder {
   constructor(

@@ -1,18 +1,18 @@
 import { NgModule } from '@angular/core';
 
 import { BINDER_FACTORIES } from './meta-binder-factory';
-import { LinkBinderFactory } from './link-binder-factory';
-import { ActionBinderFactory } from './action-binder-factory';
-import { PropertyBinderFactory } from './property-binder-factory';
-import { ActionListenerFactory } from './action-listener-factory';
-import { EntityBinderFactory } from './entity-binder-factory';
-import { EntitiesBinderFactory } from './entities-binder-factory';
-import { RootEntityBinderFactory } from './root-entity-binder-factory';
-import { PropertiesBinderFactory } from './properties-binder-factory';
-import { LinksBinderFactory } from './links-binder-factory';
-import { ActionsBinderFactory } from './actions-binder-factory';
-import { ClassesBinderFactory } from './classes-binder-factory';
-import { RefBinderFactory } from './ref-binder-factory';
+import { LinkBinderFactory } from './link/link-binder-factory';
+import { ActionBinderFactory } from './action/action-binder-factory';
+import { PropertyBinderFactory } from './property/property-binder-factory';
+import { ActionListenerFactory } from './action-listener/action-listener-factory';
+import { EntityBinderFactory } from './entity/entity-binder-factory';
+import { EntitiesBinderFactory } from './entities/entities-binder-factory';
+import { RootEntityBinderFactory } from './root-entity/root-entity-binder-factory';
+import { PropertiesBinderFactory } from './properties/properties-binder-factory';
+import { LinksBinderFactory } from './links/links-binder-factory';
+import { ActionsBinderFactory } from './actions/actions-binder-factory';
+import { ClassesBinderFactory } from './classes/classes-binder-factory';
+import { RefBinderFactory } from './ref/ref-binder-factory';
 
 /**
  * @ignore

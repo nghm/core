@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 
-import { PropertyBoundMetadata } from '../../binding/property/property.bound-metadata';
+import { PropertyBoundMetadata } from './property.bound-metadata';
 import { PropertyBinder } from './property-binder';
-import { MetaBinderFactory } from './meta-binder-factory';
+import { MetaBinderFactory } from '../meta-binder-factory';
 
 @Injectable()
 export class PropertyBinderFactory implements MetaBinderFactory {
