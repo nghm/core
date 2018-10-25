@@ -222,9 +222,6 @@ workflows:
         jobs:
             - install-dependencies
             - lint-all:
-                working_directory: ~/project
-                docker:
-                    - image: angular/ngcontainer:0.3.3
                 parallelism: 5
                 requires:
                     - lint-core
