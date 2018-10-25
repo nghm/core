@@ -358,7 +358,6 @@ workflows:
     build-deploy:
         jobs:
             - install-dependencies
-
             - lint-core:
                 requires:
                     - install-dependencies
@@ -400,19 +399,19 @@ workflows:
 
             - test-core:
                 requires:
-                    - lint-core
+                    - build-core
             - test-forms:
                 requires:
-                    - lint-forms
+                    - build-forms
             - test-router:
                 requires:
-                    - lint-router
+                    - build-router
             - test-material-fields:
                 requires:
-                    - lint-material-fields
+                    - build-material-fields
             - test-material-devpage:
                 requires:
-                    - lint-material-devpage
+                    - build-material-devpage
 
             - deploy-docs:
                 requires:
