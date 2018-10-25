@@ -82,8 +82,6 @@ jobs:
             - run:
                 name: Linting
                 command: npm run lint:material-devpage
-    lint-all:
-        parallelism: 5
     # The build job
     build:
         working_directory: ~/project
@@ -223,21 +221,27 @@ workflows:
         jobs:
             - install-dependencies
             - lint-core
+                requires:
+                    - install-dependencies
             - lint-forms
+                requires:
+                    - install-dependencies
             - lint-material-fields
+                requires:
+                    - install-dependencies
             - lint-router
+                requires:
+                    - install-dependencies
             - lint-material-devpage
-            - lint-all:
+                requires:
+                    - install-dependencies
+            - build:
                 requires:
                     - lint-core
                     - lint-forms
                     - lint-material-fields
                     - lint-router
                     - lint-material-devpage
-                    - install-dependencies
-            - build:
-                requires:
-                    - lint-all
                 filters:
                     tags:
                         only: /^v.*/
