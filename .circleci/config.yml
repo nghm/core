@@ -89,45 +89,134 @@ jobs:
             - run:
                 name: Linting
                 command: npm run lint:material-devpage
-    # The build job
-    build:
-        working_directory: ~/project
-        docker:
-            - image: angular/ngcontainer:0.3.3
+
+    build-core:
+        <<: *defaults
         steps:
-            # Checkout the code from the branch into the working_directory
             - checkout
-            # Restore local dependencies from cache
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Build
+                command: npm run build:core
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-core
+    build-forms:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - run:
+                name: Build
+                command: npm run build:forms
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+    build-material-fields:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+            - run:
+                name: Build
+                command: npm run build:material-fields
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
+    build-router:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - run:
+                name: Build
+                command: npm run build:router
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-router
+    build-material-devpage:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-router
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
+            - run:
+                name: Build
+                command: npm run build:material-devpage
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-devpage
+
+    test-core:
+        <<: *defaults
+        steps:
+            - checkout
             - restore_cache:
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
-            # Lint the source code
             - run:
-                name: Linting
-                command: npm run lint
-            # Build production
-            - run:
-                name: Build in production
-                command: npm run build:all
-            # Test the source code
-            - run:
-                name: Testing Core
+                name: Test
                 command: npm run test:core
+    test-forms:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
-                name: Testing Forms
+                name: Test
                 command: npm run test:forms
+    test-material-fields:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
-                name: Testing Material Devpage
-                command: npm run test:material-devpage
-            - run:
-                name: Testing Material Fields
+                name: Test
                 command: npm run test:material-fields
+    test-router:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
-                name: Testing Router
+                name: Test
                 command: npm run test:router
+    test-material-devpage:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
-                name: Testing Nghm
-                command: npm run test:nghm
+                name: Test
+                command: npm run test:material-devpage
     deploy-docs:
         machine:
             enabled: true
@@ -227,6 +316,7 @@ workflows:
     build-deploy:
         jobs:
             - install-dependencies
+
             - lint-core:
                 requires:
                     - install-dependencies
@@ -242,16 +332,30 @@ workflows:
             - lint-material-devpage:
                 requires:
                     - install-dependencies
-            - build:
+
+            - build-core:
                 requires:
                     - lint-core
+            - build-forms:
+                requires:
                     - lint-forms
+                    - build-core
+            - build-material-fields:
+                requires:
                     - lint-material-fields
+                    - build-forms
+            - build-router:
+                requires:
                     - lint-router
+                    - build-core
+            - build-material-devpage:
+                requires:
                     - lint-material-devpage
-                filters:
-                    tags:
-                        only: /^v.*/
+                    - build-core
+                    - build-router
+                    - build-forms
+                    - build-material-fields
+
             - deploy-docs:
                 requires:
                     - build
