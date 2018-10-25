@@ -1,4 +1,4 @@
-import { Injectable, Inject, NgZone } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 
 import { getSourceMetadata } from './meta';
 import { Binder } from './binder';
