@@ -19,19 +19,19 @@
     ],
     "paths": {
       "@nghm/core": [
-        "projects/core/src/public_api"
+        "dist/core"
       ],
       "@nghm/forms": [
-        "projects/forms/src/public_api"
+        "dist/forms"
       ],
       "@nghm/material-fields": [
-        "projects/material-fields/src/public_api"
+        "dist/material-fields"
       ],
       "@nghm/router": [
-        "projects/router/src/public_api"
+        "dist/router"
       ],
       "@nghm/material-devpage": [
-        "projects/material-devpage/src/public_api"
+        "dist/material-devpage"
       ]
     }
   }

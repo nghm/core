@@ -1,51 +1,390 @@
 version: 2
+default: &defaults
+    working_directory: ~/project
+    docker:
+        - image: angular/ngcontainer:0.3.3
 jobs:
-    # The build job
-    build:
+    install-dependencies:
+        <<: *defaults
+        steps:
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git tag -l | sed v.* | tac | head -n 1)
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
+            - restore_cache:
+                name: Restore Base Dependencies
+                keys:
+                    - v1-base-dependencies-{{ checksum "package.json" }}
+            - run:
+                name: Install local dependencies
+                command: |
+                    npm install
+            - save_cache:
+                name: Store Base Dependencies
+                key: v1-base-dependencies-{{ checksum "package.json" }}
+                paths:
+                    - node_modules
+            - save_cache:
+                name: Store Dependencies
+                key: v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                paths:
+                    - node_modules
+                    - package.json
+                    - projects/core/package.json
+                    - projects/forms/package.json
+                    - projects/router/package.json
+                    - projects/material-fields/package.json
+                    - projects/material-devpage/package.json
+    lint-core:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:core
+    lint-forms:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:forms
+    lint-material-fields:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:material-fields
+    lint-router:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:router
+    lint-material-devpage:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:material-devpage
+
+    build-core:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Build
+                command: npm run build:core
+            - run:
+                name: Test
+                command: npm run test:core
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-core
+                paths:
+                    - dist/core
+    build-forms:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                name: Restore Core Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - run:
+                name: Build
+                command: npm run build:forms
+            - run:
+                name: Test
+                command: npm run test:forms
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+                paths:
+                    - dist/forms
+    build-material-fields:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                name: Restore Core Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - restore_cache:
+                name: Restore Forms Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+            - run:
+                name: Build
+                command: npm run build:material-fields
+            - run:
+                name: Test
+                command: npm run test:material-fields
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
+                paths:
+                    - dist/material-fields
+    build-router:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                name: Restore Core Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - run:
+                name: Build
+                command: npm run build:router
+            - run:
+                name: Test
+                command: npm run test:router
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-router
+                paths:
+                    - dist/router
+    build-material-devpage:
+        <<: *defaults
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - restore_cache:
+                name: Restore Core Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - restore_cache:
+                name: Restore Forms Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+            - restore_cache:
+                name: Restore Router Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-router
+            - restore_cache:
+                name: Restore Material Fields Distribution
+                keys:
+                    - v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
+            - run:
+                name: Build
+                command: npm run build:material-devpage
+            - run:
+                name: Test
+                command: npm run test:material-devpage
+            - save_cache:
+                key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-devpage
+                paths:
+                    - dist/material-devpage
+    deploy-docs:
+        machine:
+            enabled: true
+        environment:
+            HEROKU_APP: "docs-nghm"
+        steps:
+            - checkout
+            - restore_cache:
+                name: Restore Dependencies
+                keys:
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Display package version
+                command: npm run echo:version
+            - run:
+                name: Pull docs repository
+                command: |
+                    mkdir -p docs
+                    cd docs
+                    git init
+                    git config user.email "dan.patiu@gmail.com"
+                    git config user.name "Heroku Agent"
+                    git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
+
+            - run:
+                name: Documenting Core
+                command: npm run compodoc:core
+            - run:
+                name: Documenting Forms
+                command: npm run compodoc:forms
+            - run:
+                name: Documenting Material Devpage
+                command: npm run compodoc:material-devpage
+            - run:
+                name: Documenting Material Fields
+                command: npm run compodoc:material-fields
+            - run:
+                name: Documenting Router
+                command: npm run compodoc:router
+
+            - run:
+                name: Push docs repository
+                command: |
+                    VERSION=$(git tag -l | sed v.* | tac | head -n 1)
+                    cd docs
+                    git add .
+                    git commit -m "Deployment commit - $VERSION"
+                    git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
+                    cd ../
+    publish-npm:
         working_directory: ~/project
         docker:
             - image: angular/ngcontainer:0.3.3
         steps:
-            # Checkout the code from the branch into the working_directory
             - checkout
-            # Log the current branch
-            - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            # Restore local dependencies from cache
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ checksum "package.json" }}
-                - v1-dependencies-
-            # Install project dependencies
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
-                name: Install local dependencies
-                command: npm install
-            # Cache local dependencies if they don't exist
-            - save_cache:
-                key: v1-dependencies-{{ checksum "package.json" }}
-                paths:
-                    - node_modules
-            # Lint the source code
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
             - run:
-                name: Linting
-                command: npm run lint
-            # Test the source code
+                name: Publish Core
+                command: |
+                    cd projects/core
+                    npm run publish
+                    cd ../../
             - run:
-                name: Testing Core
-                command: npm run test:core
+                name: Publish Forms
+                command: |
+                    cd projects/forms
+                    npm run publish
+                    cd ../../
             - run:
-                name: Testing Forms
-                command: npm run test:forms
+                name: Publish Material Devpage
+                command: |
+                    cd projects/material-devpage
+                    npm run publish
+                    cd ../../
             - run:
-                name: Testing Material Devpage
-                command: npm run test:material-devpage
+                name: Publish Material Fields
+                command: |
+                    cd projects/material-fields
+                    npm run publish
+                    cd ../../
             - run:
-                name: Testing Material Fields
-                command: npm run test:material-fields
-            - run:
-                name: Testing Router
-                command: npm run test:router
-            - run:
-                name: Testing Nghm
-                command: npm run test:nghm
+                name: Publish Router
+                command: |
+                    cd projects/router
+                    npm run publish
+                    cd ../../
+workflows:
+    version: 2
+    build-deploy:
+        jobs:
+            - install-dependencies
+            - lint-core:
+                requires:
+                    - install-dependencies
+            - lint-forms:
+                requires:
+                    - install-dependencies
+            - lint-material-fields:
+                requires:
+                    - install-dependencies
+            - lint-router:
+                requires:
+                    - install-dependencies
+            - lint-material-devpage:
+                requires:
+                    - install-dependencies
+
+            - build-core:
+                requires:
+                    - lint-core
+            - build-forms:
+                requires:
+                    - lint-forms
+                    - build-core
+            - build-material-fields:
+                requires:
+                    - lint-material-fields
+                    - build-forms
+            - build-router:
+                requires:
+                    - lint-router
+                    - build-core
+            - build-material-devpage:
+                requires:
+                    - lint-material-devpage
+                    - build-core
+                    - build-router
+                    - build-forms
+                    - build-material-fields
+
+            - deploy-docs:
+                requires:
+                    - build-core
+                    - build-forms
+                    - build-router
+                    - build-material-fields
+                    - build-material-devpage
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        only:
+                            - master
+                            - /release\/.*/
+            - publish-npm:
+                requires:
+                    - deploy-docs
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        only:
+                            - master

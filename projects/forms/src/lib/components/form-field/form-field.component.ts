@@ -1,7 +1,7 @@
 import { Component, Input, OnChanges, Host, Optional, Attribute, AfterViewInit } from '@angular/core';
 
 import { InputConfiguration } from '../../interfaces/input-configuration';
-import { ReplaySubject, from } from 'rxjs';
+import { Observable, ReplaySubject, from } from 'rxjs';
 import { OverrideFieldNamedDirective } from '../../directives/field-configuration.directive';
 
 @Component({
@@ -15,7 +15,6 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
   @Input() value: any;
   @Input() type: string;
 
-
   @Input() required?: boolean;
   @Input() max?: number;
   @Input() min?: number;
@@ -26,7 +25,7 @@ export class FieldConfigurationComponent implements InputConfiguration, OnChange
 
   @Input() disabled?: boolean;
 
-  inputConfiguration = from(this.inputConfigurationSubject);
+  inputConfiguration = from(this.inputConfigurationSubject) as Observable<InputConfiguration>;
 
   constructor(
     @Optional() @Host() public override: OverrideFieldNamedDirective,

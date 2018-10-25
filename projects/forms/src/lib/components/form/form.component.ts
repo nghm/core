@@ -1,15 +1,15 @@
 import { Component, Input, QueryList, ContentChildren, ViewChild, TemplateRef, ContentChild, AfterViewInit, NgZone } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { ActionExecutorService } from '@nghm/core';
+import { of, Observable, from } from 'rxjs';
 
 import { InputConfiguration } from '../../interfaces/input-configuration';
 import { PARENT_FORM_GROUP } from '../../di/parent-form';
-import { of, Observable, from } from 'rxjs';
 import { map, mergeMap, scan, switchMap } from 'rxjs/operators';
 import { FieldConfigurationComponent } from '../form-field/form-field.component';
 import { FieldLabelDirective } from '../../directives/field-label.directive';
 import { FieldErrorDirective } from '../../directives/field-error.directive';
 import { FormSubmitDirective } from '../../directives/form-submit.directive';
-import { ActionExecutorService } from 'projects/core/src/lib/services/action-executor';
 
 export function formGroupFactory({ ngForm: { control }}) {
   return control;

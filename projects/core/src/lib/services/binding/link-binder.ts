@@ -1,4 +1,4 @@
-import { LinkBoundMetadata } from '../../decorators';
+import { LinkBoundMetadata } from '../../decorators/link.bound-metadata';
 import { UrlInterpolator } from '../url-interpolator';
 import { Binder } from './binder';
 
@@ -12,7 +12,7 @@ export class LinkBinder implements Binder {
     const { linkQueries, bindingName } = this.meta;
     const { links = [] } = source;
     const { href, rel = [] } =
-      links.find(({ rel: rels = []}) =>
+      links.find(({ rel: rels = [] }) =>
           linkQueries.some(linkQuery =>
             linkQuery.every(requiredRel => rels.includes(requiredRel))
           )

@@ -1,6 +1,6 @@
 import { Injectable, Inject, NgZone } from '@angular/core';
 
-import { getSourceMetadata } from '../../decorators';
+import { getSourceMetadata } from '../../decorators/meta';
 import { Binder } from './binder';
 import { BINDER_FACTORIES, MetaBinderFactory } from './meta-binder-factory';
 
