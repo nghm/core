@@ -222,6 +222,11 @@ workflows:
     build-deploy:
         jobs:
             - install-dependencies
+            - lint-core
+            - lint-forms
+            - lint-material-fields
+            - lint-router
+            - lint-material-devpage
             - lint-all:
                 requires:
                     - lint-core
