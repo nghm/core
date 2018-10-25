@@ -24,8 +24,7 @@ import { ActionBoundMetadata } from './action.bound-metadata';
  *
  * @Annotation
  *
- * @param {string} [actionName]
- * @returns {PropertyDecorator}
+ * @param actionName The name of the action to bind, this defaults to the property name
  */
 export function Action(actionName?: string): PropertyDecorator {
   return function (target: any, bindingName: string) {

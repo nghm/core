@@ -1,10 +1,7 @@
 import { FieldBoundMetadata } from './meta';
 
 /**
- *
- * @private
- * @class ActionsBoundMetadata
- * @implements {FieldBoundMetadata}
+ * Action bound metadata
  */
 export class ActionsBoundMetadata implements FieldBoundMetadata {
   constructor(public bindingName: string) { }

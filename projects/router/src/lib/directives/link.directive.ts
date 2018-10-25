@@ -11,7 +11,7 @@ export class LinkDirective {
 
   constructor(private router: Router, private scopedUrlTrimmer: UrlScopeTrimmer) { }
 
-  @HostListener('click', ['$event'])
+  @HostListener('click', [])
   onClick() {
     const { scopedUrlTrimmer } = this;
     const { href } = this.hmLink;

@@ -46,6 +46,10 @@ jobs:
             - run:
                 name: Linting
                 command: npm run lint
+            # Build production
+            - run:
+                name: Build in production
+                command: npm run build:all
             # Test the source code
             - run:
                 name: Testing Core
@@ -126,13 +130,13 @@ jobs:
                 command: npm run compodoc:forms
             - run:
                 name: Documenting Material Devpage
-                command: npm run compodoc:core
+                command: npm run compodoc:material-devpage
             - run:
                 name: Documenting Material Fields
-                command: npm run compodoc:core
+                command: npm run compodoc:material-fields
             - run:
                 name: Documenting Router
-                command: npm run compodoc:core
+                command: npm run compodoc:router
 
             - run:
                 name: Push docs repository
@@ -143,6 +147,71 @@ jobs:
                     git commit -m "Deployment commit - $VERSION"
                     git push -f https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
                     cd ../
+    publish-npm:
+        working_directory: ~/project
+        docker:
+            - image: angular/ngcontainer:0.3.3
+        steps:
+            - checkout
+            # Restore local dependencies from cache
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}
+                - v1-dependencies-
+            - run:
+                name: Set environment variables in packages
+                command: |
+                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd projects/core
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../forms
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-devpage
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../material-fields
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../router
+                    sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    cd ../../
+            # Install project dependencies
+            - run:
+                name: Install local dependencies
+                command: npm install
+            - run:
+                name: Authenticate with registry
+                command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
+
+            - run:
+                name: Publish Core
+                command: |
+                    cd projects/core
+                    npm run publish
+                    cd ../../
+            - run:
+                name: Publish Forms
+                command: |
+                    cd projects/forms
+                    npm run publish
+                    cd ../../
+            - run:
+                name: Publish Material Devpage
+                command: |
+                    cd projects/material-devpage
+                    npm run publish
+                    cd ../../
+            - run:
+                name: Publish Material Fields
+                command: |
+                    cd projects/material-fields
+                    npm run publish
+                    cd ../../
+            - run:
+                name: Publish Router
+                command: |
+                    cd projects/router
+                    npm run publish
+                    cd ../../
 workflows:
     version: 2
     build-deploy:
@@ -161,3 +230,13 @@ workflows:
                         only:
                             - master
                             - /release\/.*/
+            - publish-npm:
+                requires:
+                    - build
+                    - deploy-docs
+                filters:
+                    tags:
+                        only: /^v.*/
+                    branches:
+                        only:
+                            - master

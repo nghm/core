@@ -3,3 +3,4 @@
  */
 
 export * from './lib/router.module';
+export { LinkDirective } from './lib/directives/link.directive';

@@ -26,8 +26,8 @@ import { ActionEventType } from './action-event.type';
  *
  * @Annotation
  *
- * @param {string | '*'} actionName The action to listen. The '*' option can be used to listen to all actions
- * @param {...Array<ActionEventType>} events A list of events to listen
+ * @param actionName The action to listen. The '*' option can be used to listen to all actions
+ * @param events A list of events to listen
  */
 export function ActionListener(actionName: string | '*', ...events: Array<ActionEventType>): PropertyDecorator {
   return function <T>(target: T, bindingName: string) {

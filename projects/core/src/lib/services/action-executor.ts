@@ -2,8 +2,8 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpEventType } from '@angular/common/http';
 import { Subject, from, Observable } from 'rxjs';
 import { filter, takeUntil, catchError } from 'rxjs/operators';
-import { LifetimeEvents } from 'projects/core/src/lib/services/lifetime-events';
 import { ActionEvent } from './action-event.type';
+import { LifetimeEvents } from './lifetime-events';
 
 @Injectable()
 export class ActionExecutorService {

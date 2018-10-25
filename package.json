@@ -7,7 +7,12 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build --prod",
+    "build:all": "npm run build:core && npm run build:forms && npm run build:material-fields && npm run build:router && npm run build:material-devpage",
+    "build:core": "ng build core --prod",
+    "build:forms": "ng build forms --prod",
+    "build:material-devpage": "ng build material-devpage --prod",
+    "build:material-fields": "ng build material-fields --prod",
+    "build:router": "ng build router --prod",
     "test:core": "ng test core --browsers=ChromeHeadless --progress=false",
     "test:forms": "ng test forms --browsers=ChromeHeadless --progress=false",
     "test:material-devpage": "ng test material-devpage --browsers=ChromeHeadless --progress=false",

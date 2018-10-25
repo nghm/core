@@ -21,3 +21,5 @@ export {
   RootEntity } from './lib/decorators';
 
 export { UrlScopeTrimmer, APPLICATION_SCOPE } from './lib/services/url-scope-trimmer';
+export { LifetimeEvents } from './lib/services/lifetime-events';
+export { ActionExecutorService } from './lib/services/action-executor';

@@ -12,7 +12,7 @@ export class LinkBinder implements Binder {
     const { linkQueries, bindingName } = this.meta;
     const { links = [] } = source;
     const { href, rel = [] } =
-      links.find(({ rel: rels = []}) =>
+      links.find(({ rel: rels = [] }) =>
           linkQueries.some(linkQuery =>
             linkQuery.every(requiredRel => rels.includes(requiredRel))
           )
