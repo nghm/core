@@ -30,6 +30,7 @@ jobs:
                 command: |
                     npm install
             - save_cache:
+                name: Store Dependencies
                 key: v1-dependencies-{{ .Branch }}-{{ .Revision }}
                 paths:
                     - node_modules
@@ -44,8 +45,9 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Linting
                 command: npm run lint:core
@@ -54,8 +56,9 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Linting
                 command: npm run lint:forms
@@ -64,8 +67,9 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Linting
                 command: npm run lint:material-fields
@@ -74,8 +78,9 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Linting
                 command: npm run lint:router
@@ -84,8 +89,9 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
-                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+                    - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Linting
                 command: npm run lint:material-devpage
@@ -95,6 +101,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -109,9 +116,11 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - restore_cache:
+                name: Restore Core Distribution
                 keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-core
             - run:
@@ -126,11 +135,16 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - restore_cache:
+                name: Restore Core Distribution
                 keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - restore_cache:
+                name: Restore Forms Distribution
+                keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
             - run:
                 name: Build
@@ -144,9 +158,11 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - restore_cache:
+                name: Restore Core Distribution
                 keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-core
             - run:
@@ -161,13 +177,24 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - restore_cache:
+                name: Restore Core Distribution
                 keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-core
+            - restore_cache:
+                name: Restore Forms Distribution
+                keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+            - restore_cache:
+                name: Restore Router Distribution
+                keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-router
+            - restore_cache:
+                name: Restore Material Fields Distribution
+                keys:
                     - v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
             - run:
                 name: Build
@@ -182,6 +209,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -192,6 +220,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -202,6 +231,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -212,6 +242,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -222,6 +253,7 @@ jobs:
         steps:
             - checkout
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -234,8 +266,8 @@ jobs:
             HEROKU_APP: "docs-nghm"
         steps:
             - checkout
-            # Restore local dependencies from cache
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                     - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
@@ -283,8 +315,8 @@ jobs:
             - image: angular/ngcontainer:0.3.3
         steps:
             - checkout
-            # Restore local dependencies from cache
             - restore_cache:
+                name: Restore Dependencies
                 keys:
                 - v1-dependencies-{{ .Branch }}-{{ .Revision }}
             - run:
