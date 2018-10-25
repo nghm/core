@@ -37,6 +37,52 @@ jobs:
                     - projects/router/package.json
                     - projects/material-fields/package.json
                     - projects/material-devpage/package.json
+    lint-core:
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:core
+    lint-forms:
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:forms
+    lint-material-fields:
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:material-fields
+    lint-router:
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:router
+    lint-material-devpage:
+        steps:
+            - checkout
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ .Branch }}-{{ .Revision }}
+            - run:
+                name: Linting
+                command: npm run lint:material-devpage
+
     # The build job
     build:
         working_directory: ~/project
@@ -175,9 +221,21 @@ workflows:
     build-deploy:
         jobs:
             - install-dependencies
+            - lint-all:
+                working_directory: ~/project
+                docker:
+                    - image: angular/ngcontainer:0.3.3
+                parallelism: 5
+                requires:
+                    - lint-core
+                    - lint-forms
+                    - lint-material-fields
+                    - lint-router
+                    - lint-material-devpage
             - build:
                 requires:
                     - install-dependencies
+                    - lint-all
                 filters:
                     tags:
                         only: /^v.*/
