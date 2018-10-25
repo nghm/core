@@ -28,7 +28,7 @@ jobs:
                 command: |
                     npm install
             - save_cache:
-                key: v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
+                key: v1-dependencies-{{ checksum "package.json" }}-{{ .Branch }}-{{ .Revision }}
                 paths:
                     - node_modules
                     - projects/core/package.json
@@ -47,7 +47,7 @@ jobs:
             # Restore local dependencies from cache
             - restore_cache:
                 keys:
-                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
+                - v1-dependencies-{{ checksum "package.json" }}-{{ .Branch }}-{{ .Revision }}
             # Lint the source code
             - run:
                 name: Linting
@@ -85,7 +85,7 @@ jobs:
             # Restore local dependencies from cache
             - restore_cache:
                 keys:
-                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
+                - v1-dependencies-{{ checksum "package.json" }}-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Display package version
                 command: npm run echo:version
@@ -134,7 +134,7 @@ jobs:
             # Restore local dependencies from cache
             - restore_cache:
                 keys:
-                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
+                - v1-dependencies-{{ checksum "package.json" }}-{{ .Branch }}-{{ .Revision }}
             - run:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
