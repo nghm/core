@@ -78,10 +78,10 @@ jobs:
         steps:
             - checkout
             # Restore local dependencies from cache
-            - restore_cache:
-                keys:
-                - v1-dependencies-{{ checksum "package.json" }}
-                - v1-dependencies-
+            # - restore_cache:
+            #     keys:
+            #     - v1-dependencies-{{ checksum "package.json" }}
+            #     - v1-dependencies-
             - run:
                 name: Set environment variables in packages
                 command: |
@@ -103,10 +103,10 @@ jobs:
                 name: Install local dependencies
                 command: npm install
             # Cache local dependencies if they don't exist
-            - save_cache:
-                key: v1-dependencies-{{ checksum "package.json" }}
-                paths:
-                    - node_modules
+            # - save_cache:
+            #     key: v1-dependencies-{{ checksum "package.json" }}
+            #     paths:
+            #         - node_modules
             - run:
                 name: Display package version
                 command: npm run echo:version
@@ -155,10 +155,10 @@ jobs:
         steps:
             - checkout
             # Restore local dependencies from cache
-            - restore_cache:
-                keys:
-                - v1-dependencies-{{ checksum "package.json" }}
-                - v1-dependencies-
+            # - restore_cache:
+            #     keys:
+            #     - v1-dependencies-{{ checksum "package.json" }}
+            #     - v1-dependencies-
             - run:
                 name: Set environment variables in packages
                 command: |
@@ -176,9 +176,9 @@ jobs:
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
                     cd ../../
             # Install project dependencies
-            - run:
-                name: Install local dependencies
-                command: npm install
+            # - run:
+            #     name: Install local dependencies
+            #     command: npm install
             - run:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
