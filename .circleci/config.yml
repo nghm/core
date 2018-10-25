@@ -102,6 +102,8 @@ jobs:
                 command: npm run build:core
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-core
+                paths:
+                    - dist/core
     build-forms:
         <<: *defaults
         steps:
@@ -117,6 +119,8 @@ jobs:
                 command: npm run build:forms
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-forms
+                paths:
+                    - dist/forms
     build-material-fields:
         <<: *defaults
         steps:
@@ -133,6 +137,8 @@ jobs:
                 command: npm run build:material-fields
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-fields
+                paths:
+                    - dist/material-fields
     build-router:
         <<: *defaults
         steps:
@@ -148,6 +154,8 @@ jobs:
                 command: npm run build:router
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-router
+                paths:
+                    - dist/router
     build-material-devpage:
         <<: *defaults
         steps:
@@ -166,6 +174,8 @@ jobs:
                 command: npm run build:material-devpage
             - save_cache:
                 key: v1-dist-{{ .Branch }}-{{ .Revision }}-material-devpage
+                paths:
+                    - dist/material-devpage
 
     test-core:
         <<: *defaults
