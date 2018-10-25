@@ -358,7 +358,11 @@ workflows:
 
             - deploy-docs:
                 requires:
-                    - build
+                    - build-core
+                    - build-forms
+                    - build-router
+                    - build-material-fields
+                    - build-material-devpage
                 filters:
                     tags:
                         only: /^v.*/
@@ -368,7 +372,6 @@ workflows:
                             - /release\/.*/
             - publish-npm:
                 requires:
-                    - build
                     - deploy-docs
                 filters:
                     tags:
