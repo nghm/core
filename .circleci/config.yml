@@ -1,22 +1,12 @@
 version: 2
 jobs:
-    # The build job
-    build:
+    install-dependencies:
         working_directory: ~/project
         docker:
             - image: angular/ngcontainer:0.3.3
         steps:
             # Checkout the code from the branch into the working_directory
             - checkout
-            # Log the current branch
-            - run:
-                name: Show current branch
-                command: echo ${CIRCLE_BRANCH}
-            # Restore local dependencies from cache
-            # - restore_cache:
-            #     keys:
-            #     - v1-dependencies-{{ checksum "package.json" }}
-            #     - v1-dependencies-
             - run:
                 name: Set environment variables in packages
                 command: |
@@ -33,16 +23,31 @@ jobs:
                     cd ../router
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
                     cd ../../
-            # Install project dependencies
             - run:
                 name: Install local dependencies
                 command: |
                     npm install
-            # Cache local dependencies if they don't exist
-            # - save_cache:
-            #     key: v1-dependencies-{{ checksum "package.json" }}
-            #     paths:
-            #         - node_modules
+            - save_cache:
+                key: v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
+                paths:
+                    - node_modules
+                    - projects/core/package.json
+                    - projects/forms/package.json
+                    - projects/router/package.json
+                    - projects/material-fields/package.json
+                    - projects/material-devpage/package.json
+    # The build job
+    build:
+        working_directory: ~/project
+        docker:
+            - image: angular/ngcontainer:0.3.3
+        steps:
+            # Checkout the code from the branch into the working_directory
+            - checkout
+            # Restore local dependencies from cache
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
             # Lint the source code
             - run:
                 name: Linting
@@ -78,39 +83,12 @@ jobs:
         steps:
             - checkout
             # Restore local dependencies from cache
-            # - restore_cache:
-            #     keys:
-            #     - v1-dependencies-{{ checksum "package.json" }}
-            #     - v1-dependencies-
-            - run:
-                name: Set environment variables in packages
-                command: |
-                    VERSION=$(git tag -l | sed v.* | tac | head -n 1)
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd projects/core
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../forms
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../material-devpage
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../material-fields
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../router
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../../
-            # Install project dependencies
-            - run:
-                name: Install local dependencies
-                command: npm install
-            # Cache local dependencies if they don't exist
-            # - save_cache:
-            #     key: v1-dependencies-{{ checksum "package.json" }}
-            #     paths:
-            #         - node_modules
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
             - run:
                 name: Display package version
                 command: npm run echo:version
-
             - run:
                 name: Pull docs repository
                 command: |
@@ -122,7 +100,6 @@ jobs:
                     git pull https://heroku:$HEROKU_API_KEY@git.heroku.com/$HEROKU_APP.git master
                     cd ../
 
-            # Generate documentation
             - run:
                 name: Documenting Core
                 command: npm run compodoc:core
@@ -155,30 +132,9 @@ jobs:
         steps:
             - checkout
             # Restore local dependencies from cache
-            # - restore_cache:
-            #     keys:
-            #     - v1-dependencies-{{ checksum "package.json" }}
-            #     - v1-dependencies-
-            - run:
-                name: Set environment variables in packages
-                command: |
-                    VERSION=$(git tag -l | sed v.* | tac | head -n 1)
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd projects/core
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../forms
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../material-devpage
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../material-fields
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../router
-                    sed -i -e "s/\$VERSION/$VERSION/" package.json
-                    cd ../../
-            # Install project dependencies
-            # - run:
-            #     name: Install local dependencies
-            #     command: npm install
+            - restore_cache:
+                keys:
+                - v1-dependencies-{{ checksum "package.json" }}-{{ $CIRCLE_SHA1 }}
             - run:
                 name: Authenticate with registry
                 command: echo "//registry.npmjs.org/:_authToken=$NPM_TOKEN" > ~/repo/.npmrc
