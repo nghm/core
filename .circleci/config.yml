@@ -234,9 +234,9 @@ workflows:
                     - lint-material-fields
                     - lint-router
                     - lint-material-devpage
+                    - install-dependencies
             - build:
                 requires:
-                    - install-dependencies
                     - lint-all
                 filters:
                     tags:
