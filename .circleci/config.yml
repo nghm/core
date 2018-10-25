@@ -220,19 +220,19 @@ workflows:
     build-deploy:
         jobs:
             - install-dependencies
-            - lint-core
+            - lint-core:
                 requires:
                     - install-dependencies
-            - lint-forms
+            - lint-forms:
                 requires:
                     - install-dependencies
-            - lint-material-fields
+            - lint-material-fields:
                 requires:
                     - install-dependencies
-            - lint-router
+            - lint-router:
                 requires:
                     - install-dependencies
-            - lint-material-devpage
+            - lint-material-devpage:
                 requires:
                     - install-dependencies
             - build:
