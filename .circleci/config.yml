@@ -31,6 +31,7 @@ jobs:
                 key: v1-dependencies-{{ checksum "package.json" }}-{{ .Branch }}-{{ .Revision }}
                 paths:
                     - node_modules
+                    - package.json
                     - projects/core/package.json
                     - projects/forms/package.json
                     - projects/router/package.json
