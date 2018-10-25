@@ -20,7 +20,7 @@ jobs:
             - run:
                 name: Set environment variables in packages
                 command: |
-                    VERSION=$(git describe --abbrev=0 --tags | sed 's/^v//')
+                    VERSION=$(git tag -l | sed v.* | tac | head -n 1)
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
                     cd projects/core
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
