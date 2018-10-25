@@ -28,14 +28,14 @@ jobs:
             - restore_cache:
                 name: Restore Base Dependencies
                 keys:
-                    - v1-base-dependencies-{{ checksum "package-lock.json" }}
+                    - v1-base-dependencies-{{ checksum "package.json" }}
             - run:
                 name: Install local dependencies
                 command: |
                     npm install
             - save_cache:
                 name: Store Base Dependencies
-                key: v1-base-dependencies-{{ checksum "package-lock.json" }}
+                key: v1-base-dependencies-{{ checksum "package.json" }}
                 paths:
                     - node_modules
             - save_cache:
