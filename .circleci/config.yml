@@ -34,9 +34,6 @@ jobs:
                 command: |
                     npm install
             - save_cache:
-                name: Store Dependencies
-                key: v1-dependencies
-            - save_cache:
                 name: Store Base Dependencies
                 key: v1-base-dependencies-{{ checksum "package-lock.json" }}
                 paths:
