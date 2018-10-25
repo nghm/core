@@ -1,4 +1,4 @@
-import { FieldBoundMetadata } from './meta';
+import { FieldBoundMetadata } from '../meta';
 
 export class LinksBoundMetadata implements FieldBoundMetadata {
   constructor(public nameFactory: (link: {

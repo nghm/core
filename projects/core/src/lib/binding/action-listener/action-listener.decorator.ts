@@ -1,4 +1,4 @@
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { ActionListenerBoundMetadata } from './action-listener.bound-metadata';
 import { ActionEventType } from './action-event.type';
 

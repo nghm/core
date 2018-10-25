@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { ActionBoundMetadata } from '../../decorators/action.bound-metadata';
+import { ActionBoundMetadata } from '../../binding/action/action.bound-metadata';
 import { ActionBinder } from './action-binder';
 import { MetaBinderFactory } from './meta-binder-factory';
 

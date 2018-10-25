@@ -1,4 +1,4 @@
-import { ClassesBoundMetadata } from '../../decorators/classes.bound-metadata';
+import { ClassesBoundMetadata } from '../../binding/classes/classes.bound-metadata';
 import { Binder } from './binder';
 
 export class ClassesBinder implements Binder {

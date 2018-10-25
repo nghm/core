@@ -1,5 +1,5 @@
 import { Type } from '@angular/core';
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { EntitiesBoundMetadata } from './entities.bound-metadata';
 export function Entities<T>(query: string, type: Type<any>): PropertyDecorator {
   return function (target: T, bindingName: string) {

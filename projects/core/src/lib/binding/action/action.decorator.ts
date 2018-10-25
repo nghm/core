@@ -1,4 +1,4 @@
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { ActionBoundMetadata } from './action.bound-metadata';
 
 /**

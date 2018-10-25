@@ -18,7 +18,7 @@ export {
   Properties,
   Property,
   Ref,
-  RootEntity } from './lib/decorators';
+  RootEntity } from './lib/binding';
 
 export { UrlScopeTrimmer, APPLICATION_SCOPE } from './lib/services/url-scope-trimmer';
 export { LifetimeEvents } from './lib/services/lifetime-events';

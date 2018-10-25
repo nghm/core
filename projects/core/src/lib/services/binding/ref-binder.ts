@@ -1,4 +1,4 @@
-import { RefBoundMetadata } from '../../decorators/ref.bound-metadata';
+import { RefBoundMetadata } from '../../binding/ref/ref.bound-metadata';
 import { Binder } from './binder';
 import { HypermediaRef } from '../hypermedia-ref';
 import { ResolverService } from '../current-resolver';

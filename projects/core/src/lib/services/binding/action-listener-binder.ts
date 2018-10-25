@@ -1,7 +1,7 @@
 import { Subscription } from 'rxjs';
 
 import { Binder } from './binder';
-import { ActionListenerBoundMetadata } from '../../decorators/action-listener.bound-metadata';
+import { ActionListenerBoundMetadata } from '../../binding/action-listener/action-listener.bound-metadata';
 import { ActionExecutorService } from '../action-executor';
 
 export class ActionListenerBinder implements Binder {

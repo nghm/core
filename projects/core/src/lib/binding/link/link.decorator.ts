@@ -1,4 +1,4 @@
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { LinkBoundMetadata } from './link.bound-metadata';
 export function Link(...linkQueries: Array<Array<string>>): PropertyDecorator {
   return function <T>(target: T, bindingName: string) {

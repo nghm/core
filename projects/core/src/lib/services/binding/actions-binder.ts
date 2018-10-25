@@ -1,4 +1,4 @@
-import { ActionsBoundMetadata } from '../../decorators/actions.bound-metadata';
+import { ActionsBoundMetadata } from '../../binding/actions/actions.bound-metadata';
 import { Binder } from './binder';
 import { ActionExecutorService } from '../action-executor';
 

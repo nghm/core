@@ -1,4 +1,4 @@
-import { FieldBoundMetadata } from './meta';
+import { FieldBoundMetadata } from '../meta';
 
 /**
  * Action bound metadata

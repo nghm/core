@@ -1,6 +1,6 @@
 import { Injectable, Injector } from '@angular/core';
 
-import { RefBoundMetadata } from '../../decorators/ref.bound-metadata';
+import { RefBoundMetadata } from '../../binding/ref/ref.bound-metadata';
 import { RefBinder } from './ref-binder';
 import { MetaBinderFactory } from './meta-binder-factory';
 import { ResolverService } from '../current-resolver';

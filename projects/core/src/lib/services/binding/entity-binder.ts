@@ -1,4 +1,4 @@
-import { EntityBoundMetadata } from '../../decorators/entity.bound-metadata';
+import { EntityBoundMetadata } from '../../binding/entity/entity.bound-metadata';
 import { Binder } from './binder';
 import { MetaBinder } from './meta-binders-provider';
 import { CssQueryFactory } from '../css-query.factory';

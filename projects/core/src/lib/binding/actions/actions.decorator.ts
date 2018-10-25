@@ -1,4 +1,4 @@
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { ActionsBoundMetadata } from './actions.bound-metadata';
 
 export function Actions<T>(): PropertyDecorator {

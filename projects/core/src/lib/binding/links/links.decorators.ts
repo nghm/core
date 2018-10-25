@@ -1,4 +1,4 @@
-import { setMetadataEntry } from './meta';
+import { setMetadataEntry } from '../meta';
 import { LinksBoundMetadata } from './links.bound-metadata';
 export function Links(nameFactory: (link: {
   href: string;
