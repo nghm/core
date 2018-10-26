@@ -3,9 +3,9 @@
   "version": "$VERSION",
   "private": false,
   "peerDependencies": {
-    "@angular/common": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/core": "^6.0.0-rc.0 || ^6.0.0",
-    "@angular/forms": "^6.0.0-rc.0 || ^6.0.0",
+    "@angular/common": "^7.0.1",
+    "@angular/core": "^7.0.1",
+    "@angular/forms": "^7.0.1",
     "@nghm/core": "$VERSION"
   }
 }
