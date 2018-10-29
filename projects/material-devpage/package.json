@@ -1,14 +1,14 @@
 {
   "name": "@nghm/material-devpage",
-  "version": "$VERSION",
+  "version": "0.0.0-PLACEHOLDER",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^7.0.1",
     "@angular/core": "^7.0.1",
     "@angular/router": "^7.0.1",
-    "@nghm/core": "$VERSION",
-    "@nghm/router": "$VERSION",
-    "@nghm/forms": "$VERSION",
-    "@nghm/material-forms": "$VERSION"
+    "@nghm/core": "0.0.0-PLACEHOLDER",
+    "@nghm/router": "0.0.0-PLACEHOLDER",
+    "@nghm/forms": "0.0.0-PLACEHOLDER",
+    "@nghm/material-forms": "0.0.0-PLACEHOLDER"
   }
 }

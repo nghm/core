@@ -14,16 +14,22 @@ jobs:
                 command: |
                     VERSION=$(git tag -l | sed v.* | tac | head -n 1)
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd projects/core
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd ../forms
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd ../material-devpage
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd ../material-fields
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd ../router
                     sed -i -e "s/\$VERSION/$VERSION/" package.json
+                    sed -i -e "s/0.0.0-PLACEHOLDER/$VERSION/" package.json
                     cd ../../
             - restore_cache:
                 name: Restore Base Dependencies
