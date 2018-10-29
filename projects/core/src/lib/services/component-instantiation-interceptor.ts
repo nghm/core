@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router, ChildrenOutletContexts, PRIMARY_OUTLET, NavigationEnd } from '@angular/router';
-import { filter, map, distinctUntilChanged, distinct, distinctUntilKeyChanged } from 'rxjs/operators';
+import { filter, map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })

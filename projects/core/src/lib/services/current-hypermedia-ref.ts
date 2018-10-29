@@ -1,5 +1,6 @@
-import { ResolverService } from './current-resolver';
 import { Observable } from 'rxjs';
+
+import { ResolverService } from './current-resolver';
 import { HypermediaRef } from './hypermedia-ref';
 
 export class CurrentHypermediaRef extends HypermediaRef {

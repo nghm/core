@@ -1,4 +1,5 @@
 import { HypermediaNode } from './hypermedia-node';
+
 import { Adapter, Predicate } from 'css-select';
 
 export class HypermediaAdapter implements Adapter<HypermediaNode, HypermediaNode> {

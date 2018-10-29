@@ -1,10 +1,10 @@
 {
   "name": "@nghm/router",
-  "version": "$VERSION",
+  "version": "0.0.0-PLACEHOLDER",
   "private": false,
   "peerDependencies": {
     "@angular/common": "^7.0.1",
     "@angular/core": "^7.0.1",
-    "@nghm/core": "$VERSION"
+    "@nghm/core": "0.0.0-PLACEHOLDER"
   }
 }
