@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Property, ActionListener, Links, Link, Entities, HypermediaRef } from '@nghm/core';
+import { Property, Links, Link, Entities, HypermediaRef, ActionListener } from '@nghm/core';
 import { AppRootComponent } from 'src/app/core/containers/app.component';
 import { animations } from './home-page.animations';
 import { Book } from './book.model';
