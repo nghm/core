@@ -2,10 +2,6 @@
 // tslint:disable:no-bitwise
 import { Entities, Classes, Properties, Links, Actions, Link } from '@nghm/core';
 
-export function relForName({ rel }) {
-  return rel[0];
-}
-
 export class ExplorableEntitiy {
   loading = true;
   background = '';
@@ -13,7 +9,7 @@ export class ExplorableEntitiy {
   @Classes() classes: Array<string>;
   @Properties() properties: any;
   @Entities(':root > *', ExplorableEntitiy) entities: Array<ExplorableEntitiy>;
-  @Links(relForName) links;
+  @Links() links;
   @Link() self;
   @Link(['details'], ['parent']) relation;
   @Actions() actions;

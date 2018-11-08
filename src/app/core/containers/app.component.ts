@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Title } from '@angular/platform-browser';
+import { Entity } from '@nghm/core';
+import { Menu } from '../models/menu.model';
 
 @Component({
   selector: 'app-root',
@@ -7,18 +8,9 @@ import { Title } from '@angular/platform-browser';
   styleUrls: ['./app.component.css']
 })
 export class AppRootComponent {
-  menuLinks: Array<any>;
+  @Entity('.menu', Menu) menu: Menu;
+
   opened = false;
-
-  constructor(private title: Title) { }
-
-  setTitle(title: string): void {
-    this.title.setTitle(title);
-  }
-
-  setMenuLinks(menuLinks: Array<any>): void {
-    this.menuLinks = menuLinks;
-  }
 
   closeSidenav(): void {
     this.opened = false;
@@ -26,5 +18,9 @@ export class AppRootComponent {
 
   openSidenav(): void {
     this.opened = true;
+  }
+
+  linkTracker(_, link) {
+    return link.name;
   }
 }

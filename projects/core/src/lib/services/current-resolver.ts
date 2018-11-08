@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { ResourcePathNormalizer } from './resource-path-normalizer';
 import { MetaBinder } from '../binding/meta-binders-provider';
+import { Binder } from '../binding/binder';
 
 @Injectable()
 export class ResolverService {
@@ -15,27 +16,31 @@ export class ResolverService {
     this.location = location;
   }
 
-  resolvePath(target: any, path: string) {
+  resolvePath(targets: any[], path: string) {
     const uri = this.resourcePathNormalizer.normalize(path);
 
-    return this.resolve(target, uri);
+    return this.resolve(targets, uri);
   }
 
-  resolve(target: any, resourceUrl: string): void {
-    if (target.hmBeforeResolve && target.hmBeforeResolve instanceof Function) {
-      target.hmBeforeResolve();
-    }
+  resolve(targets: any[], resourceUrl: string): void {
+    targets.forEach(target => {
+      if (target.hmBeforeResolve && target.hmBeforeResolve instanceof Function) {
+        target.hmBeforeResolve();
+      }
+    });
 
     this.http
       .get(resourceUrl)
       .subscribe(source => {
         source['href'] = resourceUrl;
 
-        this.metaBinder.bind(target, source);
+        targets.forEach(target => {
+          this.metaBinder.bind(target, source);
 
-        if (target.hmAfterResolve && target.hmAfterResolve instanceof Function) {
-          target.hmAfterResolve();
-        }
+          if (target.hmAfterResolve && target.hmAfterResolve instanceof Function) {
+            target.hmAfterResolve();
+          }
+        });
       });
   }
 }

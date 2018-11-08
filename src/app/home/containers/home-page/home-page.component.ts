@@ -1,8 +1,11 @@
 import { Component } from '@angular/core';
-import { Property, Links, Link, Entities, HypermediaRef, ActionListener } from '@nghm/core';
-import { AppRootComponent } from 'src/app/core/containers/app.component';
+import { Entity, HypermediaRef, ActionListener } from '@nghm/core';
 import { animations } from './home-page.animations';
 import { Book } from './book.model';
+import { BookCounts } from '../../models/book-counts.model';
+import { AuthorCounts } from '../../models/author-counts.model';
+import { Author } from '../../models/author.model';
+import { Feedback } from '../../models/feedback.model';
 
 @Component({
   selector: 'app-home-page',
@@ -11,23 +14,19 @@ import { Book } from './book.model';
   animations
 })
 export class HomePageComponent {
-  @Links(link => link.rel.find(rel => rel !== 'menu'), ['menu'])
-  set menuLinks(links) {
-    this.appRoot.setMenuLinks(links);
-  }
+  @Entity('.analytic.book-counts', BookCounts)
+  bookCounts: BookCounts;
 
-  @Link() topRatedBook;
+  @Entity('.analytic.author-counts', AuthorCounts)
+  authorCounts: AuthorCounts;
 
-  @Property() title;
-  @Property() description;
+  @Entity('.analytic.author-counts > .best-selling-author', Author)
+  bestSellingAuthor: Author;
 
-  @Entities('.latest-book', Book) latestBooks;
+  @Entity('.feedback', Feedback)
+  feedback: Feedback;
 
-  constructor(
-    private hypermediaRef: HypermediaRef,
-    private appRoot: AppRootComponent) {
-
-  }
+  constructor(private hypermediaRef: HypermediaRef) { }
 
   @ActionListener('*', 'success')
   refresh({ parent }): void {

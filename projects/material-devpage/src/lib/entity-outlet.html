@@ -17,7 +17,7 @@
         <ng-container *ngIf="entity?.links.length > 0">
           <mat-menu #linkMenu="matMenu">
             <a mat-menu-item *ngFor="let link of entity.links" [hmLink]="link" class="link" color="primary">
-              <span *ngFor="let rel of link.rel; let last = last" class="capitalize">{{ rel }}</span>
+              <span>{{ link.name }}</span>
             </a>
           </mat-menu>
           <button mat-icon-button [matMenuTriggerFor]="linkMenu" class="link-menu-icon">

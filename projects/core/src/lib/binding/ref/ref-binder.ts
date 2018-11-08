@@ -11,7 +11,7 @@ export class RefBinder implements Binder {
 
   bind(target, source): void {
     const { bindingName } = this.meta;
-    const hypermediaRef = new HypermediaRef(target, source.href, this.resolver);
+    const hypermediaRef = new HypermediaRef([target], source.href, this.resolver);
 
     target[bindingName] = hypermediaRef;
   }

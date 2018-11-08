@@ -10,7 +10,7 @@ export class LinksBinder implements Binder {
   ) { }
 
   bind(target, source): void {
-    const { nameFactory, linkQueries, bindingName } = this.meta;
+    const { linkQueries, bindingName } = this.meta;
     const { links: sourceLinks = [] } = source;
     const links =
       linkQueries.length === 0 && sourceLinks ||
@@ -23,10 +23,9 @@ export class LinksBinder implements Binder {
     const finalLinks = [];
 
     for (const link of links) {
-      const { href, rel } = link;
+      const { href, rel, name } = link;
       const hasInterpolationParameters = this.urlInterpolator.hasInterpolationParameters(href);
       const make = (parameters => hasInterpolationParameters && this.urlInterpolator.interpolate(href, parameters) || href);
-      const name = nameFactory(link);
 
       finalLinks.push({
         href, rel, make, name

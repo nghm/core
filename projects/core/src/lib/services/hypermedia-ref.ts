@@ -2,7 +2,7 @@ import { ResolverService } from './current-resolver';
 
 export class HypermediaRef {
   constructor(
-    protected target: any,
+    protected targets: any[] = [],
     protected href: string,
 
     private resolver: ResolverService
@@ -10,9 +10,9 @@ export class HypermediaRef {
 
   fetch(): void {
     if (this.href) {
-      this.resolver.resolve(this.target, this.href);
+      this.resolver.resolve(this.targets, this.href);
     } else {
-      this.resolver.resolvePath(this.target, location.pathname + location.search);
+      this.resolver.resolvePath(this.targets, location.pathname + location.search);
     }
   }
 }

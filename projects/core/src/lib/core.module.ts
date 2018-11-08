@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { RouterModule } from '@angular/router';
 import { BinderModule } from './binding/binding.module';
 
 import { ComponentInstantiationInterceptor } from './services/component-instantiation-interceptor';
@@ -12,10 +13,11 @@ import { LifetimeEvents } from './services/lifetime-events';
 import { HypermediaRef } from './services/hypermedia-ref';
 import { CssQueryFactory } from './services/css-query.factory';
 import { currentHypermediaRef } from './services/current-hypermedia-ref.factory';
+import { RouterOutletInterceptorDirective } from './directives/router-outlet-interceptor.directive';
 
 @NgModule({
-  imports: [BinderModule],
-  declarations: [],
+  imports: [BinderModule, RouterModule],
+  declarations: [RouterOutletInterceptorDirective],
   providers: [
     ComponentInstantiationInterceptor,
     ResourcePathNormalizer,
@@ -32,7 +34,7 @@ import { currentHypermediaRef } from './services/current-hypermedia-ref.factory'
     CssQueryFactory,
     UrlScopeTrimmer
   ],
-  exports: []
+  exports: [RouterOutletInterceptorDirective]
 })
 export class CoreModule {
 }

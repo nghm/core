@@ -7,7 +7,10 @@ import { ActionExecutorService } from '../../services/action-executor';
 export class ActionListenerBinder implements Binder {
   private eventSubscription: Subscription;
 
-  constructor(private meta: ActionListenerBoundMetadata, private actionExecutor: ActionExecutorService) {}
+  constructor(
+    private meta: ActionListenerBoundMetadata,
+    private actionExecutor: ActionExecutorService
+  ) {}
 
   bind(target) {
     const { actionName, events, bindingName } = this.meta;

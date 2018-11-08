@@ -6,7 +6,7 @@ import { RouterModule as HypermediaRouterModule } from '@nghm/router';
 
 import { HomePageComponent } from './containers/home-page/home-page.component';
 import { MatButtonModule, MatSidenavModule, MatCardModule,
-  MatProgressSpinnerModule, MatProgressBarModule } from '@angular/material';
+  MatProgressSpinnerModule, MatProgressBarModule, MatDividerModule } from '@angular/material';
 
 @NgModule({
   imports: [
@@ -16,6 +16,7 @@ import { MatButtonModule, MatSidenavModule, MatCardModule,
     MatCardModule,
     MatSidenavModule,
     MatButtonModule,
+    MatDividerModule,
     MatProgressSpinnerModule,
     MatProgressBarModule,
     RouterModule.forChild([{

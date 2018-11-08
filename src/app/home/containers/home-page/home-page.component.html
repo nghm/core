@@ -1,33 +1,57 @@
-<h1 class="mat-h1">{{title}}</h1>
+<mat-card *ngIf="bookCounts">
+  <mat-card-title>Book analytic</mat-card-title>
 
-<p class="mat-p">{{description}}</p>
+  <mat-card-content>
+    <p>
+      New books: {{ bookCounts.newBooks }}
+    </p>
+    <p>
+      Rented books: {{ bookCounts.rentedBooks }}
+    </p>
+    <p>
+      Total books: {{ bookCounts.totalBooks }}
+    </p>
+  </mat-card-content>
 
-<p class="mat-p">
-  <a mat-raised-button *ngIf="topRatedBook" [hmLink]="topRatedBook">Top rated book</a>
-</p>
+  <mat-card-actions *ngIf="bookCounts.books as books">
+    <a mat-button [hmLink]="books">SEE BOOKS</a>
+  </mat-card-actions>
+</mat-card>
 
-<div [@listStagger]="latestBooks?.length">
-  <ng-container *ngFor="let book of latestBooks">
-    <mat-card class="latest-book">
-      <mat-progress-spinner mode="indeterminate" *ngIf="book.loading; else loaded"></mat-progress-spinner>
-      <ng-template #loaded>
-        <mat-card-title>{{ book.title }}</mat-card-title>
-        <mat-card-content>
-          {{ book.description }}
-        </mat-card-content>
-        <ng-container *ngIf="book.update as update">
-          <mat-card-content>
-            <mat-progress-bar mode="indeterminate" *ngIf="saveForm.isSubmitting"></mat-progress-bar>
-            <hm-form [action]="update" #saveForm>
-              <hm-form-field named="description" component="mat|textarea"></hm-form-field>
-            </hm-form>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button [disabled]="saveForm.isSubmitting" (click)="saveForm.submit()">SAVE</button>
-            <button mat-button [hmLink]="book.self" color="primary">GO TO</button>
-          </mat-card-actions>
-        </ng-container>
-      </ng-template>
-    </mat-card>
-  </ng-container>
-</div>
+<mat-card *ngIf="authorCounts">
+  <mat-card-title>Author analytic</mat-card-title>
+
+  <mat-card-content>
+    <p>
+      New authors: {{ authorCounts.newAuthors }}
+    </p>
+    <p>
+      Total authros: {{ authorCounts.totalAuthors }}
+    </p>
+
+    <ng-container *ngIf="bestSellingAuthor">
+      <h5>Best selling author: {{ bestSellingAuthor.name }}</h5>
+      <p>Book: {{ bestSellingAuthor.book }}</p>
+    </ng-container>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="feedback && feedback.post as post">
+    <mat-card-title>Feedback</mat-card-title>
+
+    <mat-card-content>
+      <p>
+        Send us feedback!
+      </p>
+
+      <hm-form [action]="post" #feedbackForm>
+        <div *hmLabel="let name">{{ name }}</div>
+        <div *hmError="let name">{{ name }}</div>
+      </hm-form>
+    </mat-card-content>
+
+    <mat-card-actions>
+      <button mat-button (click)="feedbackForm.submit()">SEND</button>
+    </mat-card-actions>
+  </mat-card>
+

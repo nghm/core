@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, Observable } from 'rxjs';
+import { EMPTY, Observable, Subject } from 'rxjs';
 
 @Injectable()
 export class LifetimeEvents {
-  dispose = EMPTY as Observable<void>;
+  disposeSubject = new Subject<any>();
+
+  public dispose = this.disposeSubject.asObservable();
 }
